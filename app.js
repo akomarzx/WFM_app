@@ -1,32 +1,32 @@
-const express = require('express');
+const express = require("express");
 const app = express();
+const path = require("path");
 
-require('dotenv').config();
+// Set Up View Engine
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
-const {sequelize} = require('./models');
-async function main(){
-	await sequelize.sync({force : true});
+//Body Parsers
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//Morgan Logging
+if (process.env.NODE_ENV === "development") {
+  const morgan = require("morgan");
+  app.use(morgan("tiny"));
 }
-main();
 
-const path = require('path')
-app.set('view engine' , 'ejs')
-app.set('views' , path.join(__dirname , 'views'));
+app.get("/", (req, res) => {
+  res.render("basicUserIndexPage");
+});
 
-app.listen(process.env.PORT , () =>{
-	console.log('Listening');
-})
-const morgan = require('morgan');
-app.use(morgan('tiny'));
 
-app.get('/' , (req , res) =>{
-	res.render('index')
-})
-app.get('/cat' , async (req, res, next) =>{
-	next(new Error("This is a error"));
-})
+app.use((err, req, res, next) => {
+  console.log(err?.message);
+});
 
-// app.use((err, req, res , next) =>{
-// 	console.log(err?.message);
-// 	res.status(401).send('<h1>Hello Error</h1>');	
-// })
+let PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Currently in ${process.env.NODE_ENV} mode`);
+  console.log(`Server Active at port ${process.env.PORT}`);
+});
