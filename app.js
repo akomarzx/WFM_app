@@ -50,11 +50,27 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.render('index');
+  let name = 'anonymous'
+  if(req.query.name){
+    req.session.name = req.query.name;
+  }
+  if(req.session.name){
+    res.locals.name = req.session.name;
+  }
+  else{
+    res.locals.name = name;
+  }
+
+  res.render('index')
 });
 
+app.use('/error' , (res , req) =>{
+  chicken.fly();
+})
+
 app.use((err, req, res, next) => {
-  console.log(err?.message);
+  req.flash('error' , 'Invalid request')
+  res.redirect('/');
 });
 
 let PORT = process.env.PORT || 8080;
