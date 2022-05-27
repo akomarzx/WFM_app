@@ -16,10 +16,11 @@ const store = new SequelizeStore({
 app.set('trust proxy', 1);
 app.use(
   session({
+    //switch to env variable once deployed for production
     secret: 'this is not a secure secret',
     resave: false,
     saveUninitialized: true,
-    //Cookie will not save if not https
+    //Cookie will not save if not https switch to true if deployed to production
     cookie: { secure: false },
     store: store,
   })
@@ -50,23 +51,8 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  let name = 'anonymous'
-  if(req.query.name){
-    req.session.name = req.query.name;
-  }
-  if(req.session.name){
-    res.locals.name = req.session.name;
-  }
-  else{
-    res.locals.name = name;
-  }
-
   res.render('index')
 });
-
-app.use('/error' , (res , req) =>{
-  chicken.fly();
-})
 
 app.use((err, req, res, next) => {
   req.flash('error' , 'Invalid request')
@@ -74,7 +60,14 @@ app.use((err, req, res, next) => {
 });
 
 let PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Currently in ${process.env.NODE_ENV} mode`);
   console.log(`Server Active at port ${process.env.PORT}`);
+  try{
+    await sequelize.authenticate();
+    console.log("Database Connected");
+  }
+  catch(e){
+    console.log(e.message);
+  }
 });
