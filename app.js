@@ -59,6 +59,9 @@ app.use((err, req, res, next) => {
   res.redirect('/');
 });
 
+const employeeRoutes = require('./routes/employeeRoutes');
+app.use('/employees' , employeeRoutes);
+
 let PORT = process.env.PORT || 8080;
 app.listen(PORT, async () => {
   console.log(`Currently in ${process.env.NODE_ENV} mode`);

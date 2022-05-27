@@ -1,45 +1,45 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('employee_details', {
+    await queryInterface.createTable('employees', {
+      first_name: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      last_name: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      birth_date: {
+        type: Sequelize.DATEONLY,
+        allowNull: false
+      },
+      sex: {
+        type: Sequelize.CHAR(2),
+        allowNull: false
+      },
+      employment_status: {
+        type : Sequelize.STRING,
+        allowNull : false,
+        validate : {
+          isIn : [['active' , 'inactive']]
+        }
+      }, 
+      uuid: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4
+      },
+      hiring_date: {
+        type: Sequelize.DATEONLY,
+        defaultValue: Sequelize.NOW(),
+        allowNull: false
+      },
       emp_id: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
       },
-      uuid: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4
-      },
-      first_name: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      last_name: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      birth_date: {
-        type: DataTypes.DATEONLY,
-        allowNull: false
-      },
-      sex: {
-        type: DataTypes.CHAR,
-        allowNull: false
-      },
-      employed_date: {
-        type: DataTypes.DATEONLY,
-        defaultValue: DataTypes.NOW(),
-        allowNull: false
-      },
-       employmnet_status: {
-      type : DataTypes.STRING,
-      allowNull : false,
-      validate : {
-        isIn : [['active' , 'inactive']]
-      }
-      }, 
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -51,6 +51,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('employee_details');
+    await queryInterface.dropTable('employees');
   }
 };

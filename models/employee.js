@@ -1,9 +1,5 @@
 'use strict';
-const { allow } = require('joi');
-const {
-  Model, UUIDV4
-} = require('sequelize');
-const { DataTypes } = require('.');
+const { Model, UUIDV4 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Employee extends Model {
     /**
@@ -15,51 +11,55 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Employee.init({
-    emp_id: {
-      type: DataTypes.INTEGER,
-      allowNull : false,
-      primaryKey : true,
-      autoIncrement : true,
+  Employee.init(
+    {
+      first_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      last_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      birth_date: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+      },
+      sex: {
+        type: DataTypes.CHAR(2),
+        allowNull: false,
+        validate: {
+          isIn: [['m', 'f', 'x']],
+        },
+      },
+      employment_status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          isIn: [['active', 'inactive']],
+        },
+      },
+      uuid: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+      },
+      emp_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      hiring_date: {
+        type: DataTypes.DATEONLY,
+        defaultValue: DataTypes.NOW(),
+        allowNull: false,
+      },
     },
-    uuid :{
-      type : DataTypes.UUID  ,
-      defaultValue : DataTypes.UUIDV4
-    },
-    first_name:{
-      type : DataTypes.STRING,
-      allowNull : false
-    },
-    last_name: {
-      type: DataTypes.STRING,
-      allowNull : false
-    },  
-    birth_date: {
-      type: DataTypes.DATEONLY,
-      allowNull : false
-    },
-    sex: {
-      type: DataTypes.CHAR(2),
-      allowNull : false,
-      validate : {
-        isIn : [['m', 'f', 'x']]
-      }
-    },
-    employed_date: {
-      type : DataTypes.DATEONLY,
-      defaultValue : DataTypes.NOW(),
-      allowNull : false
-    },
-    employmnet_status: {
-      type : DataTypes.STRING,
-      allowNull : false,
-      validate : {
-        isIn : [['active' , 'inactive']]
-      }
-    } 
-  }, {
-    sequelize,
-    modelName: 'employee_details',
-  });
+    {
+      sequelize,
+      modelName: 'Employee',
+      tableName: 'employees',
+    }
+  );
   return Employee;
 };
