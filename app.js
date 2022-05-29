@@ -1,7 +1,7 @@
 const express = require('express');
 const session = require('express-session');
-const app = express();
 const path = require('path');
+const app = express();
 const { sequelize } = require('./models/index');
 const flash = require('connect-flash');
 const ejsMate = require('ejs-mate');
@@ -28,6 +28,12 @@ app.use(
 store.sync();
 app.use(flash());
 
+//Morgan Logging and live Reloading
+if (process.env.NODE_ENV === 'development') {
+  const morgan = require('morgan');
+  app.use(morgan('tiny'));
+}
+
 // Set Up View Engine
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
@@ -37,12 +43,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//Morgan Logging
-if (process.env.NODE_ENV === 'development') {
-  const morgan = require('morgan');
-  app.use(morgan('tiny'));
-}
-
 //flash middleware
 app.use((req, res, next) => {
   res.locals.success = req.flash('success');
@@ -51,26 +51,25 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.render('index')
-});
-
-app.use((err, req, res, next) => {
-  req.flash('error' , 'Invalid request')
-  res.redirect('/');
+  res.render('index');
 });
 
 const employeeRoutes = require('./routes/employeeRoutes');
-app.use('/employees' , employeeRoutes);
+app.use('/employees', employeeRoutes);
+
+app.use((err, req, res, next) => {
+  req.flash('error', 'Invalid request');
+  res.redirect('/');
+});
 
 let PORT = process.env.PORT || 8080;
 app.listen(PORT, async () => {
   console.log(`Currently in ${process.env.NODE_ENV} mode`);
   console.log(`Server Active at port ${process.env.PORT}`);
-  try{
+  try {
     await sequelize.authenticate();
-    console.log("Database Connected");
-  }
-  catch(e){
+    console.log('Database is Connected');
+  } catch (e) {
     console.log(e.message);
   }
 });
