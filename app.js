@@ -6,6 +6,21 @@ const { sequelize } = require('./models/index');
 const flash = require('connect-flash');
 const ejsMate = require('ejs-mate');
 
+//Morgan Logging and live Reloading
+//Disable http caching to live reload css
+if (process.env.NODE_ENV === 'development') {
+  const morgan = require('morgan');
+  app.use(morgan('tiny'));
+  var livereload = require("livereload");
+  var connectLiveReload = require("connect-livereload");
+  const liveReloadServer = livereload.createServer();
+  liveReloadServer.server.once("connection", () => {
+    setTimeout(() => {
+      liveReloadServer.refresh("/");
+    }, 50);
+  });
+  app.use(connectLiveReload());
+}
 //Session set-up using sequelize store
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
 const store = new SequelizeStore({
@@ -27,12 +42,6 @@ app.use(
 );
 store.sync();
 app.use(flash());
-
-//Morgan Logging and live Reloading
-if (process.env.NODE_ENV === 'development') {
-  const morgan = require('morgan');
-  app.use(morgan('tiny'));
-}
 
 // Set Up View Engine
 app.engine('ejs', ejsMate);
