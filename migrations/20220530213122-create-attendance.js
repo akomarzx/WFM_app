@@ -5,8 +5,8 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.UUID,
-        defaultValue : Sequelize.UUIDV4
+        type: Sequelize.INTEGER,
+        autoIncrement : true
       },
       //Foreign Key will be used to connect the punch information with the appropriate employee
       emp_id: {
@@ -22,7 +22,8 @@ module.exports = {
         allowNull : true
       },
       remarks: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull : true
       },
       createdAt: {
         allowNull: false,

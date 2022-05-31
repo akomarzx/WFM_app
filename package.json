@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=development PORT=3000 nodemon app.js --ext ejs,js,html,css",
-    "try": "NODE_ENV=development PORT=3000 nodemon app.js --ext .*",
     "prod": "NODE_ENV=production nodemon index.js"
   },
   "repository": {
@@ -36,6 +35,7 @@
     "moment": "^2.29.3",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
+    "node-schedule": "^2.1.0",
     "sequelize": "^6.19.0",
     "uuid": "^8.3.2"
   },

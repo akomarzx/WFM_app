@@ -16,7 +16,10 @@ module.exports = {
       },
       sex: {
         type: Sequelize.CHAR(2),
-        allowNull: false
+        allowNull: false,
+        validate: {
+          isIn: [['m', 'f', 'x']],
+        }
       },
       employment_status: {
         type : Sequelize.STRING,

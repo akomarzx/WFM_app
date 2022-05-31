@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
+        autoIncrement : true 
       },
       emp_id: {
         type: DataTypes.INTEGER,
@@ -33,14 +33,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       remarks: {
         type: DataTypes.STRING,
-      },
-      createdAt: {
-        allowNull: false,
-        type: DataTypes.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: DataTypes.DATE,
       },
     },
     {
