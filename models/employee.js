@@ -1,4 +1,5 @@
 'use strict';
+const PunchInfo = require('./punchinfo');
 const { Model, UUIDV4 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Employee extends Model {
@@ -8,7 +9,16 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.hasOne(models.PunchInfo, {
+        foreignKey: 'emp_id',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      });
+      this.hasMany(models.Attendance, {
+        foreignKey: 'emp_id',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      });
     }
   }
   Employee.init(
