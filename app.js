@@ -64,7 +64,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/employees', require('./routes/employeeRoutes'));
-app.use('/attendance' , require('./routes/attendanceRoutes');)
+app.use('/attendance' , require('./routes/attendanceRoutes'));
 
 app.use((err, req, res, next) => {
   req.flash('error', 'Invalid request');
