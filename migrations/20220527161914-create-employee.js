@@ -33,8 +33,8 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4
       },
       hiring_date: {
-        type: Sequelize.DATEONLY,
-        defaultValue: Sequelize.NOW(),
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
         allowNull: false
       },
       emp_id: {

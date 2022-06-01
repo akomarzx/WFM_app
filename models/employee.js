@@ -54,8 +54,8 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
       },
       hiring_date: {
-        type: DataTypes.DATEONLY,
-        defaultValue: DataTypes.NOW(),
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
         allowNull: false,
       },
       emp_id: {
