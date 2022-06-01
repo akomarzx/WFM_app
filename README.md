@@ -10,4 +10,5 @@ April 29 - May 5 : Reading Documentations and Watching Tutorials about sequelize
 May 11-17 - Set-up more stuff like sequelize store, flash, bootstrap, etc...
 May 18-26 - Reading more documentation from sequelize and do small demos.
 May 19-27 - Started Building the Website. Beginning with models and database design.
-May 28-30 - Continue Building the models and start making the relations or association between each models with sequelize.
+May 28-30 - Continue Building the models and started making the relations or association between each models with sequelize.
+May 31 - Working with migrations and models.

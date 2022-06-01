@@ -11,7 +11,13 @@ module.exports = {
       //Foreign Key will be used to connect the punch information with the appropriate employee
       emp_id: {
         type: Sequelize.INTEGER,
-        allowNull : false
+        allowNull : false,
+        references : {
+          model: 'employees',
+          key : 'emp_id'
+        },
+        onUpdate : 'CASCADE',
+        onDelete :'CASCADE'
       },
       time_in: {
         type: Sequelize.DATE,
