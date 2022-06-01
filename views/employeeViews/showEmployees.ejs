@@ -1,0 +1,16 @@
+<% layout('/layout/boilerplate') %>
+<% for( let index = 0; index < array.length; index++ ) { %>
+    <% let employee = array[index] %> 
+    <ul>
+        <li>
+        <div>
+            <p>First Name : <%= employee.first_name %> </p>
+            <p>Last Name : <%= employee.last_name %> </p>
+            <p>Birthday: <%= employee.birth_date %> </p>
+            <p>Sex: <%= employee.sex %> </p>
+            <p>Status: <%= employee.employment_status %> </p>
+            <p>Hiring Date: <%= employee.hiring_date%> </p>
+        </div>
+        </li>
+    </ul>
+<% } %>
