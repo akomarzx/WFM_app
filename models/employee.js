@@ -20,6 +20,9 @@ module.exports = (sequelize, DataTypes) => {
         onUpdate: 'CASCADE',
       });
     }
+    toJSON() {
+      return { ...this.get(), emp_id: undefined , createdAt : undefined , updatedAt : undefined };
+    }
   }
   Employee.init(
     {

@@ -2,7 +2,7 @@ let { sequelize, Employee, PunchInfo } = require('../models');
 
 let get_all_employee = async (req, res) => {
   try {
-    const list = await Employee.findAll();
+    const list = await Employee.findAll({include : [PunchInfo]});
     res.json(list);
   } catch (e) {
     req.flash('error', e.message);
