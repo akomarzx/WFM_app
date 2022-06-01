@@ -1,4 +1,4 @@
-let { sequelize, Employee } = require('../models');
+let { sequelize, Employee, PunchInfo } = require('../models');
 
 let get_all_employee = async (req, res) => {
   try {
@@ -21,6 +21,9 @@ let create_employee = async (req, res) => {
       sex: body.sex.toLowerCase(),
       employment_status: body.employment_status.toLowerCase(),
     });
+    const punch_info = await PunchInfo.create({
+      emp_id : emp.emp_id
+    })
     res.redirect('/');
   } catch (e) {
     req.flash('error', e.message);

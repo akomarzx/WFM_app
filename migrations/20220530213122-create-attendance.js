@@ -21,7 +21,8 @@ module.exports = {
       },
       time_in: {
         type: Sequelize.DATE,
-        allowNull : false
+        allowNull : false,
+        defaultValue : Sequelize.fn('now')
       },
       time_out: {
         type: Sequelize.DATE,

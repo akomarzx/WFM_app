@@ -34,7 +34,7 @@ module.exports = {
       },
       hiring_date: {
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW,
+        defaultValue: Sequelize.fn('now'),
         allowNull: false
       },
       emp_id: {
