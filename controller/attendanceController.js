@@ -10,12 +10,24 @@ let create_attendance = async(req, res) =>{
             })
             res.json(emp_attendance);
         }
+        else{
+            req.flash('error' , 'Invalid punch-id')
+            res.redirect('/')
+        }
     }
     catch(e){
         res.json(e.message)
     }    
 }
-
+let get_all_attendance = async (req, res) => {
+  try {
+    const list = await Attendance.findAll();
+    res.json(list);
+  } catch (e) {
+    req.flash('error', e.message);
+    res.redirect('/');
+  }
+};
 module.exports = {
     create_attendance
 }
