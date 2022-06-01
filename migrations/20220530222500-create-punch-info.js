@@ -11,13 +11,13 @@ module.exports = {
       emp_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        allowNull : false,
-        references : {
+        allowNull: false,
+        references: {
           model: 'employees',
-          key : 'emp_id'
+          key: 'emp_id',
         },
-        onUpdate : 'CASCADE',
-        onDelete : 'CASCADE',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,

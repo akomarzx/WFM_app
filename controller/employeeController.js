@@ -22,8 +22,8 @@ let create_employee = async (req, res) => {
       employment_status: body.employment_status.toLowerCase(),
     });
     const punch_info = await PunchInfo.create({
-      emp_id : emp.emp_id
-    })
+      emp_id: emp.emp_id,
+    });
     res.redirect('/');
   } catch (e) {
     req.flash('error', e.message);

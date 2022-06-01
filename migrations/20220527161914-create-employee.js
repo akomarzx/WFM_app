@@ -4,38 +4,38 @@ module.exports = {
     await queryInterface.createTable('employees', {
       first_name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       last_name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       birth_date: {
         type: Sequelize.DATEONLY,
-        allowNull: false
+        allowNull: false,
       },
       sex: {
         type: Sequelize.CHAR(2),
         allowNull: false,
         validate: {
           isIn: [['m', 'f', 'x']],
-        }
+        },
       },
       employment_status: {
-        type : Sequelize.STRING,
-        allowNull : false,
-        validate : {
-          isIn : [['active' , 'inactive']]
-        }
-      }, 
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          isIn: [['active', 'inactive']],
+        },
+      },
       uuid: {
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
+        defaultValue: Sequelize.UUIDV4,
       },
       hiring_date: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('now'),
-        allowNull: false
+        allowNull: false,
       },
       emp_id: {
         type: Sequelize.INTEGER,
@@ -45,15 +45,15 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('employees');
-  }
+  },
 };

@@ -11,12 +11,12 @@ const ejsMate = require('ejs-mate');
 if (process.env.NODE_ENV === 'development') {
   const morgan = require('morgan');
   app.use(morgan('tiny'));
-  var livereload = require("livereload");
-  var connectLiveReload = require("connect-livereload");
+  var livereload = require('livereload');
+  var connectLiveReload = require('connect-livereload');
   const liveReloadServer = livereload.createServer();
-  liveReloadServer.server.once("connection", () => {
+  liveReloadServer.server.once('connection', () => {
     setTimeout(() => {
-      liveReloadServer.refresh("/");
+      liveReloadServer.refresh('/');
     }, 50);
   });
   app.use(connectLiveReload());
@@ -64,7 +64,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/employees', require('./routes/employeeRoutes'));
-app.use('/attendance' , require('./routes/attendanceRoutes'));
+app.use('/attendance', require('./routes/attendanceRoutes'));
 
 app.use((err, req, res, next) => {
   req.flash('error', 'Invalid request');

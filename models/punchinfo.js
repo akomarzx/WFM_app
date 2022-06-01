@@ -8,9 +8,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.Employee , {
-        foreignKey : 'emp_id'
-      })
+      this.belongsTo(models.Employee, {
+        foreignKey: 'emp_id',
+      });
     }
   }
   PunchInfo.init(

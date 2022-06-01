@@ -6,43 +6,43 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.INTEGER,
-        autoIncrement : true
+        autoIncrement: true,
       },
       //Foreign Key will be used to connect the punch information with the appropriate employee
       emp_id: {
         type: Sequelize.INTEGER,
-        allowNull : false,
-        references : {
+        allowNull: false,
+        references: {
           model: 'employees',
-          key : 'emp_id'
+          key: 'emp_id',
         },
-        onUpdate : 'CASCADE',
-        onDelete :'CASCADE'
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       time_in: {
         type: Sequelize.DATE,
-        allowNull : false,
-        defaultValue : Sequelize.fn('now')
+        allowNull: false,
+        defaultValue: Sequelize.fn('now'),
       },
       time_out: {
         type: Sequelize.DATE,
-        allowNull : true
+        allowNull: true,
       },
       remarks: {
         type: Sequelize.STRING,
-        allowNull : true
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('attendances');
-  }
+  },
 };

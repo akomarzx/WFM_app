@@ -8,9 +8,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.Employee,{
-        foreignKey : 'emp_id'
-      })
+      this.belongsTo(models.Employee, {
+        foreignKey: 'emp_id',
+      });
     }
   }
   Attendance.init(
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         primaryKey: true,
         type: DataTypes.INTEGER,
-        autoIncrement : true 
+        autoIncrement: true,
       },
       emp_id: {
         type: DataTypes.INTEGER,
@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       time_in: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue : DataTypes.NOW
+        defaultValue: DataTypes.NOW,
       },
       time_out: {
         type: DataTypes.DATE,
@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Attendance',
-      tableName : 'attendances'
+      tableName: 'attendances',
     }
   );
   return Attendance;
