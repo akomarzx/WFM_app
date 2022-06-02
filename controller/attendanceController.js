@@ -1,4 +1,4 @@
-const { PunchInfo, Attendance } = require('../models');
+const { PunchInfo, Attendance, Employee } = require('../models');
 
 let create_attendance = async (req, res) => {
   let { punchId } = req.body;
@@ -19,7 +19,7 @@ let create_attendance = async (req, res) => {
 };
 let get_all_attendance = async (req, res) => {
   try {
-    const list = await Attendance.findAll();
+    const list = await Attendance.findAll({include : [Employee]});
     res.json(list);
   } catch (e) {
     req.flash('error', e.message);
@@ -27,5 +27,5 @@ let get_all_attendance = async (req, res) => {
   }
 };
 module.exports = {
-  create_attendance,
+  create_attendance, get_all_attendance
 };

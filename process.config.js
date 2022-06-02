@@ -5,12 +5,12 @@ module.exports = {
       exec_mode : "cluster",
       instances : 8,
       env_development: {
-        PORT : 8080,
+        PORT : 3000,
         NODE_ENV: "development",
         name : "dev"
       },
       env_production: {
-        PORT: 8080,
+        PORT: 3000,
         NODE_ENV: "production",
         name : "prod"
         }

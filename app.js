@@ -59,17 +59,15 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
-  res.render('index');
-});
-
+app.use('/' , require('./routes/indexRoute'));
+app.use('/auth' , require('./routes/authRoutes'))
 app.use('/employees', require('./routes/employeeRoutes'));
 app.use('/attendance', require('./routes/attendanceRoutes'));
 
-// app.use((err, req, res, next) => {
-//   req.flash('error', 'Invalid request');
-//   res.redirect('/');
-// });
+app.use((err, req, res, next) => {
+  req.flash('error', 'Invalid request');
+  res.redirect('/');
+});
 
 let PORT = process.env.PORT || 8080;
 app.listen(PORT, async () => {
