@@ -6,8 +6,8 @@ const { sequelize } = require('./models/index');
 const flash = require('connect-flash');
 const ejsMate = require('ejs-mate');
 
-//Morgan Logging and live Reloading
-//Disable http caching to live reload css
+//Morgan and live Reloading
+//Disable http caching to live reload css and js
 if (process.env.NODE_ENV === 'development') {
   const morgan = require('morgan');
   app.use(morgan('tiny'));
