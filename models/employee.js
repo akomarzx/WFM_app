@@ -9,14 +9,19 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      this.hasOne(models.User, {
+        foreignKey : 'emp_id',
+        onDelete : 'CASCADE',
+        onUpdate : 'CASCADE'
+      })
       this.hasOne(models.PunchInfo, {
         foreignKey: 'emp_id',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       });
       this.hasMany(models.Attendance, {
         foreignKey: 'emp_id',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       });
     }
