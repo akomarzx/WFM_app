@@ -1,3 +1,6 @@
+//TODO: All Controllers have to be refactored to make it thinner 
+// Research how to implement a service layer.
+
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -59,8 +62,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/' , require('./routes/indexRoute'));
-app.use('/auth' , require('./routes/authRoutes'))
+app.use('/', require('./routes/indexRoute'));
+app.use('/auth', require('./routes/authRoutes'));
+app.use('/auth', require('./routes/authRoutes'));
 app.use('/employees', require('./routes/employeeRoutes'));
 app.use('/attendance', require('./routes/attendanceRoutes'));
 
