@@ -13,3 +13,4 @@ May 19-27 - Started Building the Website. Beginning with models and database des
 May 28-30 - Continue Building the models and started making the relations or association between each models with sequelize.<br/>
 May 31 - Working with migrations and models.<br/>
 June 1 - Working on the controllers and endpoints.
+June 2-5 - Researching User authentication and implementing User Registration.
