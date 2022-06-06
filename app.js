@@ -72,9 +72,10 @@ app.use('/', require('./routes/indexRoute'));
 app.use('/auth', require('./routes/authRoutes')(passport));
 app.use('/employees', require('./routes/employeeRoutes'));
 app.use('/attendance', require('./routes/attendanceRoutes'));
+app.use('/dashboard' , require('./routes/dashboardRoute'));
 
 app.use((err, req, res, next) => {
-  req.flash('error', 'Invalid request');
+  req.flash('error', err.message);
   res.redirect('/');
 });
 

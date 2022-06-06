@@ -3,15 +3,16 @@ const router = express.Router();
 const { PunchInfo, User } = require('../models');
 const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
+
 let get_login_page = (req, res) => {
+  if(req.user){
+    return res.redirect('/dashboard');
+  }
   res.render('../views/authViews/loginPage');
 };
 
 let get_registration_page = (req, res) => {
   res.render('../views/authViews/registrationPage');
-};
-
-let login_user = async (req, res) => {
 };
 
 let register_user = async (req, res) => {
@@ -22,13 +23,15 @@ let register_user = async (req, res) => {
 
   try {
     let punch_info = await PunchInfo.findByPk(regCode);
-    let user = await User.findOne({where : {
-      [Op.or] : [
-        {email : email},
-        {emp_id : punch_info.emp_id}
-      ]
-    }});
-    
+    let user = await User.findOne({
+      where: {
+        [Op.or]: [
+          { email: email },
+          { emp_id: punch_info.emp_id }
+        ]
+      }
+    });
+
     if (punch_info == null || user != null) {
       req.flash(
         'error',
@@ -38,11 +41,11 @@ let register_user = async (req, res) => {
     }
     let hashedPassword = await bcrypt.hash(password, 10);
     await User.create({
-      email : email,
-      hash : hashedPassword,
-      emp_id : punch_info.emp_id
+      email: email,
+      hash: hashedPassword,
+      emp_id: punch_info.emp_id
     })
-    req.flash('success' , 'Registration Successful');
+    req.flash('success', 'Registration Successful');
     res.redirect('login/')
   } catch (e) {
     req.flash(
@@ -51,10 +54,19 @@ let register_user = async (req, res) => {
     res.redirect('register/')
   }
 };
+let sign_out = (req, res) => {
+  req.session.destroy(function(err){
+    if(err){
+      console.log(err);
+    }
+    res.redirect('/');
+  })
+}
+
 
 module.exports = {
   get_login_page,
   get_registration_page,
-  login_user,
   register_user,
+  sign_out
 };
