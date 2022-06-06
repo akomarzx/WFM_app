@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
 
 let get_login_page = (req, res) => {
-  if(req.user){
+  if (req.user) {
     return res.redirect('/dashboard');
   }
   res.render('../views/authViews/loginPage');
@@ -20,9 +20,11 @@ let register_user = async (req, res) => {
   // Use the punch info as the registration code and check email in user db to check if email already exists
   // so that only employees can register
   // Add server side validation afterwards
-
   try {
     let punch_info = await PunchInfo.findByPk(regCode);
+    if (punch_info == null) {
+      throw new Error('One of the information is invalid or already exist in the system');
+    }
     let user = await User.findOne({
       where: {
         [Op.or]: [
@@ -31,7 +33,6 @@ let register_user = async (req, res) => {
         ]
       }
     });
-
     if (punch_info == null || user != null) {
       req.flash(
         'error',
@@ -55,8 +56,8 @@ let register_user = async (req, res) => {
   }
 };
 let sign_out = (req, res) => {
-  req.session.destroy(function(err){
-    if(err){
+  req.session.destroy(function (err) {
+    if (err) {
       console.log(err);
     }
     res.redirect('/');

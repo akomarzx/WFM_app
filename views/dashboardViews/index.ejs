@@ -1,0 +1,6 @@
+<% layout('/layout/fullNavBarBoilerplate') %>
+<h1>hello <%- employee.first_name %></h1>
+
+<form method="get" action="/auth/signout">
+  <button type="submit" class="btn btn-primary">Sign-out</button>
+</form>

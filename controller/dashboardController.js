@@ -1,5 +1,6 @@
 let get_dashboard = function(req, res){
-    res.send('Hello World')
+    res.locals.employee = req.user;
+    res.render('./dashboardViews/index');
 }
 
 module.exports = {
