@@ -11,7 +11,8 @@ let get_registration_page = (req, res) => {
   res.render('../views/authViews/registrationPage');
 };
 
-let login_user = async (req, res) => {};
+let login_user = async (req, res) => {
+};
 
 let register_user = async (req, res) => {
   let { email, password, regCode } = req.body;

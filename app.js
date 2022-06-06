@@ -1,6 +1,5 @@
-//TODO: All Controllers have to be refactored to make it thinner 
+ //TODO: All Controllers have to be refactored to make it thinner 
 // Research how to implement a service layer.
-
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -8,6 +7,7 @@ const app = express();
 const { sequelize } = require('./models/index');
 const flash = require('connect-flash');
 const ejsMate = require('ejs-mate');
+const passport = require('passport')
 
 //Morgan and live Reloading
 //Disable http caching to live reload css and js
@@ -46,6 +46,12 @@ app.use(
 store.sync();
 app.use(flash());
 
+//passport related things
+let initializePassport = require('./config/passport/passport')
+initializePassport(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Set Up View Engine
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
@@ -63,8 +69,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', require('./routes/indexRoute'));
-app.use('/auth', require('./routes/authRoutes'));
-app.use('/auth', require('./routes/authRoutes'));
+app.use('/auth', require('./routes/authRoutes')(passport));
 app.use('/employees', require('./routes/employeeRoutes'));
 app.use('/attendance', require('./routes/attendanceRoutes'));
 
