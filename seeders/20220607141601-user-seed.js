@@ -5,8 +5,10 @@ module.exports = {
     return queryInterface.bulkInsert('users' , [
       {
         email : 'admin@wfm.com',
-        hash : bcrypt.hash('12345' , 10),
-        emp_id : 1
+        hash : await bcrypt.hash('12345' , 10),
+        emp_id : 1,
+        createdAt : new Date(),
+        updatedAt : new Date()  
       }
     ])
   },
