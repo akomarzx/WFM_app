@@ -1,5 +1,7 @@
  //TODO: All Controllers have to be refactored to make it thinner 
 // Research how to implement a service layer.
+//Controller - will handle the requests and will use services. It will also handle validation that will be pass onto the api
+//Services = will contain all business logic
 const express = require('express');
 const dotenv = require('dotenv').config();
 const session = require('express-session');
