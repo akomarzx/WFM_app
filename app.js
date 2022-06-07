@@ -1,6 +1,7 @@
  //TODO: All Controllers have to be refactored to make it thinner 
 // Research how to implement a service layer.
 const express = require('express');
+const dotenv = require('dotenv').config();
 const session = require('express-session');
 const path = require('path');
 const app = express();
@@ -34,8 +35,7 @@ const store = new SequelizeStore({
 app.set('trust proxy', 1);
 app.use(
   session({
-    //switch to env variable once deployed for production
-    secret: 'this is not a secure secret',
+    secret: process.env.SESSION_SECRET, 
     resave: false,
     saveUninitialized: true,
     //Cookie will not save if not https switch to true if deployed to production
