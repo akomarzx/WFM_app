@@ -7,7 +7,7 @@ const dotenv = require('dotenv').config();
 const session = require('express-session');
 const path = require('path');
 const app = express();
-const { sequelize } = require('./models/index');
+const { sequelize } = require('./api/models/index');
 const flash = require('connect-flash');
 const ejsMate = require('ejs-mate');
 const passport = require('passport')
@@ -16,7 +16,7 @@ const passport = require('passport')
 //Disable http caching to live reload css and js
 if (process.env.NODE_ENV === 'development') {
   const morgan = require('morgan');
-  app.use(morgan('tiny'));
+  app.use(morgan('dev'));
   var livereload = require('livereload');
   var connectLiveReload = require('connect-livereload');
   const liveReloadServer = livereload.createServer();
@@ -70,11 +70,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', require('./routes/indexRoute'));
-app.use('/auth', require('./routes/authRoutes')(passport));
-app.use('/employees', require('./routes/employeeRoutes'));
-app.use('/attendance', require('./routes/attendanceRoutes'));
-app.use('/dashboard' , require('./routes/dashboardRoute'));
+app.use('/', require('./api/routes/indexRoute'));
+app.use('/auth', require('./api/routes/authRoutes')(passport));
+app.use('/employees', require('./api/routes/employeeRoutes'));
+app.use('/attendance', require('./api/routes/attendanceRoutes'));
+app.use('/dashboard' , require('./api/routes/dashboardRoute'));
 
 app.use((err, req, res, next) => {
   req.flash('error', err.message);

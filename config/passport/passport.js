@@ -1,6 +1,6 @@
 let bcrypt = require('bcrypt');
 let localStrategy = require('passport-local').Strategy;
-let { User, PunchInfo, Employee } = require('../../models');
+let { User, PunchInfo, Employee } = require('../../api/models');
 
 let validatePassword = async (plainText, hashedPassword) => {
     try {
