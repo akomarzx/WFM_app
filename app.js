@@ -3,7 +3,6 @@
 //Controller - will handle the requests and will use services. It will also handle validation that will be pass onto the api
 //Services = will contain all business logic
 const express = require('express');
-const dotenv = require('dotenv').config();
 const session = require('express-session');
 const path = require('path');
 const app = express();
