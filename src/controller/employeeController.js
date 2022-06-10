@@ -1,5 +1,4 @@
 const EmployeeServices = require('../services/employeeServices');
-const EmployeeServicesInstance = new EmployeeServices();
 
 
 let get_all_employee = async (req, res) => {
