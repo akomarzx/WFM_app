@@ -6,7 +6,7 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const app = express();
-const { sequelize } = require('./api/models/index');
+const { sequelize } = require('./src/models/index');
 const flash = require('connect-flash');
 const ejsMate = require('ejs-mate');
 const passport = require('passport')
@@ -69,11 +69,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', require('./api/routes/indexRoute'));
-app.use('/auth', require('./api/routes/authRoutes')(passport));
-app.use('/employees', require('./api/routes/employeeRoutes'));
-app.use('/attendance', require('./api/routes/attendanceRoutes'));
-app.use('/dashboard' , require('./api/routes/dashboardRoute'));
+app.use('/', require('./src/routes/indexRoute'));
+app.use('/auth', require('./src/routes/authRoutes')(passport));
+app.use('/employees', require('./src/routes/employeeRoutes'));
+app.use('/attendance', require('./src/routes/attendanceRoutes'));
+app.use('/dashboard' , require('./src/routes/dashboardRoute'));
 
 app.use((err, req, res, next) => {
   req.flash('error', err.message);
