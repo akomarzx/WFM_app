@@ -1,8 +1,8 @@
-let get_dashboard = function(req, res){
-    res.locals.employee = req.user;
-    res.render('./dashboardViews/index');
-}
+const getDashboard = function(req, res) {
+  res.locals.employee = req.user;
+  res.render('./dashboardViews/index');
+};
 
 module.exports = {
-    get_dashboard
-}
+  getDashboard,
+};

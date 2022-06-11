@@ -1,5 +1,5 @@
 'use strict';
-const { Model } = require('sequelize');
+const {Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class PunchInfo extends Model {
     /**
@@ -14,23 +14,23 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   PunchInfo.init(
-    {
-      punch_id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: DataTypes.INTEGER,
+      {
+        punch_id: {
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          type: DataTypes.INTEGER,
+        },
+        emp_id: {
+          type: DataTypes.INTEGER,
+          primaryKey: true,
+        },
       },
-      emp_id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
+      {
+        sequelize,
+        modelName: 'PunchInfo',
+        tableName: 'punch_infos',
       },
-    },
-    {
-      sequelize,
-      modelName: 'PunchInfo',
-      tableName: 'punch_infos',
-    }
   );
   return PunchInfo;
 };

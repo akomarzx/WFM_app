@@ -1,16 +1,14 @@
-const EmployeeServices = require('../services/employeeServices');
+const EmployeeSerivces = require('../services/employeeServices');
+const getAllEmployee = async (req, res) => {
 
-
-let get_all_employee = async (req, res) => {
-  
 };
 
-let create_employee = async (req, res) => {
-  EmployeeServicesInstance.createEmployee();
-  res.send('hello') 
+const createEmployee = async (req, res) => {
+  await EmployeeSerivces.createEmployee(req.body);
+  res.json({message: 'hello'});
 };
 
 module.exports = {
-  get_all_employee,
-  create_employee,
+  getAllEmployee,
+  createEmployee,
 };

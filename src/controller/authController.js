@@ -1,73 +1,73 @@
-const express = require('express');
-const router = express.Router();
-const { PunchInfo, User } = require('../models');
+const {PunchInfo, User} = require('../models');
 const bcrypt = require('bcrypt');
-const { Op } = require('sequelize');
+const {Op} = require('sequelize');
 
-let get_login_page = (req, res) => {
+const getLoginPage = (req, res) => {
   if (req.user) {
     return res.redirect('/dashboard');
   }
   res.render('../views/authViews/loginPage');
 };
 
-let get_registration_page = (req, res) => {
+const getRegistrationPage = (req, res) => {
   res.render('../views/authViews/registrationPage');
 };
 
-let register_user = async (req, res) => {
-  let { email, password, regCode } = req.body;
-  // Use the punch info as the registration code and check email in user db to check if email already exists
+const registerUser = async (req, res) => {
+  const {email, password, regCode} = req.body;
+  // Use the punch info as the registration code and
+  // check email in user db to check if email already exists
   // so that only employees can register
   // Add server side validation afterwards
   try {
-    let punch_info = await PunchInfo.findByPk(regCode);
-    if (punch_info == null) {
-      throw new Error('One of the information is invalid or already exist in the system');
+    const punchInfo = await PunchInfo.findByPk(regCode);
+    if (punchInfo == null) {
+      throw new Error(
+          'One of the information is invalid or already exist in the system');
     }
-    let user = await User.findOne({
+    const user = await User.findOne({
       where: {
         [Op.or]: [
-          { email: email },
-          { emp_id: punch_info.emp_id }
-        ]
-      }
+          {email: email},
+          {emp_id: punchInfo.emp_id},
+        ],
+      },
     });
-    if (punch_info == null || user != null) {
+    if (punchInfo == null || user != null) {
       req.flash(
-        'error',
-        'One of the information is invalid or already exist in the system'
+          'error',
+          'One of the information is invalid or already exist in the system',
       );
       return res.redirect('register/');
     }
-    let hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
     await User.create({
       email: email,
       hash: hashedPassword,
-      emp_id: punch_info.emp_id
-    })
+      emp_id: punchInfo.emp_id,
+    });
     req.flash('success', 'Registration Successful');
-    res.redirect('login/')
+    res.redirect('login/');
   } catch (e) {
     req.flash(
-      'error', e.message
+        'error', e.message,
     );
-    res.redirect('register/')
+    res.redirect('register/');
   }
 };
-let sign_out = (req, res) => {
-  req.session.destroy(function (err) {
+const signOut = (req, res) => {
+  req.session.destroy(function(err) {
     if (err) {
       console.log(err);
     }
     res.redirect('/');
-  })
-}
+  });
+};
 
 
 module.exports = {
-  get_login_page,
-  get_registration_page,
-  register_user,
-  sign_out
+  getLoginPage,
+  getRegistrationPage,
+  registerUser,
+  signOut,
 };

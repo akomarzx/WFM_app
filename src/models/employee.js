@@ -1,6 +1,5 @@
 'use strict';
-const PunchInfo = require('./punchinfo');
-const { Model, UUIDV4 } = require('sequelize');
+const {Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Employee extends Model {
     /**
@@ -10,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasOne(models.User, {
-        foreignKey : 'emp_id',
-        onDelete : 'CASCADE',
-        onUpdate : 'CASCADE'
-      })
+        foreignKey: 'emp_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      });
       this.hasOne(models.PunchInfo, {
         foreignKey: 'emp_id',
         onDelete: 'CASCADE',
@@ -26,58 +25,62 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
     toJSON() {
-      return { ...this.get(), emp_id: undefined , createdAt : undefined , updatedAt : undefined };
+      return {...this.get(),
+        emp_id: undefined,
+        createdAt: undefined,
+        updatedAt: undefined};
     }
   }
   Employee.init(
-    {
-      first_name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      last_name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      birth_date: {
-        type: DataTypes.DATEONLY,
-        allowNull: false,
-      },
-      sex: {
-        type: DataTypes.CHAR(2),
-        allowNull: false,
-        validate: {
-          isIn: [['m', 'f', 'x']],
+      {
+        first_name: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        last_name: {
+          type: DataTypes.STRING,
+          allowNull: false,
+        },
+        birth_date: {
+          type: DataTypes.DATEONLY,
+          allowNull: false,
+        },
+        sex: {
+          // eslint-disable-next-line new-cap
+          type: DataTypes.CHAR(2),
+          allowNull: false,
+          validate: {
+            isIn: [['m', 'f', 'x']],
+          },
+        },
+        employment_status: {
+          type: DataTypes.STRING,
+          allowNull: false,
+          validate: {
+            isIn: [['active', 'inactive']],
+          },
+        },
+        uuid: {
+          type: DataTypes.UUID,
+          defaultValue: DataTypes.UUIDV4,
+        },
+        hiring_date: {
+          type: DataTypes.DATE,
+          defaultValue: DataTypes.NOW,
+          allowNull: false,
+        },
+        emp_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          primaryKey: true,
+          autoIncrement: true,
         },
       },
-      employment_status: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          isIn: [['active', 'inactive']],
-        },
+      {
+        sequelize,
+        modelName: 'Employee',
+        tableName: 'employees',
       },
-      uuid: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-      },
-      hiring_date: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        allowNull: false,
-      },
-      emp_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-    },
-    {
-      sequelize,
-      modelName: 'Employee',
-      tableName: 'employees',
-    }
   );
   return Employee;
 };

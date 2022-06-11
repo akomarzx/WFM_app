@@ -1,31 +1,9 @@
-const { PunchInfo, Attendance, Employee } = require('../models');
 
-let create_attendance = async (req, res) => {
-  let { punchId } = req.body;
-  try {
-    let punchInfo = await PunchInfo.findOne({ where: { punch_id: punchId } });
-    if (punchInfo) {
-      let emp_attendance = Attendance.create({
-        emp_id: punchInfo.emp_id,
-      });
-      res.json(emp_attendance);
-    } else {
-      req.flash('error', 'Invalid punch-id');
-      res.redirect('/');
-    }
-  } catch (e) {
-    res.json(e.message);
-  }
+const createAttendance = async (req, res) => {
+
 };
-let get_all_attendance = async (req, res) => {
-  try {
-    const list = await Attendance.findAll({include : [Employee]});
-    res.json(list);
-  } catch (e) {
-    req.flash('error', e.message);
-    res.redirect('/');
-  }
+const getAllAttendance = async (req, res) => {
 };
 module.exports = {
-  create_attendance, get_all_attendance
+  createAttendance, getAllAttendance,
 };

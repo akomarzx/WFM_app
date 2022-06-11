@@ -1,5 +1,5 @@
 'use strict';
-const { Model } = require('sequelize');
+const {Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Attendance extends Model {
     /**
@@ -14,35 +14,35 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Attendance.init(
-    {
-      id: {
-        allowNull: false,
-        primaryKey: true,
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+      {
+        id: {
+          allowNull: false,
+          primaryKey: true,
+          type: DataTypes.INTEGER,
+          autoIncrement: true,
+        },
+        emp_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
+        time_in: {
+          type: DataTypes.DATE,
+          allowNull: false,
+          defaultValue: DataTypes.NOW,
+        },
+        time_out: {
+          type: DataTypes.DATE,
+          allowNull: true,
+        },
+        remarks: {
+          type: DataTypes.STRING,
+        },
       },
-      emp_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+      {
+        sequelize,
+        modelName: 'Attendance',
+        tableName: 'attendances',
       },
-      time_in: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
-      },
-      time_out: {
-        type: DataTypes.DATE,
-        allowNull: true,
-      },
-      remarks: {
-        type: DataTypes.STRING,
-      },
-    },
-    {
-      sequelize,
-      modelName: 'Attendance',
-      tableName: 'attendances',
-    }
   );
   return Attendance;
 };
