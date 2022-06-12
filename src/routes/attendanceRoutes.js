@@ -3,6 +3,6 @@ const express = require('express');
 const router = express.Router();
 const attendanceController = require('../controller/attendanceController');
 
-router.post('/', attendanceController.create_attendance);
-router.get('/', attendanceController.get_all_attendance);
+router.post('/', attendanceController.createAttendance);
+router.get('/', attendanceController.getAllAttendance);
 module.exports = router;
