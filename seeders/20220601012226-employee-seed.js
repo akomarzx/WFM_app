@@ -1,6 +1,6 @@
 'use strict';
 const moment = require('moment');
-const { v4: uuidv4 } = require('uuid');
+const {v4: uuidv4} = require('uuid');
 module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('employees', [
