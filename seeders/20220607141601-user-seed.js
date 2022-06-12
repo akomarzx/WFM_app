@@ -1,23 +1,23 @@
 'use strict';
-var bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('users' , [
+  async up(queryInterface, Sequelize) {
+    return queryInterface.bulkInsert('users', [
       {
-        email : 'admin@wfm.com',
-        hash : await bcrypt.hash('12345' , 10),
-        emp_id : 1,
-        createdAt : new Date(),
-        updatedAt : new Date()  
-      }
-    ])
+        email: 'admin@wfm.com',
+        hash: await bcrypt.hash('12345', 10),
+        emp_id: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
   },
 
-  async down (queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('users' , [
+  async down(queryInterface, Sequelize) {
+    return queryInterface.bulkDelete('users', [
       {
-        email : 'admin@wfm.com',
-      }
-    ])
-  }
+        email: 'admin@wfm.com',
+      },
+    ]);
+  },
 };
