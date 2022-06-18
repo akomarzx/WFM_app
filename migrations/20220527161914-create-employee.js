@@ -18,6 +18,14 @@ module.exports = {
           key: 'emp_id',
         },
       },
+      position_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'positions',
+          key: 'position_id',
+        },
+      },
       first_name: {
         type: Sequelize.STRING,
         allowNull: false,
