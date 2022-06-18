@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         // eslint-disable-next-line camelcase
         foreignKey: 'dept_id',
       });
-      this.belongsTo(models.positions, {
+      this.belongsTo(models.Position, {
         foreignKey: 'position_id',
       });
       this.hasMany(this, {as: 'children', foreignKey: 'emp_id'});

@@ -15,10 +15,7 @@ const getRegistrationPage = (req, res) => {
 
 const registerUser = async (req, res) => {
   const {email, password, regCode} = req.body;
-  // Use the punch info as the registration code and
-  // check email in user db to check if email already exists
-  // so that only employees can register
-  // Add server side validation afterwards
+  // TODO Move to service layer
   try {
     const punchInfo = await PunchInfo.findByPk(regCode);
     if (punchInfo == null) {
