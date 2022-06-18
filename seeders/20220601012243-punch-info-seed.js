@@ -1,5 +1,4 @@
 'use strict';
-
 module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('punch_infos', [
@@ -17,15 +16,10 @@ module.exports = {
       },
     ]);
   },
-
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('punch_infos', [
-      {
-        punch_id: 7000,
-      },
-      {
-        punch_id: 7001,
-      },
-    ]);
+    const Op = Sequelize.Op;
+    return queryInterface.bulkDelete('punch_infos', {
+      punch_id: {[Op.in]: [7000, 7001]},
+    });
   },
 };

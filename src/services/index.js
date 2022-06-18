@@ -1,4 +1,4 @@
 const EmployeeServices = require('./employeeServices');
 const PunchInfoServices = require('./punchInfoServices');
-
-module.exports = {EmployeeServices, PunchInfoServices};
+const AttendanceServices = require('./attendanceServices');
+module.exports = {EmployeeServices, PunchInfoServices, AttendanceServices};
