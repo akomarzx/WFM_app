@@ -8,7 +8,8 @@ module.exports = {
         type: Sequelize.INTEGER,
         autoIncrement: true,
       },
-      //Foreign Key will be used to connect the punch information with the appropriate employee
+      // Foreign Key will be used to connect
+      // the punch information with the appropriate employee
       emp_id: {
         type: Sequelize.INTEGER,
         allowNull: false,

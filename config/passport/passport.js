@@ -33,6 +33,7 @@ module.exports = async (passport) => {
   passport.serializeUser(function(user, done) {
     done(null, user.emp_id);
   });
+  // eslint-disable-next-line camelcase
   passport.deserializeUser(async (emp_id, done) => {
     try {
       const employee = await Employee.findByPk(emp_id);

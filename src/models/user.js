@@ -1,6 +1,8 @@
+/* eslint-disable valid-jsdoc */
+/* eslint-disable require-jsdoc */
 'use strict';
 const {
-  Model
+  Model,
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -10,31 +12,30 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.Employee , {
-        foreignKey : 'emp_id'
-      })
+      this.belongsTo(models.Employee, {
+        foreignKey: 'emp_id',
+      });
     }
-    
   }
   User.init({
     email: {
       type: DataTypes.STRING,
-      primaryKey : true,
-      allowNull : false
+      primaryKey: true,
+      allowNull: false,
     },
     hash: {
-      type : DataTypes.STRING,
-      allowNull : false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    emp_id:{
-      type : DataTypes.INTEGER,
-      allowNull : false,
+    emp_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
 
-    } 
+    },
   }, {
     sequelize,
     modelName: 'User',
-    tableName : 'users'
+    tableName: 'users',
   });
   return User;
 };

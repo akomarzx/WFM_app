@@ -5,31 +5,31 @@ module.exports = {
       email: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       hash: {
         type: Sequelize.STRING,
-        allowNull : false
+        allowNull: false,
       },
       emp_id: {
         type: Sequelize.INTEGER,
-        allowNull : false,
-        references :{
-          model : 'employees',
-          key : 'emp_id'
-        }
+        allowNull: false,
+        references: {
+          model: 'employees',
+          key: 'emp_id',
+        },
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('users');
-  }
+  },
 };

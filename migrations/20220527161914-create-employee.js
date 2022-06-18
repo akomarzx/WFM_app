@@ -15,6 +15,7 @@ module.exports = {
         allowNull: false,
       },
       sex: {
+        // eslint-disable-next-line new-cap
         type: Sequelize.CHAR(2),
         allowNull: false,
         validate: {
