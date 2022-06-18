@@ -26,6 +26,8 @@ module.exports = (sequelize, DataTypes) => {
         // eslint-disable-next-line camelcase
         foreignKey: 'dept_id',
       });
+      this.hasMany(this, {as: 'children', foreignKey: 'emp_id'});
+      this.belongsTo(this, {as: 'parent', foreignKey: 'emp_id'});
     }
     toJSON() {
       return {...this.get(),
@@ -37,6 +39,10 @@ module.exports = (sequelize, DataTypes) => {
   Employee.init(
       {
         dept_id: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
+        },
+        super_id: {
           type: DataTypes.INTEGER,
           allowNull: true,
         },

@@ -10,6 +10,14 @@ module.exports = {
           key: 'dept_id',
         },
       },
+      super_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'employees',
+          key: 'emp_id',
+        },
+      },
       first_name: {
         type: Sequelize.STRING,
         allowNull: false,

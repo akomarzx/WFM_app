@@ -19,10 +19,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('departments', {
-      // eslint-disable-next-line camelcase
-      dept_id: {[Op.in]: [1000, 1001]},
-    });
+    return queryInterface.bulkDelete('employees', null,
+        {truncate: true, cascade: true});
   },
 };

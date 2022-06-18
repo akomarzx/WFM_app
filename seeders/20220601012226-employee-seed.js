@@ -5,6 +5,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('employees', [
       {
+        dept_id: 1000,
         first_name: 'Ronald',
         last_name: 'Ombao',
         birth_date: moment('2000-01-01').format('YYYY/MM/DD'),
@@ -15,6 +16,8 @@ module.exports = {
         uuid: uuidv4(),
       },
       {
+        dept_id: 1001,
+        super_id: 1,
         first_name: 'John',
         last_name: 'Smith',
         birth_date: moment('1997-04-06').format('YYYY/MM/DD'),
