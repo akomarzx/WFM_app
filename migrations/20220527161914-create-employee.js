@@ -2,6 +2,14 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('employees', {
+      dept_id: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'departments',
+          key: 'dept_id',
+        },
+      },
       first_name: {
         type: Sequelize.STRING,
         allowNull: false,

@@ -13,17 +13,18 @@ module.exports = (sequelize, DataTypes) => {
       this.hasOne(models.User, {
         foreignKey: 'emp_id',
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
       });
       this.hasOne(models.PunchInfo, {
         foreignKey: 'emp_id',
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
       });
       this.hasMany(models.Attendance, {
         foreignKey: 'emp_id',
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+      });
+      this.belongsTo(models.Department, {
+        // eslint-disable-next-line camelcase
+        foreignKey: 'dept_id',
       });
     }
     toJSON() {
@@ -35,6 +36,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Employee.init(
       {
+        dept_id: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
+        },
         first_name: {
           type: DataTypes.STRING,
           allowNull: false,

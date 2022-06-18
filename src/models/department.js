@@ -3,37 +3,38 @@
 'use strict';
 const {Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Department extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.Employee, {
-        foreignKey: 'emp_id',
+      this.hasMany(models.Employee, {
+        // eslint-disable-next-line camelcase
+        foreignKey: 'dept_id',
       });
     }
   }
-  User.init({
-    email: {
-      type: DataTypes.STRING,
+  Department.init({
+    dept_id: {
+      allowNull: false,
+      autoIncrement: true,
       primaryKey: true,
-      allowNull: false,
+      type: DataTypes.INTEGER,
     },
-    hash: {
+    dept_name: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    emp_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-
     },
   }, {
     sequelize,
-    modelName: 'User',
-    tableName: 'users',
+    modelName: 'Department',
+    tableName: 'departments',
   });
-  return User;
+  Department.addHook('beforeCreate', (department, option)=> {
+    department.dept_name = department.dept_name.toUpperCase();
+  });
+
+  return Department;
 };
