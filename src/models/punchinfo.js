@@ -25,7 +25,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         emp_id: {
           type: DataTypes.INTEGER,
-          primaryKey: true,
+          unique: true,
+          allowNull: true,
         },
       },
       {

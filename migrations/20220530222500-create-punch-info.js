@@ -9,9 +9,9 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       emp_id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        allowNull: false,
+        type: DataTypes.INTEGER,
+        unique: true,
+        allowNull: true,
         references: {
           model: 'employees',
           key: 'emp_id',
