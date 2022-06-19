@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Department',
     tableName: 'departments',
+    paranoid: true,
   });
   Department.addHook('beforeCreate', (department, option)=> {
     department.dept_name = department.dept_name.toUpperCase();
