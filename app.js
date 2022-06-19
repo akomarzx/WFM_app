@@ -80,10 +80,10 @@ app.use('/employees', require('./src/routes/employeeRoutes'));
 app.use('/attendance', require('./src/routes/attendanceRoutes'));
 app.use('/dashboard', require('./src/routes/dashboardRoute'));
 
-app.use((err, req, res, next) => {
-  req.flash('error', err.message);
-  res.redirect('/');
-});
+// app.use((err, req, res, next) => {
+//   req.flash('error', err.message);
+//   res.redirect('/');
+// });
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, async () => {
