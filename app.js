@@ -11,6 +11,7 @@ const {sequelize} = require('./src/models/index');
 const flash = require('connect-flash');
 const ejsMate = require('ejs-mate');
 const passport = require('passport');
+const methodOverride = require('method-override');
 // eslint-disable-next-line no-unused-vars
 const Services = require('./src/services');
 // Morgan and live Reloading
@@ -28,6 +29,9 @@ if (process.env.NODE_ENV === 'development') {
   });
   app.use(connectLiveReload());
 }
+// Method override
+app.use(methodOverride('_method'));
+
 // Session set-up using sequelize store
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const store = new SequelizeStore({

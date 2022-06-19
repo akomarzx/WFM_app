@@ -1,5 +1,3 @@
-/* eslint-disable require-jsdoc */
-/* eslint-disable valid-jsdoc */
 'use strict';
 const {
   Model,
