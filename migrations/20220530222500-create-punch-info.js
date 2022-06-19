@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       emp_id: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         unique: true,
         allowNull: true,
         references: {
@@ -23,6 +23,10 @@ module.exports = {
       },
       updatedAt: {
         allowNull: false,
+        type: Sequelize.DATE,
+      },
+      deletedAt: {
+        allowNull: true,
         type: Sequelize.DATE,
       },
     });
