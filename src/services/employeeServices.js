@@ -1,7 +1,17 @@
 const EventEmitter = require('events');
 const employeeEvents = new EventEmitter();
+const moment = require('moment');
 
-const {Employee} = require('../models');
+const {Employee, Department, Position} = require('../models');
+
+const getEmployees = async () => {
+  try {
+    const employees = await Employee.findAll({include: [Department, Position]});
+    return employees;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
 const createEmployee = async (employeeData) => {
   try {
@@ -11,7 +21,7 @@ const createEmployee = async (employeeData) => {
       position_id: employeeData.position_id,
       first_name: employeeData.first_name,
       last_name: employeeData.last_name,
-      birth_date: employeeData.birth_date,
+      birth_date: moment(employeeData.birth_date, ('YYYY-MM-DD')),
       sex: employeeData.sex,
       employment_status: employeeData.employment_status,
     });
@@ -21,4 +31,4 @@ const createEmployee = async (employeeData) => {
   }
 };
 
-module.exports = {createEmployee, employeeEvents};
+module.exports = {getEmployees, createEmployee, employeeEvents};

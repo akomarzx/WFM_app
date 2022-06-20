@@ -14,6 +14,13 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'position_id',
       });
     }
+    toJSON() {
+      return {...this.get(),
+        position_id: undefined,
+        updatedAt: undefined,
+        createdAt: undefined,
+        deletedAt: undefined};
+    }
   }
   Position.init({
     position_id: {

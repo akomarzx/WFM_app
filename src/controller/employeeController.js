@@ -1,19 +1,14 @@
 const EmployeeSerivces = require('../services/employeeServices');
 const asyncWrapper = require('../utils/asyncWrapper');
 
-const getAllEmployee = async (req, res, next) => {
-};
-
-const createEmployee= asyncWrapper(async (req, res, next) => {
-  try {
-    const newEmployee = await EmployeeSerivces.createEmployee(req.body);
-    res.json({employee: newEmployee});
-  } catch (error) {
-    next(error);
-  }
+const getEmployees= asyncWrapper(async (req, res, next) => {
+  const employees = await EmployeeSerivces.getEmployees();
+  res.status(200).json(employees);
 });
 
-module.exports = {
-  getAllEmployee,
-  createEmployee,
-};
+const createEmployee = asyncWrapper(async (req, res, next) => {
+  const newEmployee = await EmployeeSerivces.createEmployee(req.body);
+  res.status(201).json({employee: newEmployee});
+});
+
+module.exports = {getEmployees, createEmployee};

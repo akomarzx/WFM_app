@@ -13,6 +13,13 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'dept_id',
       });
     }
+    toJSON() {
+      return {...this.get(),
+        dept_id: undefined,
+        createdAt: undefined,
+        updatedAt: undefined,
+        deletedAt: undefined};
+    }
   }
   Department.init({
     dept_id: {

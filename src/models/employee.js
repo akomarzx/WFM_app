@@ -34,7 +34,11 @@ module.exports = (sequelize, DataTypes) => {
       return {...this.get(),
         emp_id: undefined,
         createdAt: undefined,
-        updatedAt: undefined};
+        updatedAt: undefined,
+        deletedAt: undefined,
+        dept_id: undefined,
+        super_id: undefined,
+        position_id: undefined};
     }
   }
   Employee.init(
