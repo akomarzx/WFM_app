@@ -1,12 +1,17 @@
 const EmployeeSerivces = require('../services/employeeServices');
+const asyncWrapper = require('../utils/asyncWrapper');
+
 const getAllEmployee = async (req, res, next) => {
 };
 
-const createEmployee = async (req, res, next) => {
-  // FIXME Still res after the error.
-  const newEmployee = await EmployeeSerivces.createEmployee(req.body, next);
-  res.json({employee: newEmployee});
-};
+const createEmployee= asyncWrapper(async (req, res, next) => {
+  try {
+    const newEmployee = await EmployeeSerivces.createEmployee(req.body);
+    res.json({employee: newEmployee});
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = {
   getAllEmployee,
