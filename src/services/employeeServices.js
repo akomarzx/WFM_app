@@ -13,6 +13,24 @@ const getEmployees = async () => {
   }
 };
 
+const getEmployee = async (id) => {
+  try {
+    const employee = await Employee.findOne({
+      where: {
+        uuid: id,
+      },
+    });
+    // TODO throw an exception is nothing is found,
+    // Impelement Error objects and catch if matching to the error thrown
+    if (employee) {
+      return employee;
+    }
+    throw new Error('Employee Not Found!');
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 const createEmployee = async (employeeData) => {
   try {
     const newEmployee = await Employee.create({
@@ -25,10 +43,11 @@ const createEmployee = async (employeeData) => {
       sex: employeeData.sex,
       employment_status: employeeData.employment_status,
     });
+    employeeEvents.emit('employeeCreated', newEmployee);
     return newEmployee;
   } catch (error) {
     throw new Error(error.message);
   }
 };
 
-module.exports = {getEmployees, createEmployee, employeeEvents};
+module.exports = {getEmployee, getEmployees, createEmployee, employeeEvents};
