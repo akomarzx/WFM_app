@@ -21,7 +21,7 @@ const getEmployee = async (id) => {
       },
     });
     // TODO throw an exception is nothing is found,
-    // Impelement Error objects and catch if matching to the error thrown
+    // Impelement Error objects. Catch matching error thrown
     if (employee) {
       return employee;
     }
@@ -39,7 +39,7 @@ const createEmployee = async (employeeData) => {
       position_id: employeeData.position_id,
       first_name: employeeData.first_name,
       last_name: employeeData.last_name,
-      birth_date: moment(employeeData.birth_date, ('YYYY-MM-DD')),
+      birth_date: moment(employeeData.birth_date, ('YYYY-MM-DD'), true),
       sex: employeeData.sex,
       employment_status: employeeData.employment_status,
     });
@@ -50,4 +50,50 @@ const createEmployee = async (employeeData) => {
   }
 };
 
-module.exports = {getEmployee, getEmployees, createEmployee, employeeEvents};
+const updateEmployee = async (id, employeeData) => {
+  try {
+    const employeeToBeUpdated = await Employee.findOne({
+      where: {
+        uuid: id,
+      },
+    });
+    if (employeeToBeUpdated != null) {
+      await employeeToBeUpdated.set({
+        dept_id: employeeData.dept_id,
+        super_id: employeeData.super_id,
+        position_id: employeeData.position_id,
+        first_name: employeeData.first_name,
+        last_name: employeeData.last_name,
+        birth_date: moment(employeeData.birth_date, ('YYYY-MM-DD'), true),
+        sex: employeeData.sex,
+        employment_status: employeeData.employment_status,
+      });
+      await employeeToBeUpdated.save();
+
+      return employeeToBeUpdated;
+    }
+    throw new Error('Resource not found!');
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const deleteEmployee = async (id) => {
+  try {
+    const employeeToBeDeleted = await Employee.findOne({
+      where: {
+        uuid: id,
+      },
+    });
+    if (employeeToBeDeleted != null) {
+      await employeeToBeDeleted.destroy();
+      return;
+    }
+    throw new Error('Resource Not Found!');
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+module.exports = {getEmployee, getEmployees,
+  createEmployee, updateEmployee,
+  deleteEmployee, employeeEvents};

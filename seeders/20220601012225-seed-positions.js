@@ -19,7 +19,7 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete('positions', {
-      punch_id: {[Op.in]: [1000, 1001]},
+      position_id: {[Op.in]: [1000, 1001]},
     });
   },
 };

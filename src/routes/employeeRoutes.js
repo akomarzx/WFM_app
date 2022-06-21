@@ -5,9 +5,11 @@ const express = require('express');
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
-router.get('/:id', employeeController.getEmployee);
 router.get('/', employeeController.getEmployees);
 router.post('/', employeeController.createEmployee);
+router.get('/:id', employeeController.getEmployee);
+router.put('/:id', employeeController.updateEmployee);
+router.delete('/:id', employeeController.deleteEmployee);
 
 router.use((err, req, res, next)=> {
   res.status(500).send(err.stack);

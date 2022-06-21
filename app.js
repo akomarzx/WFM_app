@@ -1,8 +1,5 @@
 // TODO: All Controllers have to be refactored to make it thinner
-// Research how to implement a service layer.
-// Controller - will handle the requests and will use services.
-// It will also handle validation that will be pass onto the api
-// Services = will contain all business logic
+// TODO: Error Classes Needed
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -76,7 +73,7 @@ app.use((req, res, next) => {
 
 app.use('/', require('./src/routes/indexRoute'));
 app.use('/auth', require('./src/routes/authRoutes')(passport));
-app.use('/employee', require('./src/routes/employeeRoutes'));
+app.use('/employees', require('./src/routes/employeeRoutes'));
 app.use('/attendance', require('./src/routes/attendanceRoutes'));
 app.use('/dashboard', require('./src/routes/dashboardRoute'));
 

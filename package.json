@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/akomarzx/WFM_app#readme",
   "dependencies": {
+    "@joi/date": "^2.1.0",
     "bcrypt": "^5.0.1",
     "bootstrap": "^5.1.3",
     "connect-flash": "^0.1.1",

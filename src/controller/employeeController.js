@@ -16,4 +16,20 @@ const createEmployee = asyncWrapper(async (req, res, next) => {
   res.status(201).json({employee: newEmployee});
 });
 
-module.exports = {getEmployee, getEmployees, createEmployee};
+const updateEmployee = asyncWrapper(async (req, res, next) => {
+  const updatedEmployee =
+  await EmployeeSerivces.updateEmployee(req.params.id, req.body);
+  res.status(200).json(updatedEmployee);
+});
+
+const deleteEmployee = asyncWrapper(async (req, res, next) => {
+  const employeeToBeDeleted =
+  await EmployeeSerivces.deleteEmployee(req.params.id);
+  res.status(200).json({message: 'Succesfully Deleted'});
+});
+
+module.exports = {
+  getEmployee, getEmployees,
+  createEmployee, updateEmployee,
+  deleteEmployee,
+};
