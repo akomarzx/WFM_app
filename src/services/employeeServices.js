@@ -1,3 +1,4 @@
+// TODO: Validation
 const EventEmitter = require('events');
 const employeeEvents = new EventEmitter();
 const moment = require('moment');
@@ -20,7 +21,7 @@ const getEmployee = async (id) => {
         uuid: id,
       },
     });
-    // TODO throw an exception is nothing is found,
+    // TODO throw an exception if nothing is found,
     // Impelement Error objects. Catch matching error thrown
     if (employee) {
       return employee;
@@ -86,6 +87,7 @@ const deleteEmployee = async (id) => {
       },
     });
     if (employeeToBeDeleted != null) {
+      employeeEvents.emit('employeeDeleted', employeeToBeDeleted);
       await employeeToBeDeleted.destroy();
       return;
     }
@@ -94,6 +96,14 @@ const deleteEmployee = async (id) => {
     throw new Error(error.message);
   }
 };
+
+employeeEvents.on('employeeDeleted', async (employee) => {
+  await employee.update({
+    employment_status: 'inactive',
+  });
+});
+
+
 module.exports = {getEmployee, getEmployees,
   createEmployee, updateEmployee,
   deleteEmployee, employeeEvents};

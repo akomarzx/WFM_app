@@ -1,5 +1,6 @@
 // TODO: All Controllers have to be refactored to make it thinner
-// TODO: Error Classes Needed
+// TODO: Error Classes
+// TODO: All Sequelize call must be transactional
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -62,7 +63,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Body Parsers
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({extended: false}));
 
 // flash middleware
 app.use((req, res, next) => {
