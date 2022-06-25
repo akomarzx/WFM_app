@@ -10,6 +10,5 @@ const employeeSchema = Joi.object({
       .valid('active', 'inactive').required(),
 }).required();
 
-module.exports = {
-  employeeSchema,
-};
+module.exports = employeeSchema;
+

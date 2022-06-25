@@ -3,7 +3,7 @@ module.exports = function Validate(schema) {
     try {
       await schema.validateAsync(req.body, {
         abortEarly: false,
-        stripUnkown: true,
+        stripUnknown: true,
       });
       next();
     } catch (error) {
