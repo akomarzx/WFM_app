@@ -1,6 +1,7 @@
 // TODO: All Controllers have to be refactored to make it thinner
 // TODO: Error Classes
 // TODO: All Sequelize call must be transactional
+// Use sequelize errors to throw execeptions on the services
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -79,9 +80,14 @@ app.use('/employees', require('./src/routes/employeeRoutes'));
 app.use('/attendance', require('./src/routes/attendanceRoutes'));
 app.use('/dashboard', require('./src/routes/dashboardRoute'));
 
+// Centralized Error Handling
+// All errors from all layers will bubble up
+// to the error handler
 app.use((err, req, res, next) => {
-  req.flash('error', err.message);
-  res.redirect('/');
+  if (req.flash) {
+    req.flash('error', err.message);
+  }
+  res.send(err.stack);
 });
 
 const PORT = process.env.PORT || 8080;
@@ -92,6 +98,6 @@ app.listen(PORT, async () => {
     await sequelize.authenticate();
     console.log('Database is Connected');
   } catch (e) {
-    console.log(e.message);
+    process.exit(1);
   }
 });

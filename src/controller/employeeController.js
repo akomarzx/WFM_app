@@ -1,6 +1,5 @@
 const EmployeeSerivces = require('../services/employeeServices');
 const asyncWrapper = require('../utils/asyncWrapper');
-const {employeeSchema} = require('../schemas/employeeSchema');
 
 const getEmployee = asyncWrapper(async (req, res, next) => {
   const employee = await EmployeeSerivces.getEmployee(req.params.id);

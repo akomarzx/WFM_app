@@ -1,4 +1,3 @@
-// TODO: Validation
 const EventEmitter = require('events');
 const employeeEvents = new EventEmitter();
 const moment = require('moment');
@@ -14,8 +13,8 @@ const getEmployees = async () => {
     });
     return result;
   } catch (error) {
-    throw new Error(error.message);
-  }
+    throw error;
+  };
 };
 
 const getEmployee = async (id) => {
@@ -26,16 +25,11 @@ const getEmployee = async (id) => {
           uuid: id,
         },
       });
-      // TODO throw an exception if nothing is found,
-      // Impelement Error objects. Catch matching error thrown
-      if (employee) {
-        return employee;
-      }
-      throw new Error('Employee Not Found!');
+      return employee;
     });
     return result;
   } catch (error) {
-    throw new Error(error.message);
+    throw error;
   }
 };
 
@@ -57,7 +51,7 @@ const createEmployee = async (employeeData) => {
     });
     return result;
   } catch (error) {
-    throw new Error(error.message);
+    throw error;
   }
 };
 
@@ -69,25 +63,22 @@ const updateEmployee = async (id, employeeData) => {
           uuid: id,
         },
       });
-      if (employeeToBeUpdated != null) {
-        await employeeToBeUpdated.set({
-          dept_id: employeeData.dept_id,
-          super_id: employeeData.super_id,
-          position_id: employeeData.position_id,
-          first_name: employeeData.first_name,
-          last_name: employeeData.last_name,
-          birth_date: moment(employeeData.birth_date, ('YYYY-MM-DD'), true),
-          sex: employeeData.sex,
-          employment_status: employeeData.employment_status,
-        });
-        await employeeToBeUpdated.save();
-        return employeeToBeUpdated;
-      }
-      throw new Error('Resource not found!');
+      await employeeToBeUpdated.set({
+        dept_id: employeeData.dept_id,
+        super_id: employeeData.super_id,
+        position_id: employeeData.position_id,
+        first_name: employeeData.first_name,
+        last_name: employeeData.last_name,
+        birth_date: moment(employeeData.birth_date, ('YYYY-MM-DD'), true),
+        sex: employeeData.sex,
+        employment_status: employeeData.employment_status,
+      });
+      await employeeToBeUpdated.save();
+      return employeeToBeUpdated;
     });
     return result;
   } catch (error) {
-    throw new Error(error.message);
+    throw error;
   }
 };
 
@@ -99,22 +90,23 @@ const deleteEmployee = async (id) => {
           uuid: id,
         },
       });
-      if (employeeToBeDeleted != null) {
-        await employeeToBeDeleted.destroy();
-        employeeEvents.emit('employeeDeleted', employeeToBeDeleted);
-        return;
-      }
-      throw new Error('Resource Not Found!');
+      await employeeToBeDeleted.destroy();
+      employeeEvents.emit('employeeDeleted', employeeToBeDeleted);
+      return;
     });
   } catch (error) {
-    throw new Error(error.message);
+    throw error;
   }
 };
 
 employeeEvents.on('employeeDeleted', async (employee) => {
-  await employee.update({
-    employment_status: 'inactive',
-  });
+  try {
+    await employee.update({
+      employment_status: 'inactive',
+    });
+  } catch (error) {
+    throw error;
+  }
 });
 
 
