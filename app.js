@@ -1,7 +1,7 @@
-// TODO: All Controllers have to be refactored to make it thinner
 // TODO: Error Classes
-// TODO: All Sequelize call must be transactional
 // Use sequelize errors to throw execeptions on the services
+// FIXME: New version of sequelize will be scoped module, 
+// need to edit require statements
 const express = require('express');
 const session = require('express-session');
 const path = require('path');

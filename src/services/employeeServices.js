@@ -8,7 +8,8 @@ const getEmployees = async () => {
   try {
     const result = sequelize.transaction(async (t) => {
       const employees = await Employee.findAll(
-          {include: [Department, Position]});
+          {include: [Department, Position],
+            rejectOnEmpty: true});
       return employees;
     });
     return result;
@@ -24,6 +25,7 @@ const getEmployee = async (id) => {
         where: {
           uuid: id,
         },
+        rejectOnEmpty: true,
       });
       return employee;
     });
@@ -62,6 +64,7 @@ const updateEmployee = async (id, employeeData) => {
         where: {
           uuid: id,
         },
+        rejectOnEmpty: true,
       });
       await employeeToBeUpdated.set({
         dept_id: employeeData.dept_id,
@@ -89,6 +92,7 @@ const deleteEmployee = async (id) => {
         where: {
           uuid: id,
         },
+        rejectOnEmpty: true,
       });
       await employeeToBeDeleted.destroy();
       employeeEvents.emit('employeeDeleted', employeeToBeDeleted);
