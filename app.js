@@ -1,5 +1,3 @@
-// TODO: Error Classes
-// Use sequelize errors to throw execeptions on the services
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -80,7 +78,7 @@ app.use('/dashboard', require('./src/routes/dashboardRoute'));
 
 // Centralized Error Handling
 // All errors from all layers will bubble up
-// to the error handler
+// to this error handler
 app.use((err, req, res, next) => {
   if (req.flash) {
     req.flash('error', err.message);

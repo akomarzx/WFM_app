@@ -8,6 +8,9 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(path.join(__dirname, '../../config/database.js'))[env];
 const db = {};
+const cls = require('cls-hooked');
+const namespace = cls.createNamespace('myNamespace');
+Sequelize.useCLS(namespace);
 
 let sequelize;
 if (config.use_env_variable) {

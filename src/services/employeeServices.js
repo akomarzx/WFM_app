@@ -2,7 +2,9 @@ const EventEmitter = require('events');
 const employeeEvents = new EventEmitter();
 const moment = require('moment');
 
-const {Employee, Department, Position, sequelize} = require('../models');
+const {createPunchInfo} = require('./punchInfoServices');
+const {Employee, Department, Position,
+  sequelize} = require('../models');
 
 const getEmployees = async () => {
   try {
@@ -20,7 +22,7 @@ const getEmployees = async () => {
 
 const getEmployee = async (id) => {
   try {
-    const result = sequelize.transaction(async (t) => {
+    const result = await sequelize.transaction(async (t) => {
       const employee = await Employee.findOne({
         where: {
           uuid: id,
@@ -47,8 +49,8 @@ const createEmployee = async (employeeData) => {
         birth_date: moment(employeeData.birth_date, ('YYYY-MM-DD'), true),
         sex: employeeData.sex,
         employment_status: employeeData.employment_status,
-      }, {transaction: t});
-      employeeEvents.emit('employeeCreated', newEmployee);
+      });
+      await createPunchInfo(newEmployee);
       return newEmployee;
     });
     return result;
@@ -76,7 +78,6 @@ const updateEmployee = async (id, employeeData) => {
         sex: employeeData.sex,
         employment_status: employeeData.employment_status,
       });
-      await employeeToBeUpdated.save();
       return employeeToBeUpdated;
     });
     return result;
