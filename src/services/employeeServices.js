@@ -96,15 +96,14 @@ const deleteEmployee = async (id) => {
         rejectOnEmpty: true,
       });
       await employeeToBeDeleted.destroy();
-      employeeEvents.emit('employeeDeleted', employeeToBeDeleted);
-      return;
+      await updateEmployementStatusWhenDeleted(employeeToBeDeleted);
     });
   } catch (error) {
     throw error;
   }
 };
 
-employeeEvents.on('employeeDeleted', async (employee) => {
+const updateEmployementStatusWhenDeleted = async (employee) => {
   try {
     await employee.update({
       employment_status: 'inactive',
@@ -112,7 +111,7 @@ employeeEvents.on('employeeDeleted', async (employee) => {
   } catch (error) {
     throw error;
   }
-});
+};
 
 
 module.exports = {getEmployee, getEmployees,
