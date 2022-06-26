@@ -1,5 +1,6 @@
 'use strict';
-const {Model} = require('@sequelize/core');
+// const {Model} = require('@sequelize/core');
+const {Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Employee extends Model {
     /**
