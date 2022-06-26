@@ -8,7 +8,6 @@ module.exports = {
     database: process.env.DB_DATABASE,
     host: process.env.DB_HOST,
     dialect: 'mysql',
-    define: {rejectOnEmpty: true},
     pool: {
       max: 10,
       min: 0,
