@@ -1,7 +1,5 @@
 // TODO: Error Classes
 // Use sequelize errors to throw execeptions on the services
-// FIXME: New version of sequelize will be scoped module, 
-// need to edit require statements
 const express = require('express');
 const session = require('express-session');
 const path = require('path');

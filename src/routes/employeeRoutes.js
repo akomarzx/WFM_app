@@ -1,7 +1,7 @@
 // TODO: Validation Middleware for create and put route
 // TODO: Authentication and Authorization Middleware
 const employeeController = require('../controller/employeeController');
-const employeeSchema = require('../schemas/employeeSchema');
+const {employeeSchema} = require('../utils/schemas');
 const validate = require('../middlewares/validateInput');
 const express = require('express');
 
