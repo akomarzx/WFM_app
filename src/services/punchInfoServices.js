@@ -15,6 +15,24 @@ const createPunchInfo = async (employee) => {
     throw error;
   }
 };
+// Sequelize onDelete is not currently working with
+// Soft-deletion aka paranoid tables.
+// this will be called when a employee is destroyed
+// this will disable the punch number of the deleted employee.
+const deletePunchInfo = async (empId) => {
+  try {
+    await sequelize.transaction(async (t) => {
+      await PunchInfo.destroy({
+        where: {
+          emp_id: empId,
+        },
+        rejectOnEmpty: true,
+      });
+    });
+  } catch (error) {
+    throw error;
+  }
+};
 
 
-module.exports = {createPunchInfo};
+module.exports = {createPunchInfo, deletePunchInfo};

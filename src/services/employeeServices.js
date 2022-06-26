@@ -1,8 +1,11 @@
+// TODO: Update and Delete can be simplified
+// by using a where clause, but loses the reference of
+// the current object in process
 const EventEmitter = require('events');
 const employeeEvents = new EventEmitter();
 const moment = require('moment');
 
-const {createPunchInfo} = require('./punchInfoServices');
+const {createPunchInfo, deletePunchInfo} = require('./punchInfoServices');
 const {Employee, Department, Position,
   sequelize} = require('../models');
 
@@ -11,7 +14,8 @@ const getEmployees = async () => {
     const result = sequelize.transaction(async (t) => {
       const employees = await Employee.findAll(
           {include: [Department, Position],
-            rejectOnEmpty: true});
+            rejectOnEmpty: true,
+            benchmark: true});
       return employees;
     });
     return result;
@@ -49,7 +53,7 @@ const createEmployee = async (employeeData) => {
         birth_date: moment(employeeData.birth_date, ('YYYY-MM-DD'), true),
         sex: employeeData.sex,
         employment_status: employeeData.employment_status,
-      });
+      }, {benchmark: true});
       await createPunchInfo(newEmployee);
       return newEmployee;
     });
@@ -77,7 +81,7 @@ const updateEmployee = async (id, employeeData) => {
         birth_date: moment(employeeData.birth_date, ('YYYY-MM-DD'), true),
         sex: employeeData.sex,
         employment_status: employeeData.employment_status,
-      });
+      }, {benchmark: true});
       return employeeToBeUpdated;
     });
     return result;
@@ -97,6 +101,7 @@ const deleteEmployee = async (id) => {
       });
       await employeeToBeDeleted.destroy();
       await updateEmployementStatusWhenDeleted(employeeToBeDeleted);
+      await deletePunchInfo(employeeToBeDeleted.emp_id);
     });
   } catch (error) {
     throw error;
