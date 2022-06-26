@@ -11,15 +11,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.hasOne(models.User, {
         foreignKey: 'emp_id',
-        onDelete: 'CASCADE',
       });
       this.hasOne(models.PunchInfo, {
         foreignKey: 'emp_id',
-        onDelete: 'CASCADE',
       });
       this.hasMany(models.Attendance, {
         foreignKey: 'emp_id',
-        onDelete: 'CASCADE',
       });
       this.belongsTo(models.Department, {
         // eslint-disable-next-line camelcase
