@@ -13,6 +13,13 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'emp_id',
       });
     }
+    toJSON() {
+      return {...this.get(),
+        emp_id: undefined,
+        createdAt: undefined,
+        updatedAt: undefined,
+        deletedAt: undefined};
+    }
   }
   PunchInfo.init(
       {

@@ -6,14 +6,14 @@ const employeeEvents = new EventEmitter();
 const moment = require('moment');
 
 const {createPunchInfo, deletePunchInfo} = require('./punchInfoServices');
-const {Employee, Department, Position,
+const {Employee, Department, Position, PunchInfo,
   sequelize} = require('../models');
 
 const getEmployees = async () => {
   try {
     const result = sequelize.transaction(async (t) => {
       const employees = await Employee.findAll(
-          {include: [Department, Position],
+          {include: [Department, Position, PunchInfo],
             rejectOnEmpty: true,
             benchmark: true});
       return employees;
@@ -32,6 +32,7 @@ const getEmployee = async (id) => {
           uuid: id,
         },
         rejectOnEmpty: true,
+        include: [Department, Position, PunchInfo],
       });
       return employee;
     });
