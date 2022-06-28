@@ -22,3 +22,8 @@ May 31 - Working with migrations and models.<br/>
 June 1 - Working on the controllers and endpoints.<br/>
 June 2-5 - Researching User authentication and implementing User Registration.<br/>
 June 6-7 - Finished Implenting user registration and log-in system.<br/>
+June 7-8 Spend some time linting and implementing a uniform source code rules</br>
+June 9-21 - Write the employee services
+June 22 - Validation for employee model
+June 23-27 - Cleaning up and Read more documentations and watching tutorials.
+June 28 - Started Implementing Authorization System
