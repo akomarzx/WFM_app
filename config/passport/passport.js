@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
 const {User, Employee} = require('../../src/models');
-
 const validatePassword = async (plainText, hashedPassword) => {
   try {
     return await bcrypt.compare(plainText, hashedPassword);

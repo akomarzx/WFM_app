@@ -7,7 +7,7 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'roles',
-          key: 'id',
+          key: 'role_id',
         },
       },
       dept_id: {
