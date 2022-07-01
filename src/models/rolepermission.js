@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const {Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class RolePermission extends Model {
     /**
@@ -14,11 +12,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   RolePermission.init({
-    role_id: DataTypes.INTEGER,
-    permission_id: DataTypes.INTEGER
+    role_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    permission_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   }, {
     sequelize,
     modelName: 'RolePermission',
+    tableName: 'rolePermissions',
   });
   return RolePermission;
 };

@@ -25,6 +25,9 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.Position, {
         foreignKey: 'position_id',
       });
+      this.belongsTo(models.Role, {
+        foreignKey: 'role_id',
+      }),
       this.hasMany(this, {as: 'children', foreignKey: 'emp_id'});
       this.belongsTo(this, {as: 'parent', foreignKey: 'emp_id'});
     }
@@ -41,6 +44,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Employee.init(
       {
+        role_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
         dept_id: {
           type: DataTypes.INTEGER,
           allowNull: true,

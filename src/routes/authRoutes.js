@@ -15,6 +15,9 @@ module.exports = function(passport) {
   }));
   router.post('/register', authController.registerUser);
 
+  router.get('/test', async (req, res, next) => {
+
+  });
 
   return router;
 };
