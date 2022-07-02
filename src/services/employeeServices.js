@@ -46,6 +46,7 @@ const createEmployee = async (employeeData) => {
   try {
     const result = await sequelize.transaction(async (t) => {
       const newEmployee = await Employee.create({
+        role_id: employeeData.role_id,
         dept_id: employeeData.dept_id,
         super_id: employeeData.super_id,
         position_id: employeeData.position_id,
