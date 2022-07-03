@@ -88,7 +88,9 @@ app.use((err, req, res, next) => {
     req.flash('error', err.message);
   }
   console.log(err.message);
-  res.status(err.statusCode).send(err.stack);
+  const statusCode = err.statusCode || 500;
+
+  res.status(statusCode).send(err.stack);
 });
 
 const PORT = process.env.PORT || 8080;
