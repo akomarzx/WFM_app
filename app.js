@@ -83,6 +83,7 @@ app.use('/dashboard', require('./src/routes/dashboardRoute'));
 // Centralized Error Handling
 // All errors from all layers will bubble up
 // to this error handler
+// TODO: improve the centralized error handler
 app.use((err, req, res, next) => {
   if (req.flash) {
     req.flash('error', err.message);
