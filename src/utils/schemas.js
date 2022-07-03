@@ -27,13 +27,32 @@ const htmlSanitizerExtension = (joi) => ({
 const Joi = BaseJoi.extend(htmlSanitizerExtension);
 
 const employeeSchema = Joi.object({
-  first_name: Joi.string().required().escapeHTML(),
-  last_name: Joi.string().required(),
+  first_name: Joi.string().escapeHTML().required(),
+  last_name: Joi.string().escapeHTML().required(),
   birth_date: Joi.date().format('YYYY-MM-DD').utc().required(),
-  sex: Joi.string().max(1).lowercase().valid('m', 'f', 'x').required(),
+  sex: Joi.string().max(1).
+      lowercase().valid('m', 'f', 'x').
+      escapeHTML().required(),
   employment_status: Joi.string().lowercase()
-      .valid('active', 'inactive').required(),
+      .valid('active', 'inactive').escapeHTML().required(),
 }).required();
 
-module.exports = {employeeSchema};
+const logInSchema = Joi.object({
+  email: Joi.string()
+      .email({minDomainSegments: 2, tlds: {allow: ['com', 'net']}})
+      .escapeHTML()
+      .required(),
+  password: Joi.string().
+      required(),
+}).required();
+
+
+// TODO: Registration Schema - A little bit complicated
+// need more time
+// eslint-disable-next-line max-len
+//     .pattern(new RegExp(/(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])[a-zA-Z0-9!@#\$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{6,}/))
+//     .messages({
+//       'string.pattern.base': 'Invalid Password',
+//     }),
+module.exports = {employeeSchema, logInSchema};
 

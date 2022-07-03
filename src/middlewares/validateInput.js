@@ -1,3 +1,5 @@
+const {ValidationError} = require('joi');
+
 module.exports = function Validate(schema) {
   return async (req, res, next) => {
     try {
@@ -6,7 +8,12 @@ module.exports = function Validate(schema) {
         stripUnknown: true,
       });
       next();
+      // Improve the error handling
     } catch (error) {
+      if (error instanceof ValidationError) {
+        req.flash('error', error.message);
+        return res.redirect('back');
+      }
       next(error);
     }
   };
