@@ -7,5 +7,4 @@ const isLoggedIn = require('../middlewares/isLoggedIn');
 
 router.use(isLoggedIn);
 router.get('/', dashboardController.getDashboard);
-
 module.exports = router;
