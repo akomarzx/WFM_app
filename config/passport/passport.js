@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
-const {User, Employee} = require('../../src/models');
+const {User, Employee, Role} = require('../../src/models');
 const validatePassword = async (plainText, hashedPassword) => {
   try {
     return await bcrypt.compare(plainText, hashedPassword);
@@ -35,7 +35,9 @@ module.exports = async (passport) => {
   // eslint-disable-next-line camelcase
   passport.deserializeUser(async (emp_id, done) => {
     try {
-      const employee = await Employee.findByPk(emp_id);
+      const employee = await Employee.findByPk(emp_id, {
+        include: Role,
+      });
       done(null, employee);
     } catch (error) {
       done(error);

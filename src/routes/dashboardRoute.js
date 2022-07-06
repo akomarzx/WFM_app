@@ -4,7 +4,14 @@ const express = require('express');
 const router = express.Router();
 const dashboardController = require('../controller/dashboardController');
 const isLoggedIn = require('../middlewares/isLoggedIn');
+const isRoleAllowed = require('../middlewares/isRoleAllowed');
 
 router.use(isLoggedIn);
 router.get('/', dashboardController.getDashboard);
+
+router.get('/roles-permissions',
+    isLoggedIn,
+    isRoleAllowed('ADMIN'),
+    dashboardController.getRolesPermissionsDashboard);
+
 module.exports = router;
