@@ -5,13 +5,17 @@ module.exports = {
     return queryInterface.bulkInsert('permissions', [
       {
         permission_id: 1,
-        name: 'GET_EMPLOYEE',
+        name: 'CREATE_ROLE',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        permission_id: 2,
-        name: 'CREATE_EMPLOYEE',
+        name: 'ASSIGN_ROLE',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'CREATE_PERMISSION',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -21,7 +25,7 @@ module.exports = {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete('permissions', {
       // eslint-disable-next-line camelcase
-      id: {[Op.in]: [1, 2]},
+      permission_id: {[Op.in]: [1, 2, 3]},
     });
   },
 };

@@ -9,6 +9,7 @@ module.exports = {
           model: 'roles',
           key: 'role_id',
         },
+        onDelete: 'CASCADE',
       },
       dept_id: {
         type: Sequelize.INTEGER,
@@ -17,6 +18,7 @@ module.exports = {
           model: 'departments',
           key: 'dept_id',
         },
+        onDelete: 'CASCADE',
       },
       super_id: {
         type: Sequelize.INTEGER,
@@ -25,6 +27,7 @@ module.exports = {
           model: 'employees',
           key: 'emp_id',
         },
+        onDelete: 'CASCADE',
       },
       position_id: {
         type: Sequelize.INTEGER,
@@ -33,6 +36,7 @@ module.exports = {
           model: 'positions',
           key: 'position_id',
         },
+        onDelete: 'CASCADE',
       },
       first_name: {
         type: Sequelize.STRING,

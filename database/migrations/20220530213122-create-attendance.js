@@ -17,6 +17,7 @@ module.exports = {
           model: 'employees',
           key: 'emp_id',
         },
+        onDelete: 'CASCADE',
       },
       time_in: {
         type: Sequelize.DATE,

@@ -16,6 +16,7 @@ module.exports = {
           model: 'employees',
           key: 'emp_id',
         },
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,
