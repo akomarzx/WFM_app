@@ -1,7 +1,6 @@
 // TODO: attach the serialized employee the locals via a middleware
 
 const getDashboard = function(req, res) {
-  res.locals.employee = req.user;
   res.render('./dashboardViews/index');
 };
 const getRolesPermissionsDashboard = function(req, res) {

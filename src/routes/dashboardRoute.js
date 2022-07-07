@@ -6,10 +6,6 @@ const dashboardController = require('../controller/dashboardController');
 const isLoggedIn = require('../middlewares/isLoggedIn');
 const isRoleAllowed = require('../middlewares/isRoleAllowed');
 
-router.use((req, res, next) => {
-  res.locals.employee = req.user;
-  next();
-});
 router.use(isLoggedIn);
 
 router.get('/', dashboardController.getDashboard);

@@ -74,6 +74,13 @@ app.use((req, res, next) => {
   next();
 });
 
+// locals variable
+app.use((req, res, next) => {
+  res.locals.employee = req.user;
+  next();
+});
+
+
 app.use('/', require('./src/routes/indexRoute'));
 app.use('/auth', require('./src/routes/authRoutes')(passport));
 app.use('/employees', require('./src/routes/employeeRoutes'));
