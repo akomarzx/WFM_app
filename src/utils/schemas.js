@@ -45,14 +45,22 @@ const logInSchema = Joi.object({
   password: Joi.string().
       required(),
 }).required();
-
-
-// TODO: Registration Schema - A little bit complicated
-// need more time
-// eslint-disable-next-line max-len
-//     .pattern(new RegExp(/(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])[a-zA-Z0-9!@#\$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{6,}/))
-//     .messages({
-//       'string.pattern.base': 'Invalid Password',
-//     }),
-module.exports = {employeeSchema, logInSchema};
+// TODO TEST
+const registrationSchema = Joi.object({
+  regCode: Joi.string()
+      .escapeHTML()
+      .required(),
+  email: Joi.string()
+      .email({minDomainSegments: 2, tlds: {allow: ['com', 'net']}})
+      .escapeHTML()
+      .required(),
+  password: Joi.string()
+      // eslint-disable-next-line max-len
+      .pattern(new RegExp(/(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])[a-zA-Z0-9!@#\$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{6,}/))
+      .messages({
+        'string.pattern.base': 'Invalid Password',
+      }),
+  repeat_password: Joi.ref('password'),
+}).with('password', 'repeat_password');
+module.exports = {employeeSchema, logInSchema, registrationSchema};
 
