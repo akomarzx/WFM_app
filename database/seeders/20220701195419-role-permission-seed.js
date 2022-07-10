@@ -4,19 +4,19 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('RolePermission', [
       {
-        role_id: 0,
+        role_id: 1,
         permission_id: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        role_id: 0,
+        role_id: 1,
         permission_id: 2,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        role_id: 0,
+        role_id: 1,
         permission_id: 3,
         createdAt: new Date(),
         updatedAt: new Date(),

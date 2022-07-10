@@ -5,7 +5,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('roles', [
       {
-        role_id: 0,
+        role_id: 1,
         role_name: 'SUPER_ADMIN',
         uuid: uuidv4(),
         createdAt: new Date(),
