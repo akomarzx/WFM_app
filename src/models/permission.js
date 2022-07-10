@@ -19,12 +19,16 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    permission_name: {
       type: DataTypes.STRING,
       allowNull: false,
       set(value) {
         this.setDataValue('permission_name', value.toUpperCase());
       },
+    },
+    uuid: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
     },
   }, {
     sequelize,

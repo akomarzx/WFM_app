@@ -36,6 +36,11 @@ module.exports = (sequelize, DataTypes) => {
         this.setDataValue('dept_name', value.toUpperCase());
       },
     },
+    uuid: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
+
   },
   {
     sequelize,

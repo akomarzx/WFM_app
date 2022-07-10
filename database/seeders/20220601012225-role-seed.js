@@ -1,11 +1,13 @@
 'use strict';
 
+const {v4: uuidv4} = require('uuid');
 module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('roles', [
       {
         role_id: 0,
         role_name: 'SUPER_ADMIN',
+        uuid: uuidv4(),
         createdAt: new Date(),
         updatedAt: new Date(),
       },

@@ -1,21 +1,25 @@
 'use strict';
 
+const {v4: uuidv4} = require('uuid');
 module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('permissions', [
       {
         permission_id: 1,
         permmision_name: 'CREATE_ROLE',
+        uuid: uuidv4(),
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        name: 'ASSIGN_ROLE',
+        permission_name: 'ASSIGN_ROLE',
+        uuid: uuidv4(),
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        name: 'CREATE_PERMISSION',
+        permission_name: 'CREATE_PERMISSION',
+        uuid: uuidv4(),
         createdAt: new Date(),
         updatedAt: new Date(),
       },
