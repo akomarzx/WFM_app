@@ -84,7 +84,6 @@ app.use((req, res, next) => {
 app.use('/', require('./src/routes/indexRoute'));
 app.use('/auth', require('./src/routes/authRoutes')(passport));
 app.use('/employees', require('./src/routes/employeeRoutes'));
-app.use('/attendance', require('./src/routes/attendanceRoutes'));
 app.use('/dashboard', require('./src/routes/dashboardRoute'));
 
 // Centralized Error Handling

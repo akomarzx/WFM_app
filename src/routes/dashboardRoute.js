@@ -12,7 +12,7 @@ router.get('/', dashboardController.getDashboard);
 
 router.get('/roles-permissions',
     isLoggedIn,
-    isRoleAllowed('ADMIN'),
+    isRoleAllowed('SUPER_ADMIN'),
     dashboardController.getRolesPermissionsDashboard);
 
 module.exports = router;

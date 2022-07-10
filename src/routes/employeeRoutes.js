@@ -9,6 +9,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', isLoggedIn, employeeController.getEmployees);
+
 router.post('/',
     isLoggedIn,
     isAuthorized('CREATE_EMPLOYEE'),
