@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
-      name: {
+      permission_name: {
         type: Sequelize.STRING,
         allowNull: false,
       },

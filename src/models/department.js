@@ -32,8 +32,12 @@ module.exports = (sequelize, DataTypes) => {
     dept_name: {
       type: DataTypes.STRING,
       allowNull: false,
+      set(value) {
+        this.setDataValue('dept_name', value.toUpperCase());
+      },
     },
-  }, {
+  },
+  {
     sequelize,
     modelName: 'Department',
     tableName: 'departments',

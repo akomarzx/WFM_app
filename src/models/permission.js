@@ -22,6 +22,9 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      set(value) {
+        this.setDataValue('permission_name', value.toUpperCase());
+      },
     },
   }, {
     sequelize,

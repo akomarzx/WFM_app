@@ -25,9 +25,12 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    role_name: {
       type: DataTypes.STRING,
       allowNull: false,
+      set(value) {
+        this.setDataValue('role_name', value.toUpperCase());
+      },
     },
   }, {
     sequelize,

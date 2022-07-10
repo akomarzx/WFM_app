@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert('permissions', [
       {
         permission_id: 1,
-        name: 'CREATE_ROLE',
+        permmision_name: 'CREATE_ROLE',
         createdAt: new Date(),
         updatedAt: new Date(),
       },

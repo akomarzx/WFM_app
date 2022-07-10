@@ -31,6 +31,9 @@ module.exports = (sequelize, DataTypes) => {
     position_name: {
       type: DataTypes.STRING,
       allowNull: false,
+      set(value) {
+        this.setDataValue('position_name', value.toUpperCase());
+      },
     },
     createdAt: {
       allowNull: false,
