@@ -10,11 +10,6 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-      {
-        dept_name: 'HUMAN RESOURCES',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
     ]);
   },
 

@@ -8,12 +8,6 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
-      {
-        punch_id: 7001,
-        emp_id: 2,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
     ]);
   },
   async down(queryInterface, Sequelize) {

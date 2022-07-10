@@ -7,11 +7,6 @@ module.exports = {
       position_name: 'IT ADMINISTRATOR',
       createdAt: new Date(),
       updatedAt: new Date(),
-    }, {
-      position_id: 1001,
-      position_name: 'HUMAN RESOURCES GENERALIST',
-      createdAt: new Date(),
-      updatedAt: new Date(),
     },
     ]);
   },
