@@ -121,7 +121,11 @@ const updateEmployementStatusWhenDeleted = async (employee) => {
   }
 };
 
-
-module.exports = {getEmployee, getEmployees,
-  createEmployee, updateEmployee,
-  deleteEmployee, employeeEvents};
+module.exports = {
+  getEmployee,
+  getEmployees,
+  createEmployee,
+  updateEmployee,
+  deleteEmployee,
+  employeeEvents,
+};

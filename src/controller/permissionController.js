@@ -38,6 +38,7 @@ const deletePermission = asyncWrapper(async (req, res, next) => {
   req.flash('success', 'Updated Succesfully');
   res.redirect('back');
 });
+
 module.exports = {
   getCreatePermissionForm,
   getUpdatePermissionForm,

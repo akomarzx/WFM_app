@@ -65,6 +65,7 @@ const deletePermission = async (uuid) => {
     throw error;
   }
 };
+
 module.exports = {
   createPermission,
   getAllPermission,

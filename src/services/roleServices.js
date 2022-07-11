@@ -62,6 +62,7 @@ const deleteRole = async (uuid) => {
     throw error;
   }
 };
+
 module.exports = {
   createRole,
   getAllRoles,

@@ -28,7 +28,9 @@ const deleteEmployee = asyncWrapper(async (req, res, next) => {
 });
 
 module.exports = {
-  getEmployee, getEmployees,
-  createEmployee, updateEmployee,
+  getEmployee,
+  getEmployees,
+  createEmployee,
+  updateEmployee,
   deleteEmployee,
 };

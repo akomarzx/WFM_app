@@ -35,4 +35,7 @@ const deletePunchInfo = async (empId) => {
 };
 
 
-module.exports = {createPunchInfo, deletePunchInfo};
+module.exports = {
+  createPunchInfo,
+  deletePunchInfo,
+};
