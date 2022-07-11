@@ -87,6 +87,7 @@ app.use('/auth', require('./src/routes/authRoutes')(passport));
 app.use('/employees', require('./src/routes/employeeRoutes'));
 app.use('/dashboard', require('./src/routes/dashboardRoute'));
 app.use('/roles', require('./src/routes/roleRoutes'));
+app.use('/permissions', require('./src/routes/permissionRoutes'));
 // Centralized Error Handling
 // All errors from all layers will bubble up
 // to this error handler
@@ -100,7 +101,6 @@ app.use((err, req, res, next) => {
   }
   console.log(err.message);
   const statusCode = err.statusCode || 500;
-
   res.status(statusCode).send(err.stack);
 });
 

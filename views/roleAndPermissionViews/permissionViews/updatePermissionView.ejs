@@ -1,0 +1,30 @@
+
+<% layout('/layout/fullNavBarBoilerplate') %>
+<div class="container-fluid">
+    <div class="row">
+        <div class="border border-secondary col-md-4 ms-2 mt-4 p-2">
+            <h2>Update a Permission</h2>
+            <form action="/permissions?_method=PUT" method="post">
+                <select class="form-select" aria-label="Current roles" onChange='document.getElementById("updatedPermission").value = getSelectedOption(this)' name="uuid">
+                    <option selected>Select Permission to Update</option>
+                    <% permissions.forEach(element => { %>
+                        <option value="<%= element.uuid %>"><%= element.permission_name %></option>
+                    <% }) %>
+                  </select>
+                <div class="form-group mt-3">
+                    <label for="updatedPermission">Updated value: </label>
+                    <input type="text" name="updatedPermission" id="updatedPermission">
+                </div>
+                <div class="form-group mt-3">
+                    <button class="btn btn-secondary btn-sm" type="submit">Submit</button>
+                    <button class="btn btn-secondary btn-sm" onClick="history.go(-1);" >Back</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function getSelectedOption(sel) {
+        return sel.options[sel.selectedIndex].text;
+    }   
+</script>
