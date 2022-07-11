@@ -11,7 +11,7 @@ const {Employee, Department, Position, PunchInfo,
 
 const getEmployees = async () => {
   try {
-    const result = sequelize.transaction(async (t) => {
+    const result = await sequelize.transaction(async (t) => {
       const employees = await Employee.findAll(
           {include: [Department, Position, PunchInfo],
             rejectOnEmpty: true,

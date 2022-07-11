@@ -1,0 +1,20 @@
+<% layout('/layout/fullNavBarBoilerplate') %>
+<div class="container-fluid">
+    <div class="row">
+        <div class="border border-secondary col-md-4 ms-2 mt-4 p-2">
+            <h2>Delete a Role</h2>
+            <form action="/roles?_method=DELETE" method="post">
+                <select class="form-select" aria-label="Current roles" name="uuid">
+                    <option selected>Select Role to Delete</option>
+                    <% roles.forEach(element => { %>
+                        <option value="<%= element.uuid %>"><%= element.role_name %></option>
+                    <% }) %>
+                  </select>
+                <div class="form-group mt-3">
+                    <button class="btn btn-secondary btn-sm" type="submit">Submit</button>
+                    <button class="btn btn-secondary btn-sm" onClick="history.go(-1);" >Back</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

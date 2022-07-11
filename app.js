@@ -85,14 +85,17 @@ app.use('/', require('./src/routes/indexRoute'));
 app.use('/auth', require('./src/routes/authRoutes')(passport));
 app.use('/employees', require('./src/routes/employeeRoutes'));
 app.use('/dashboard', require('./src/routes/dashboardRoute'));
-
+app.use('/roles', require('./src/routes/roleRoutes'));
 // Centralized Error Handling
 // All errors from all layers will bubble up
 // to this error handler
 // TODO: improve the centralized error handler
 app.use((err, req, res, next) => {
+  // FIXME:Stream is not readable error
   if (req.flash) {
-    req.flash('error', err.message);
+    if (!err.message === 'stream is not readable') {
+      req.flash('error', err.message);
+    }
   }
   console.log(err.message);
   const statusCode = err.statusCode || 500;
