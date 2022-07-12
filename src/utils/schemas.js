@@ -63,9 +63,25 @@ const registrationSchema = Joi.object({
   repeat_password: Joi.ref('password'),
 }).with('password', 'repeat_password');
 
+const roleSchema = Joi.object({
+  role_name: Joi.string()
+      .min(5)
+      .escapeHTML()
+      .required(),
+});
+
+const permissionSchema = Joi.object({
+  permission_name: Joi.string()
+      .min(5)
+      .escapeHTML()
+      .required(),
+});
+
 module.exports = {
   employeeSchema,
   logInSchema,
+  permissionSchema,
   registrationSchema,
+  roleSchema,
 };
 

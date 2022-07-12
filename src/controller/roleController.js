@@ -16,22 +16,22 @@ const getDeleteRoleForm = asyncWrapper(async (req, res, next) => {
 });
 
 const createRole = asyncWrapper(async (req, res, next) => {
-  const {newRole} = req.body;
-  console.log(newRole);
-  await roleServices.createRole(newRole);
+  // eslint-disable-next-line camelcase
+  const {role_name} = req.body;
+  await roleServices.createRole(role_name);
   req.flash('success', 'Role Created Succesfully');
   res.status(200).redirect('back');
 });
 
 const updateRole = asyncWrapper(async (req, res, next) => {
-  await roleServices.updateRole(req.body.uuid, req.body.updatedRole);
+  await roleServices.updateRole(req.body.uuid, req.body.role_name);
   req.flash('success', 'Updated Succesfully');
   res.redirect('back');
 });
 
 const deleteRole = asyncWrapper(async (req, res, next) => {
   await roleServices.deleteRole(req.body.uuid);
-  req.flash('success', 'Updated Succesfully');
+  req.flash('success', 'Deleted Succesfully');
   res.redirect('back');
 });
 

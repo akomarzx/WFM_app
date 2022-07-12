@@ -20,15 +20,16 @@ const getDeletePermissionForm = asyncWrapper(async (req, res, next) => {
 });
 
 const createPermission = asyncWrapper(async (req, res, next) => {
-  const {newPermission} = req.body;
-  await permissionServices.createPermission(newPermission);
+  // eslint-disable-next-line camelcase
+  const {permission_name} = req.body;
+  await permissionServices.createPermission(permission_name);
   req.flash('success', 'Permission Created Succesfully');
   res.status(200).redirect('back');
 });
 
 const updatePermission = asyncWrapper(async (req, res, next) => {
   await permissionServices.
-      updatePermission(req.body.uuid, req.body.updatedPermission);
+      updatePermission(req.body.uuid, req.body.permission_name);
   req.flash('success', 'Updated Succesfully');
   res.redirect('back');
 });
