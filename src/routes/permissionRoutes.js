@@ -1,7 +1,5 @@
 
 // TODO: validation
-// TODO: change the redirection in the back button
-// use another form with different action
 const express = require('express');
 const permissionController = require('../controller/permissionController');
 // eslint-disable-next-line new-cap

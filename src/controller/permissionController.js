@@ -14,7 +14,7 @@ const getUpdatePermissionForm = asyncWrapper(async (req, res, next) => {
 });
 
 const getDeletePermissionForm = asyncWrapper(async (req, res, next) => {
-  res.locals.roles = await permissionServices.getAllPermission();
+  res.locals.permissions = await permissionServices.getAllPermission();
   res.status(200)
       .render('./roleAndPermissionViews/permissionViews/deletePermissionView');
 });
@@ -35,7 +35,7 @@ const updatePermission = asyncWrapper(async (req, res, next) => {
 
 const deletePermission = asyncWrapper(async (req, res, next) => {
   await permissionServices.deletePermission(req.body.uuid);
-  req.flash('success', 'Updated Succesfully');
+  req.flash('success', 'Deleted Succesfully');
   res.redirect('back');
 });
 

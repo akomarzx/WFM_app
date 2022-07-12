@@ -93,11 +93,8 @@ app.use('/permissions', require('./src/routes/permissionRoutes'));
 // to this error handler
 // TODO: improve the centralized error handler
 app.use((err, req, res, next) => {
-  // FIXME:Stream is not readable error
   if (req.flash) {
-    if (!err.message === 'stream is not readable') {
-      req.flash('error', err.message);
-    }
+    req.flash('error', err.message);
   }
   console.log(err.message);
   const statusCode = err.statusCode || 500;

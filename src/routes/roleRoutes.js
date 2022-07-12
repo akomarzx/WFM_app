@@ -1,6 +1,4 @@
 // TODO: validation
-// TODO: change the redirection in the back button
-// use another form with different action
 const express = require('express');
 const roleController = require('../controller/roleController');
 // eslint-disable-next-line new-cap
