@@ -1,8 +1,6 @@
-// TODO: Roles and Permission System.
 // TODO: Improve the current permission system
 // that will only fetch the permission
 // per resources not the whole permission,
-// TODO: Fixed the cascading Delete in the database
 const express = require('express');
 const session = require('express-session');
 const path = require('path');

@@ -8,7 +8,9 @@ const express = require('express');
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
-router.get('/', isLoggedIn, employeeController.getEmployees);
+router.get('/',
+    isLoggedIn,
+    employeeController.getEmployees);
 
 router.post('/',
     isLoggedIn,
@@ -17,6 +19,7 @@ router.post('/',
     employeeController.createEmployee);
 
 router.get('/:id', employeeController.getEmployee);
+
 router.put('/:id',
     validate(employeeSchema),
     employeeController.updateEmployee);
