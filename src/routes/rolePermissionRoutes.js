@@ -1,5 +1,3 @@
-
-// TODO: validation
 const express = require('express');
 const rolePermissionController =
     require('../controller/rolePermissionController');

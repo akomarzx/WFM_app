@@ -1,5 +1,4 @@
-// TODO: validation
-// Add View route in the roles and permission dashboard!
+// TODO: Add View route in the roles and permission dashboard!
 // For roles and permissions
 const express = require('express');
 const permissionController = require('../controller/permissionController');

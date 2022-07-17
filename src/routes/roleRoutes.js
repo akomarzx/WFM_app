@@ -1,4 +1,3 @@
-// TODO: validation
 const express = require('express');
 const roleController = require('../controller/roleController');
 const {roleSchema} = require('../utils/schemas');

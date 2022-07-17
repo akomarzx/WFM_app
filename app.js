@@ -79,7 +79,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
 app.use('/', require('./src/routes/indexRoutes'));
 app.use('/auth', require('./src/routes/authRoutes')(passport));
 app.use('/employees', require('./src/routes/employeeRoutes'));
@@ -87,6 +86,7 @@ app.use('/dashboard', require('./src/routes/dashboardRoutes'));
 app.use('/roles', require('./src/routes/roleRoutes'));
 app.use('/permissions', require('./src/routes/permissionRoutes'));
 app.use('/role-permissions', require('./src/routes/rolePermissionRoutes'));
+
 // Centralized Error Handling
 // All errors from all layers will bubble up
 // to this error handler

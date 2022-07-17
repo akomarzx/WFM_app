@@ -1,7 +1,3 @@
-// TODO: Update and Delete can be simplified
-// by using a where clause, but loses the reference of
-// the current object in process
-
 const EventEmitter = require('events');
 const employeeEvents = new EventEmitter();
 const moment = require('moment');
