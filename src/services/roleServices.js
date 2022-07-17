@@ -6,7 +6,7 @@ const getRoles = async () => {
     const result = sequelize.transaction(async (t) => {
       const roles = await Role.findAll({
         where: {
-          role_name: {[Op.ne]: 'SUPER_ADMIN'},
+          roleName: {[Op.ne]: 'SUPER_ADMIN'},
         },
         // rejectOnEmpty: true,
         benchmark: true,
@@ -23,7 +23,7 @@ const getRole = async (roleUuid) => {
     const result = sequelize.transaction(async (t) => {
       const roles = await Role.findOne({
         where: {
-          role_name: {[Op.ne]: 'SUPER_ADMIN'},
+          roleName: {[Op.ne]: 'SUPER_ADMIN'},
           uuid: roleUuid,
         },
         rejectOnEmpty: true,
@@ -41,7 +41,7 @@ const createRole = async (newRole) => {
   try {
     await sequelize.transaction(async (t) => {
       await Role.create({
-        role_name: newRole,
+        roleName: newRole,
       });
     });
   } catch (error) {
@@ -58,7 +58,7 @@ const updateRole = async (uuid, updatedRole) => {
         },
       });
       await roleToBeUpdated.set({
-        role_name: updatedRole,
+        roleName: updatedRole,
       });
       await roleToBeUpdated.save();
     });

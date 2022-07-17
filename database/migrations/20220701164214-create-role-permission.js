@@ -2,20 +2,20 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('RolePermission', {
-      role_id: {
+      roleId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'roles',
-          key: 'role_id',
+          key: 'roleId',
         },
         onDelete: 'CASCADE',
       },
-      permission_id: {
+      permissionId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'permissions',
-          key: 'permission_id',
+          key: 'permissionId',
         },
         onDelete: 'CASCADE',
       },

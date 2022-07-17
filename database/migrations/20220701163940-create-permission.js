@@ -2,13 +2,13 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('permissions', {
-      permission_id: {
+      permissionId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
       },
-      permission_name: {
+      permissionName: {
         type: Sequelize.STRING,
         allowNull: false,
       },

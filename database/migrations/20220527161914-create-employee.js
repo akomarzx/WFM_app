@@ -2,51 +2,51 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('employees', {
-      role_id: {
+      roleId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'roles',
-          key: 'role_id',
+          key: 'roleId',
         },
         onDelete: 'CASCADE',
       },
-      dept_id: {
+      deptId: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
           model: 'departments',
-          key: 'dept_id',
+          key: 'deptId',
         },
         onDelete: 'CASCADE',
       },
-      super_id: {
+      superId: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
           model: 'employees',
-          key: 'emp_id',
+          key: 'empId',
         },
         onDelete: 'CASCADE',
       },
-      position_id: {
+      positionId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'positions',
-          key: 'position_id',
+          key: 'positionId',
         },
         onDelete: 'CASCADE',
       },
-      first_name: {
+      firstName: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      last_name: {
+      lastName: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      birth_date: {
+      birthDate: {
         type: Sequelize.DATEONLY,
         allowNull: false,
       },
@@ -58,7 +58,7 @@ module.exports = {
           isIn: [['m', 'f', 'x']],
         },
       },
-      employment_status: {
+      employmentStatus: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
@@ -69,12 +69,12 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      hiring_date: {
+      hiringDate: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('now'),
         allowNull: false,
       },
-      emp_id: {
+      empId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,

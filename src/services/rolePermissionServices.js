@@ -1,14 +1,14 @@
 /* eslint-disable camelcase */
 const {Role, Permission, sequelize} = require('../models');
 
-const createRolePermission = async (role_uuid, permission_uuid) => {
+const createRolePermission = async (roleUuid, permissionUuid) => {
   try {
     await sequelize.transaction(async (t) => {
       const role = await Role.findOne(
-          {where: {uuid: role_uuid},
+          {where: {uuid: roleUuid},
             rejectOnEmpty: true});
       const permission = await Permission.findOne({
-        where: {uuid: permission_uuid},
+        where: {uuid: permissionUuid},
         rejectOnEmpty: true,
       });
 
@@ -19,14 +19,14 @@ const createRolePermission = async (role_uuid, permission_uuid) => {
   }
 };
 
-const deleteRolePermission = async (role_uuid, permission_uuid) => {
+const deleteRolePermission = async (roleUuid, permissionUuid) => {
   try {
     await sequelize.transaction(async (t) => {
       const role = await Role.findOne(
-          {where: {uuid: role_uuid},
+          {where: {uuid: roleUuid},
             rejectOnEmpty: true});
       const permission = await Permission.findOne({
-        where: {uuid: permission_uuid},
+        where: {uuid: permissionUuid},
         rejectOnEmpty: true,
       });
       await role.removePermission(permission);

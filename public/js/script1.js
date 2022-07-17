@@ -15,7 +15,7 @@ const buildSelection = function(datas) {
   removeAll();
   datas.data.Permissions.forEach(function(element) {
     const newOption = document.createElement('option');
-    const optionText = document.createTextNode(element.permission_name);
+    const optionText = document.createTextNode(element.permissionName);
     newOption.value = element.uuid;
     newOption.appendChild(optionText);
     permissionSelect.appendChild(newOption);

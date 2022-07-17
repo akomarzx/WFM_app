@@ -9,27 +9,27 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsToMany(models.Role, {through: 'RolePermission',
-        foreignKey: 'permission_id'});
+        foreignKey: 'permissionId'});
     }
     toJSON() {
       return {...this.get(),
-        permission_id: undefined,
+        permissionId: undefined,
         createdAt: undefined,
         updatedAt: undefined};
     }
   }
   Permission.init({
-    permission_id: {
+    permissionId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    permission_name: {
+    permissionName: {
       type: DataTypes.STRING,
       allowNull: false,
       set(value) {
-        this.setDataValue('permission_name', value.toUpperCase());
+        this.setDataValue('permissionName', value.toUpperCase());
       },
     },
     uuid: {

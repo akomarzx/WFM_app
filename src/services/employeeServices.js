@@ -47,15 +47,15 @@ const createEmployee = async (employeeData) => {
   try {
     const result = await sequelize.transaction(async (t) => {
       const newEmployee = await Employee.create({
-        role_id: employeeData.role_id,
-        dept_id: employeeData.dept_id,
-        super_id: employeeData.super_id,
-        position_id: employeeData.position_id,
-        first_name: employeeData.first_name,
-        last_name: employeeData.last_name,
-        birth_date: moment(employeeData.birth_date, ('YYYY-MM-DD'), true),
+        roleId: employeeData.roleId,
+        deptId: employeeData.deptId,
+        superId: employeeData.superId,
+        positionId: employeeData.positionId,
+        firstName: employeeData.firstName,
+        lastName: employeeData.lastName,
+        birthDate: moment(employeeData.birthDate, ('YYYY-MM-DD'), true),
         sex: employeeData.sex,
-        employment_status: employeeData.employment_status,
+        employmentStatus: employeeData.employmentStatus,
       }, {benchmark: true});
       await createPunchInfo(newEmployee);
       return newEmployee;
@@ -76,14 +76,14 @@ const updateEmployee = async (id, employeeData) => {
         rejectOnEmpty: true,
       });
       await employeeToBeUpdated.set({
-        dept_id: employeeData.dept_id,
-        super_id: employeeData.super_id,
-        position_id: employeeData.position_id,
-        first_name: employeeData.first_name,
-        last_name: employeeData.last_name,
-        birth_date: moment(employeeData.birth_date, ('YYYY-MM-DD'), true),
+        deptId: employeeData.deptId,
+        superId: employeeData.superId,
+        positionId: employeeData.positionId,
+        firstName: employeeData.firstName,
+        lastName: employeeData.lastName,
+        birthDate: moment(employeeData.birthDate, ('YYYY-MM-DD'), true),
         sex: employeeData.sex,
-        employment_status: employeeData.employment_status,
+        employmentStatus: employeeData.employmentStatus,
       }, {benchmark: true});
       return employeeToBeUpdated;
     });
@@ -114,7 +114,7 @@ const deleteEmployee = async (id) => {
 const updateEmployementStatusWhenDeleted = async (employee) => {
   try {
     await employee.update({
-      employment_status: 'inactive',
+      employmentStatus: 'inactive',
     });
   } catch (error) {
     throw error;

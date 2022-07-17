@@ -18,7 +18,6 @@ router.get('/delete-rolePermission',
     rolePermissionController.getDeleteRolePermissionForm);
 
 router.post('/', rolePermissionController.createRolePermission);
-router.get('/', rolePermissionController.getRolePermissions);
 router.delete('/', rolePermissionController.deleteRolePermission);
 
 module.exports = router;

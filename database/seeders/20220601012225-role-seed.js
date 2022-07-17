@@ -5,8 +5,8 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('roles', [
       {
-        role_id: 1,
-        role_name: 'SUPER_ADMIN',
+        roleId: 1,
+        roleName: 'SUPER_ADMIN',
         uuid: uuidv4(),
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -17,7 +17,7 @@ module.exports = {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete('roles', {
       // eslint-disable-next-line camelcase
-      role_id: {[Op.in]: [1, 2]},
+      roleId: {[Op.in]: [1, 2]},
     });
   },
 };

@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const {Op} = require('sequelize');
 const ApiError = require('../utils/apiError');
 
-const registerUserService = async (email, password, regCode) => {
+const registerUser = async (email, password, regCode) => {
   try {
     const punchInfo = await PunchInfo.findByPk(regCode);
     if (punchInfo == null) {
@@ -15,7 +15,7 @@ const registerUserService = async (email, password, regCode) => {
       where: {
         [Op.or]: [
           {email: email},
-          {emp_id: punchInfo.emp_id},
+          {empId: punchInfo.empId},
         ],
       },
     });
@@ -28,7 +28,7 @@ const registerUserService = async (email, password, regCode) => {
     await User.create({
       email: email,
       hash: hashedPassword,
-      emp_id: punchInfo.emp_id,
+      empId: punchInfo.empId,
     });
   } catch (error) {
     throw error;
@@ -36,5 +36,5 @@ const registerUserService = async (email, password, regCode) => {
 };
 
 module.exports = {
-  registerUserService,
+  registerUser,
 };

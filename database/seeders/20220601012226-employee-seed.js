@@ -5,14 +5,14 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('employees', [
       {
-        role_id: 1,
-        dept_id: 1000,
-        position_id: 1000,
-        first_name: 'Ronald',
-        last_name: 'Ombao',
-        birth_date: moment('1992-04-07', ('YYYY-MM-DD')).toDate(),
+        roleId: 1,
+        deptId: 1000,
+        positionId: 1000,
+        firstName: 'Ronald',
+        lastName: 'Ombao',
+        birthDate: moment('1992-04-07', ('YYYY-MM-DD')).toDate(),
         sex: 'm',
-        employment_status: 'active',
+        employmentStatus: 'active',
         createdAt: new Date(),
         updatedAt: new Date(),
         uuid: uuidv4(),
@@ -23,7 +23,7 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete('employees', {
-      emp_id: {[Op.in]: [1, 2]},
+      empId: {[Op.in]: [1, 2]},
     });
   },
 };

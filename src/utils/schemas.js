@@ -27,13 +27,13 @@ const htmlSanitizerExtension = (joi) => ({
 const Joi = BaseJoi.extend(htmlSanitizerExtension);
 
 const employeeSchema = Joi.object({
-  first_name: Joi.string().escapeHTML().required(),
-  last_name: Joi.string().escapeHTML().required(),
-  birth_date: Joi.date().format('YYYY-MM-DD').utc().required(),
+  firstName: Joi.string().escapeHTML().required(),
+  lastName: Joi.string().escapeHTML().required(),
+  birthDate: Joi.date().format('YYYY-MM-DD').utc().required(),
   sex: Joi.string().max(1).
       lowercase().valid('m', 'f', 'x').
       escapeHTML().required(),
-  employment_status: Joi.string().lowercase()
+  employmentStatus: Joi.string().lowercase()
       .valid('active', 'inactive').escapeHTML().required(),
 }).required();
 
@@ -64,14 +64,14 @@ const registrationSchema = Joi.object({
 }).with('password', 'repeat_password');
 
 const roleSchema = Joi.object({
-  role_name: Joi.string()
+  roleName: Joi.string()
       .min(3)
       .escapeHTML()
       .required(),
 });
 
 const permissionSchema = Joi.object({
-  permission_name: Joi.string()
+  permissionName: Joi.string()
       .min(5)
       .escapeHTML()
       .required(),

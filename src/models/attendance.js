@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Employee, {
-        foreignKey: 'emp_id',
+        foreignKey: 'empId',
       });
     }
     toJSON() {
@@ -26,16 +26,16 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.INTEGER,
           autoIncrement: true,
         },
-        emp_id: {
+        empId: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
-        time_in: {
+        timeIn: {
           type: DataTypes.DATE,
           allowNull: false,
           defaultValue: DataTypes.NOW,
         },
-        time_out: {
+        timeOut: {
           type: DataTypes.DATE,
           allowNull: true,
         },

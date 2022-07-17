@@ -2,13 +2,13 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('positions', {
-      position_id: {
+      positionId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      position_name: {
+      positionName: {
         type: Sequelize.STRING,
         allowNull: false,
       },

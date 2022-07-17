@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Employee, {
-        foreignKey: 'emp_id',
+        foreignKey: 'empId',
       });
     }
   }
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    emp_id: {
+    empId: {
       type: DataTypes.INTEGER,
       allowNull: false,
 

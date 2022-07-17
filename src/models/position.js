@@ -10,25 +10,25 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.Employee, {
-        foreignKey: 'position_id',
+        foreignKey: 'positionId',
       });
     }
     toJSON() {
       return {...this.get(),
-        position_id: undefined,
+        positionId: undefined,
         updatedAt: undefined,
         createdAt: undefined,
         deletedAt: undefined};
     }
   }
   Position.init({
-    position_id: {
+    positionId: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    position_name: {
+    positionName: {
       type: DataTypes.STRING,
       allowNull: false,
       set(value) {

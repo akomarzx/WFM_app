@@ -5,8 +5,8 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('departments', [
       {
-        dept_id: 1000,
-        dept_name: 'MANAGEMENT',
+        deptId: 1000,
+        deptName: 'MANAGEMENT',
         uuid: uuidv4(),
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -17,8 +17,7 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete('departments', {
-      // eslint-disable-next-line camelcase
-      dept_id: {[Op.in]: [1000, 1001]},
+      deptId: {[Op.in]: [1000, 1001]},
     });
   },
 };

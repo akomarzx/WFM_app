@@ -11,25 +11,25 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.hasMany(models.Employee, {
         // eslint-disable-next-line camelcase
-        foreignKey: 'dept_id',
+        foreignKey: 'deptId',
       });
     }
     toJSON() {
       return {...this.get(),
-        dept_id: undefined,
+        deptId: undefined,
         createdAt: undefined,
         updatedAt: undefined,
         deletedAt: undefined};
     }
   }
   Department.init({
-    dept_id: {
+    deptId: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    dept_name: {
+    deptName: {
       type: DataTypes.STRING,
       allowNull: false,
       set(value) {
@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
     paranoid: true,
   });
   Department.addHook('beforeCreate', (department, option)=> {
-    department.dept_name = department.dept_name.toUpperCase();
+    department.deptName = department.deptName.toUpperCase();
   });
 
   return Department;

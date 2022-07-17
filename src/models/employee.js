@@ -10,65 +10,64 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasOne(models.User, {
-        foreignKey: 'emp_id',
+        foreignKey: 'empId',
       });
       this.hasOne(models.PunchInfo, {
-        foreignKey: 'emp_id',
+        foreignKey: 'empId',
       });
       this.hasMany(models.Attendance, {
-        foreignKey: 'emp_id',
+        foreignKey: 'empId',
       });
       this.belongsTo(models.Department, {
-        // eslint-disable-next-line camelcase
-        foreignKey: 'dept_id',
+        foreignKey: 'deptId',
       });
       this.belongsTo(models.Position, {
-        foreignKey: 'position_id',
+        foreignKey: 'positionId',
       });
       this.belongsTo(models.Role, {
-        foreignKey: 'role_id',
+        foreignKey: 'roleId',
       }),
-      this.hasMany(this, {as: 'children', foreignKey: 'emp_id'});
-      this.belongsTo(this, {as: 'parent', foreignKey: 'emp_id'});
+      this.hasMany(this, {as: 'children', foreignKey: 'empId'});
+      this.belongsTo(this, {as: 'parent', foreignKey: 'empId'});
     }
     toJSON() {
       return {...this.get(),
-        emp_id: undefined,
+        empId: undefined,
         createdAt: undefined,
         updatedAt: undefined,
         deletedAt: undefined,
-        dept_id: undefined,
-        super_id: undefined,
-        position_id: undefined};
+        deptId: undefined,
+        superId: undefined,
+        positionId: undefined};
     }
   }
   Employee.init(
       {
-        role_id: {
+        roleId: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
-        dept_id: {
-          type: DataTypes.INTEGER,
-          allowNull: true,
-        },
-        super_id: {
+        deptId: {
           type: DataTypes.INTEGER,
           allowNull: true,
         },
-        position_id: {
+        superId: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
+        },
+        positionId: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
-        first_name: {
+        firstName: {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        last_name: {
+        lastName: {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        birth_date: {
+        birthDate: {
           type: DataTypes.DATEONLY,
           allowNull: false,
         },
@@ -80,7 +79,7 @@ module.exports = (sequelize, DataTypes) => {
             isIn: [['m', 'f', 'x']],
           },
         },
-        employment_status: {
+        employmentStatus: {
           type: DataTypes.STRING,
           allowNull: false,
           validate: {
@@ -91,12 +90,12 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.UUID,
           defaultValue: DataTypes.UUIDV4,
         },
-        hiring_date: {
+        hiringDate: {
           type: DataTypes.DATE,
           defaultValue: DataTypes.NOW,
           allowNull: false,
         },
-        emp_id: {
+        empId: {
           type: DataTypes.INTEGER,
           allowNull: false,
           primaryKey: true,

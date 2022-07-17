@@ -1,5 +1,4 @@
-const {
-  RolePermissionServices,
+const {RolePermissionServices,
   RoleServices,
   PermissionServices} = require('../services');
 
@@ -30,23 +29,16 @@ const getDeleteRolePermissionForm = asyncWrapper(async (req, res, next) => {
 });
 
 const createRolePermission = asyncWrapper(async (req, res, next) => {
-  // eslint-disable-next-line camelcase
-  const {role_uuid, permission_uuid} = req.body;
-  await RolePermissionServices.createRolePermission(role_uuid, permission_uuid);
+  const {roleUuid, permissionUuid} = req.body;
+  await RolePermissionServices.createRolePermission(roleUuid, permissionUuid);
 
   req.flash('success', 'Permission Assigned to Role succesfully');
   res.status(200).redirect('back');
 });
 
-const getRolePermissions = asyncWrapper(async (req, res, next) => {
-  
-  req.flash('success', 'Updated Succesfully');
-  res.redirect('back');
-});
-
 const deleteRolePermission = asyncWrapper(async (req, res, next) => {
-  const {role_uuid, permission_uuid} = req.body;
-  await RolePermissionServices.deleteRolePermission(role_uuid, permission_uuid);
+  const {roleUuid, permissionUuid} = req.body;
+  await RolePermissionServices.deleteRolePermission(roleUuid, permissionUuid);
 
   req.flash('success', 'Permission Revoked Succesfully');
   res.redirect('back');
@@ -57,6 +49,5 @@ module.exports = {
   getViewRolePermissionForm,
   getDeleteRolePermissionForm,
   createRolePermission,
-  getRolePermissions,
   deleteRolePermission,
 };

@@ -7,7 +7,7 @@ const getAllPermission = async () => {
     const result = sequelize.transaction(async (t) => {
       const permissions = await Permission.findAll({
         where: {
-          permission_name: {
+          permissionName: {
             [Op.notIn]: ['CREATE_ROLE', 'ASSIGN_ROLE', 'CREATE_PERMISSION'],
           },
         },
@@ -26,7 +26,7 @@ const createPermission = async (newPermission) => {
   try {
     await sequelize.transaction(async (t) => {
       await Permission.create({
-        permission_name: newPermission,
+        permissionName: newPermission,
       });
     });
   } catch (error) {
@@ -43,7 +43,7 @@ const updatePermission = async (uuid, updatedPermission) => {
         },
       });
       await permissionToBeUpdated.set({
-        permission_name: updatedPermission,
+        permissionName: updatedPermission,
       });
       await permissionToBeUpdated.save();
     });

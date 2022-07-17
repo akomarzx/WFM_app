@@ -6,7 +6,7 @@ module.exports = function isAuthorized(permissionRequired) {
     try {
       const result = await Role.findOne({
         where: {
-          role_id: req.user.role_id,
+          roleId: req.user.roleId,
         },
         include: Permission,
       });

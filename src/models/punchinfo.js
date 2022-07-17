@@ -10,12 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Employee, {
-        foreignKey: 'emp_id',
+        foreignKey: 'empId',
       });
     }
     toJSON() {
       return {...this.get(),
-        emp_id: undefined,
+        empId: undefined,
         createdAt: undefined,
         updatedAt: undefined,
         deletedAt: undefined};
@@ -23,13 +23,13 @@ module.exports = (sequelize, DataTypes) => {
   }
   PunchInfo.init(
       {
-        punch_id: {
+        punchId: {
           allowNull: false,
           autoIncrement: true,
           primaryKey: true,
           type: DataTypes.INTEGER,
         },
-        emp_id: {
+        empId: {
           type: DataTypes.INTEGER,
           unique: true,
           allowNull: true,

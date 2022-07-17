@@ -7,7 +7,7 @@
                 <select class="form-select" aria-label="Current roles" name="uuid">
                     <option selected>Select Role to Delete</option>
                     <% roles.forEach(element => { %>
-                        <option value="<%= element.uuid %>"><%= element.role_name %></option>
+                        <option value="<%= element.uuid %>"><%= element.roleName %></option>
                     <% }) %>
                   </select>
                 <div class="form-group mt-3">

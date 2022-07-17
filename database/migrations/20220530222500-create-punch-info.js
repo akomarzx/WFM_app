@@ -2,19 +2,19 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('punch_infos', {
-      punch_id: {
+      punchId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      emp_id: {
+      empId: {
         type: Sequelize.INTEGER,
         unique: true,
         allowNull: true,
         references: {
           model: 'employees',
-          key: 'emp_id',
+          key: 'empId',
         },
         onDelete: 'CASCADE',
       },

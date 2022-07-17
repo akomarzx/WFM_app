@@ -6,7 +6,7 @@ module.exports = {
       {
         email: 'admin@wfm.com',
         hash: await bcrypt.hash('12345', 10),
-        emp_id: 1,
+        empId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
       },

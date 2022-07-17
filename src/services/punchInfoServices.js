@@ -9,7 +9,7 @@ const {sequelize, PunchInfo} = require('../models');
 const createPunchInfo = async (employee) => {
   try {
     await PunchInfo.create({
-      emp_id: employee.emp_id,
+      empId: employee.empId,
     });
   } catch (error) {
     throw error;
@@ -24,7 +24,7 @@ const deletePunchInfo = async (empId) => {
     await sequelize.transaction(async (t) => {
       await PunchInfo.destroy({
         where: {
-          emp_id: empId,
+          empId: empId,
         },
         rejectOnEmpty: true,
       });

@@ -29,7 +29,7 @@ const buildTable = function(datas) {
   datas.data.Permissions.forEach(function(element) {
     const tr = document.createElement('tr');
     const td = document.createElement('td');
-    const text = document.createTextNode(element.permission_name);
+    const text = document.createTextNode(element.permissionName);
     td.appendChild(text);
     tr.appendChild(td);
     tableBody.appendChild(tr);

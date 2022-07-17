@@ -1,10 +1,10 @@
-const {registerUserService} = require('../services/authenticationServices');
+const {AuthenticationServices} = require('../services');
 const ApiError = require('../utils/apiError');
 
 const registerUser = async (req, res) => {
   const {email, password, regCode} = req.body;
   try {
-    await registerUserService(email, password, regCode);
+    await AuthenticationServices.registerUser(email, password, regCode);
     req.flash('success', 'Registration Successful');
     return res.redirect('login/');
   } catch (error) {

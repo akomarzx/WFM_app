@@ -1,6 +1,4 @@
 'use strict';
-// Validate the Role names or make an enum inside the database
-// with check constraint
 const {Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Role extends Model {
@@ -11,28 +9,28 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsToMany(models.Permission, {through: 'RolePermission',
-        foreignKey: 'role_id'});
-      this.hasMany(models.Employee, {foreignKey: 'role_id'});
+        foreignKey: 'roleId'});
+      this.hasMany(models.Employee, {foreignKey: 'roleId'});
     }
     toJSON() {
       return {...this.get(),
-        role_id: undefined,
+        roleId: undefined,
         createdAt: undefined,
         updatedAt: undefined};
     }
   }
   Role.init({
-    role_id: {
+    roleId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    role_name: {
+    roleName: {
       type: DataTypes.STRING,
       allowNull: false,
       set(value) {
-        this.setDataValue('role_name', value.toUpperCase());
+        this.setDataValue('roleName', value.toUpperCase());
       },
     },
     uuid: {

@@ -10,21 +10,21 @@ module.exports = {
       },
       // Foreign Key will be used to connect
       // the punch information with the appropriate employee
-      emp_id: {
+      empId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'employees',
-          key: 'emp_id',
+          key: 'empId',
         },
         onDelete: 'CASCADE',
       },
-      time_in: {
+      timeIn: {
         type: Sequelize.DATE,
         allowNull: false,
         defaultValue: Sequelize.fn('now'),
       },
-      time_out: {
+      timeOut: {
         type: Sequelize.DATE,
         allowNull: true,
       },
