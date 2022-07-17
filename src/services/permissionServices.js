@@ -11,7 +11,7 @@ const getAllPermission = async () => {
             [Op.notIn]: ['CREATE_ROLE', 'ASSIGN_ROLE', 'CREATE_PERMISSION'],
           },
         },
-        rejectOnEmpty: true,
+        // rejectOnEmpty: true,
         benchmark: true,
       });
       return permissions;

@@ -1,14 +1,14 @@
-const {Role, sequelize} = require('../models');
+const {Role, sequelize, Permission} = require('../models');
 const {Op} = require('sequelize');
 
-const getAllRoles = async () => {
+const getRoles = async () => {
   try {
     const result = sequelize.transaction(async (t) => {
       const roles = await Role.findAll({
         where: {
           role_name: {[Op.ne]: 'SUPER_ADMIN'},
         },
-        rejectOnEmpty: true,
+        // rejectOnEmpty: true,
         benchmark: true,
       });
       return roles;
@@ -18,7 +18,25 @@ const getAllRoles = async () => {
     throw error;
   };
 };
-
+const getRole = async (roleUuid) => {
+  try {
+    const result = sequelize.transaction(async (t) => {
+      const roles = await Role.findOne({
+        where: {
+          role_name: {[Op.ne]: 'SUPER_ADMIN'},
+          uuid: roleUuid,
+        },
+        rejectOnEmpty: true,
+        benchmark: true,
+        include: Permission,
+      });
+      return roles;
+    });
+    return result;
+  } catch (error) {
+    throw error;
+  };
+};
 const createRole = async (newRole) => {
   try {
     await sequelize.transaction(async (t) => {
@@ -65,7 +83,8 @@ const deleteRole = async (uuid) => {
 
 module.exports = {
   createRole,
-  getAllRoles,
+  getRole,
+  getRoles,
   updateRole,
   deleteRole,
 };

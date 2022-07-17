@@ -65,7 +65,7 @@ const registrationSchema = Joi.object({
 
 const roleSchema = Joi.object({
   role_name: Joi.string()
-      .min(5)
+      .min(3)
       .escapeHTML()
       .required(),
 });

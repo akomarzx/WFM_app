@@ -6,13 +6,21 @@ const getCreateRoleForm = asyncWrapper(async (req, res, next) => {
 });
 
 const getUpdateRoleForm = asyncWrapper(async (req, res, next) => {
-  res.locals.roles = await roleServices.getAllRoles();
+  res.locals.roles = await roleServices.getRoles();
   res.status(200).render('./roleAndPermissionViews/roleViews/updateRoleView');
 });
 
 const getDeleteRoleForm = asyncWrapper(async (req, res, next) => {
-  res.locals.roles = await roleServices.getAllRoles();
+  res.locals.roles = await roleServices.getRoles();
   res.status(200).render('./roleAndPermissionViews/roleViews/deleteRoleView');
+});
+const getRole = asyncWrapper(async (req, res, next) => {
+  const role = await roleServices.getRole(req.params.id);
+  res.status(200).json(role);
+});
+const getRoles = asyncWrapper(async (req, res, next) => {
+  const roles = await roleServices.getRoles();
+  res.status(200).json(roles);
 });
 
 const createRole = asyncWrapper(async (req, res, next) => {
@@ -39,6 +47,8 @@ module.exports = {
   getCreateRoleForm,
   getUpdateRoleForm,
   getDeleteRoleForm,
+  getRole,
+  getRoles,
   createRole,
   updateRole,
   deleteRole,

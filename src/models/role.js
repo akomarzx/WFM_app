@@ -15,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Employee, {foreignKey: 'role_id'});
     }
     toJSON() {
-      return {...this.get(), role_id: undefined};
+      return {...this.get(),
+        role_id: undefined,
+        createdAt: undefined,
+        updatedAt: undefined};
     }
   }
   Role.init({

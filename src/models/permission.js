@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.Role, {through: 'RolePermission',
         foreignKey: 'permission_id'});
     }
+    toJSON() {
+      return {...this.get(),
+        permission_id: undefined,
+        createdAt: undefined,
+        updatedAt: undefined};
+    }
   }
   Permission.init({
     permission_id: {
