@@ -87,6 +87,20 @@ app.use('/roles', require('./src/routes/roleRoutes'));
 app.use('/permissions', require('./src/routes/permissionRoutes'));
 app.use('/role-permissions', require('./src/routes/rolePermissionRoutes'));
 
+// TODO: Example for a Accept header.
+// Will response with json if accept header is
+// set to application/json
+app.get('/test', (req, res, next) => {
+  res.format({
+    'text/html': function() {
+      res.send('<h1>Hello world</h1>');
+    },
+    'application/json': function() {
+      res.json({message: 'Hello Wrold'});
+    },
+  });
+});
+
 // Centralized Error Handling
 // All errors from all layers will bubble up
 // to this error handler
