@@ -2,7 +2,7 @@ const roleSelect = document.querySelector('#role_name');
 const permissionSelect = document.querySelector('#permission_name');
 
 roleSelect.addEventListener('change', async function(e) {
-  const data = await getRoles(e.target.value);
+  const data = await getRole(e.target.value);
   buildSelection(data);
 });
 
@@ -22,7 +22,7 @@ const buildSelection = function(datas) {
   });
 };
 
-const getRoles = async function(uuid) {
+const getRole = async function(uuid) {
   try {
     const result = await axios.get(`/roles/${uuid}`);
     return result;

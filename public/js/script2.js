@@ -2,7 +2,7 @@ const roleSelect = document.querySelector('#role_name');
 const permTable = document.querySelector('#permTable');
 
 roleSelect.addEventListener('change', async function(e) {
-  const data = await getRoles(e.target.value);
+  const data = await getRole(e.target.value);
   if (data) {
     buildTable(data);
   }
@@ -37,7 +37,7 @@ const buildTable = function(datas) {
   permTable.appendChild(tableBody);
 };
 
-const getRoles = async function(uuid) {
+const getRole = async function(uuid) {
   try {
     const result = await axios.get(`/roles/${uuid}`);
     return result;
