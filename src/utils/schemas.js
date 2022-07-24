@@ -30,8 +30,8 @@ const employeeSchema = Joi.object({
   firstName: Joi.string().escapeHTML().required(),
   lastName: Joi.string().escapeHTML().required(),
   birthDate: Joi.date().format('YYYY-MM-DD').utc().required(),
-  sex: Joi.string().
-      uppercase().valid('MALE', 'FEMALE', 'X').
+  sex: Joi.string()
+      .uppercase().valid('MALE', 'FEMALE', 'X').
       escapeHTML().required(),
   employmentStatus: Joi.string().uppercase()
       .valid('ACTIVE', 'INACTIVE').escapeHTML().required(),

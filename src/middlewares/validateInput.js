@@ -8,7 +8,6 @@ module.exports = function Validate(schema) {
         stripUnknown: true,
       });
       next();
-      // TODO: Improve the error handling
     } catch (error) {
       if (error instanceof ValidationError) {
         req.flash('error', error.message);

@@ -23,6 +23,12 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        permissionName: 'CREATE_EMPLOYEE',
+        uuid: uuidv4(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
   async down(queryInterface, Sequelize) {
