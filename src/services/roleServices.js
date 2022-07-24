@@ -1,5 +1,4 @@
 const {Role, sequelize, Permission} = require('../models');
-const {Op} = require('sequelize');
 
 const getRoles = async () => {
   try {
@@ -32,6 +31,7 @@ const getRole = async (roleUuid) => {
     throw error;
   };
 };
+
 const createRole = async (newRole) => {
   try {
     await sequelize.transaction(async (t) => {

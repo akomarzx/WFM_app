@@ -1,6 +1,3 @@
-// TODO: Improve the current permission system
-// that will only fetch the permission
-// per resources not the whole permission,
 // TODO: Image upload system
 const express = require('express');
 const session = require('express-session');
@@ -85,6 +82,7 @@ app.use('/dashboard', require('./src/routes/dashboardRoutes'));
 app.use('/roles', require('./src/routes/roleRoutes'));
 app.use('/permissions', require('./src/routes/permissionRoutes'));
 app.use('/role-permissions', require('./src/routes/rolePermissionRoutes'));
+app.use('/departments', require('./src/routes/departmentRoutes'));
 
 // TODO: Example for a Accept header.
 // Will response with json if accept header is

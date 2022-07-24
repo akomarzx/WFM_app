@@ -15,6 +15,11 @@ router.get('/:id', roleController.getRole);
 router.post('/',
     validateInput(roleSchema),
     roleController.createRole);
+// TODO: seperate route for put
+// ie roles/:id because req.body is used for different thing
+// use js to modify the form action
+// use path params
+
 router.put('/',
     validateInput(roleSchema),
     roleController.updateRole);

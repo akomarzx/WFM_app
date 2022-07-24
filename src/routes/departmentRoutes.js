@@ -5,17 +5,18 @@ const departmentController = require('../controller/departmentController');
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
-router.get('/create-department', roleController.getCreateRoleForm);
-router.get('/update-department', roleController.getUpdateRoleForm);
-router.get('/delete-department', roleController.getDeleteRoleForm);
+router.get('/create-department', departmentController.getCreateDepartmentForm);
+router.get('/update-department', departmentController.getUpdateDepartmentForm);
+router.get('/delete-department', departmentController.getDeleteDepartmentForm);
 
 router.route('/')
     .get(departmentController.getDepartments)
-    .post(departmentController.createDepartment);
+    .post(departmentController.createDepartment)
+    .put(departmentController.updateDepartment)
+    .delete(departmentController.deleteDepartment);
 
 router.route('/:id')
-    .get(departmentController.getDepartment)
-    .put(departmentController.updateDepartment)
-    .delete(departmentController.deleteDepartmentg);
+    .get(departmentController.getDepartment);
+
 
 module.exports = router;
