@@ -18,6 +18,9 @@ const getRole = async (roleUuid) => {
   try {
     const result = sequelize.transaction(async (t) => {
       const roles = await Role.findOne({
+        where: {
+          uuid: roleUuid,
+        },
         rejectOnEmpty: true,
         benchmark: true,
         include: Permission,

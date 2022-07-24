@@ -5,8 +5,10 @@ const createRolePermission = async (roleUuid, permissionUuid) => {
   try {
     await sequelize.transaction(async (t) => {
       const role = await Role.findOne(
-          {where: {uuid: roleUuid},
-            rejectOnEmpty: true});
+          {where: {
+            uuid: roleUuid,
+          },
+          rejectOnEmpty: true});
       const permission = await Permission.findOne({
         where: {uuid: permissionUuid},
         rejectOnEmpty: true,
@@ -23,8 +25,10 @@ const deleteRolePermission = async (roleUuid, permissionUuid) => {
   try {
     await sequelize.transaction(async (t) => {
       const role = await Role.findOne(
-          {where: {uuid: roleUuid},
-            rejectOnEmpty: true});
+          {where: {
+            uuid: roleUuid,
+          },
+          rejectOnEmpty: true});
       const permission = await Permission.findOne({
         where: {uuid: permissionUuid},
         rejectOnEmpty: true,
