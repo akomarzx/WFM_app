@@ -30,11 +30,11 @@ const employeeSchema = Joi.object({
   firstName: Joi.string().escapeHTML().required(),
   lastName: Joi.string().escapeHTML().required(),
   birthDate: Joi.date().format('YYYY-MM-DD').utc().required(),
-  sex: Joi.string().max(1).
-      lowercase().valid('m', 'f', 'x').
+  sex: Joi.string().
+      uppercase().valid('MALE', 'FEMALE', 'X').
       escapeHTML().required(),
-  employmentStatus: Joi.string().lowercase()
-      .valid('active', 'inactive').escapeHTML().required(),
+  employmentStatus: Joi.string().uppercase()
+      .valid('ACTIVE', 'INACTIVE').escapeHTML().required(),
 }).required();
 
 const logInSchema = Joi.object({
