@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       set(value) {
-        this.setDataValue('dept_name', value.toUpperCase());
+        this.setDataValue('deptName', value.toUpperCase());
       },
     },
     uuid: {
@@ -48,9 +48,5 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'departments',
     paranoid: true,
   });
-  Department.addHook('beforeCreate', (department, option)=> {
-    department.deptName = department.deptName.toUpperCase();
-  });
-
   return Department;
 };

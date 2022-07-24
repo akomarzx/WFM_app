@@ -72,18 +72,23 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
         sex: {
-          // eslint-disable-next-line new-cap
-          type: DataTypes.CHAR(2),
+          type: DataTypes.STRING,
           allowNull: false,
           validate: {
-            isIn: [['m', 'f', 'x']],
+            isIn: [['MALE', 'FEMALE', 'X']],
+          },
+          set(value) {
+            this.setDataValue('sex', value.toUpperCase());
           },
         },
         employmentStatus: {
           type: DataTypes.STRING,
           allowNull: false,
           validate: {
-            isIn: [['active', 'inactive']],
+            isIn: [['ACTIVE', 'INACTIVE']],
+          },
+          set(value) {
+            this.setDataValue('employmentStatus', value.toUpperCase());
           },
         },
         uuid: {

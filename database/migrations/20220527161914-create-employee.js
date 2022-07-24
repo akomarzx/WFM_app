@@ -52,17 +52,17 @@ module.exports = {
       },
       sex: {
         // eslint-disable-next-line new-cap
-        type: Sequelize.CHAR(2),
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          isIn: [['m', 'f', 'x']],
+          isIn: [['MALE', 'FEMALE', 'X']],
         },
       },
       employmentStatus: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-          isIn: [['active', 'inactive']],
+          isIn: [['ACTIVE', 'INACTIVE']],
         },
       },
       uuid: {
