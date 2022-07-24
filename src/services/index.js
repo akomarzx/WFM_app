@@ -25,7 +25,7 @@ function removeExtension(filename) {
   return filename.substring(0, filename.lastIndexOf('.')) || filename;
 }
 
-function processName(file) {
+function processFileName(file) {
   const filename = removeExtension(file);
   return capitalizeFirstLetter(filename);
 }
@@ -34,7 +34,7 @@ require('fs').readdirSync(normalizedPath).forEach(function(file) {
   if (file !== 'index.js' &&
         file.indexOf('.') !== 0 && file.slice(-3) === '.js' ) {
     const service = require(normalizedPath + file);
-    const serviceName = processName(file);
+    const serviceName = processFileName(file);
     services[serviceName] = service;
   }
 });
