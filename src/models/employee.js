@@ -84,6 +84,7 @@ module.exports = (sequelize, DataTypes) => {
         employmentStatus: {
           type: DataTypes.STRING,
           allowNull: false,
+          defaultValue: 'ACTIVE',
           validate: {
             isIn: [['ACTIVE', 'INACTIVE']],
           },

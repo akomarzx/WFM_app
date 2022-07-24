@@ -61,6 +61,7 @@ module.exports = {
       employmentStatus: {
         type: Sequelize.STRING,
         allowNull: false,
+        defaultValue: 'ACTIVE',
         validate: {
           isIn: [['ACTIVE', 'INACTIVE']],
         },

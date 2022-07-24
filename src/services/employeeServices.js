@@ -51,7 +51,6 @@ const createEmployee = async (employeeData) => {
         lastName: employeeData.lastName,
         birthDate: moment(employeeData.birthDate, ('YYYY-MM-DD'), true),
         sex: employeeData.sex,
-        employmentStatus: employeeData.employmentStatus,
       }, {benchmark: true});
       await createPunchInfo(newEmployee);
       return newEmployee;
@@ -110,7 +109,7 @@ const deleteEmployee = async (id) => {
 const updateEmployementStatusWhenDeleted = async (employee) => {
   try {
     await employee.update({
-      employmentStatus: 'inactive',
+      employmentStatus: 'INACTIVE',
     });
   } catch (error) {
     throw error;

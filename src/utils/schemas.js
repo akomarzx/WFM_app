@@ -33,8 +33,6 @@ const employeeSchema = Joi.object({
   sex: Joi.string()
       .uppercase().valid('MALE', 'FEMALE', 'X').
       escapeHTML().required(),
-  employmentStatus: Joi.string().uppercase()
-      .valid('ACTIVE', 'INACTIVE').escapeHTML().required(),
 }).required();
 
 const logInSchema = Joi.object({
