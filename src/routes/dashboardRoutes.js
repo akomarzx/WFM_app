@@ -10,6 +10,11 @@ router.use(isLoggedIn);
 
 router.get('/', dashboardController.getDashboard);
 
+router.get('/departments',
+    isLoggedIn,
+    isRoleAllowed('SUPER_ADMIN'),
+    dashboardController.getDepartmentDashboard);
+
 router.get('/roles-permissions',
     isLoggedIn,
     isRoleAllowed('SUPER_ADMIN'),

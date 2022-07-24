@@ -11,8 +11,14 @@ router.get('/delete-role', roleController.getDeleteRoleForm);
 
 router.get('/', roleController.getRoles);
 router.get('/:id', roleController.getRole);
-router.post('/', validateInput(roleSchema), roleController.createRole);
-router.put('/', validateInput(roleSchema), roleController.updateRole);
+
+router.post('/',
+    validateInput(roleSchema),
+    roleController.createRole);
+router.put('/',
+    validateInput(roleSchema),
+    roleController.updateRole);
+
 router.delete('/', roleController.deleteRole);
 
 module.exports = router;
