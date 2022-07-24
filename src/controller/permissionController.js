@@ -20,7 +20,6 @@ const getDeletePermissionForm = asyncWrapper(async (req, res, next) => {
 });
 
 const createPermission = asyncWrapper(async (req, res, next) => {
-  // eslint-disable-next-line camelcase
   const {permissionName} = req.body;
   await PermissionServices.createPermission(permissionName);
   req.flash('success', 'Permission Created Succesfully');
