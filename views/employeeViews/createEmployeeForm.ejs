@@ -1,2 +1,62 @@
 <% layout('/layout/fullNavBarBoilerplate') %>
- 
+<!--TODO: client side Validation-->
+<div class="container-fluid">
+    <div class="row mt-md-2 ms-md-2">
+        <div class="col col-md-5 border border-secondary rounded">
+            <h1>Create New Employee</h1>
+            <form action="/employees" method="post">
+                <div class="col-md-6 mt-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName">
+                </div>
+                <div class="col-md-6">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName">
+                </div>
+                <div class="col-md-6">
+                    <label for="birthDate" class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control" id="birthDate" name="birthDate">
+                </div>
+                <div class="col-md-6">
+                    <label for="sex" class="form-label mt-md-1">Sex</label>
+                    <select class="form-select" aria-label="Default select example" name="sex" id="sex">
+                        <option selected value="">Select Sex</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="x">X</option>
+                      </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="department" class="form-label mt-md-1">Department</label>
+                    <select class="form-select" aria-label="Default select example" name="departmentId" id="department">
+                        <option selected>Select Department</option>
+                        <% departments.forEach(element => { %>
+                            <option value="<%= element.deptId %>"><%= element.deptName %></option>
+                        <% }) %> 
+                      </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="position" class="form-label mt-md-1">Position</label>
+                    <select class="form-select" aria-label="Default select example" name="positionId" id="position">
+                        <option selected>Select Department</option>
+                        <% positions.forEach(element => { %>
+                            <option value="<%= element.positionId %>"><%= element.positionName %></option>
+                        <% }) %> 
+                      </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="roles" class="form-label mt-md-1">Role</label>
+                    <select class="form-select" aria-label="Default select example" name="roleId" id="roles">
+                        <option selected>Select Role</option>
+                        <% roles.forEach(element => { %>
+                            <option value="<%= element.roleId %>"><%= element.roleName %></option>
+                        <% }) %> 
+                      </select>
+                </div>
+                <div class="form-group mt-3 mb-3">
+                    <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> 
