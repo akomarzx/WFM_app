@@ -5,10 +5,6 @@ const getRoles = async () => {
   try {
     const result = sequelize.transaction(async (t) => {
       const roles = await Role.findAll({
-        where: {
-          roleName: {[Op.ne]: 'SUPER_ADMIN'},
-        },
-        // rejectOnEmpty: true,
         benchmark: true,
       });
       return roles;
@@ -22,10 +18,6 @@ const getRole = async (roleUuid) => {
   try {
     const result = sequelize.transaction(async (t) => {
       const roles = await Role.findOne({
-        where: {
-          roleName: {[Op.ne]: 'SUPER_ADMIN'},
-          uuid: roleUuid,
-        },
         rejectOnEmpty: true,
         benchmark: true,
         include: Permission,

@@ -1,6 +1,5 @@
 const {Role, Permission} = require('../models');
 const ApiError = require('../utils/apiError');
-
 module.exports = function isAuthorized(permissionRequired) {
   return async (req, res, next) => {
     try {
@@ -11,7 +10,7 @@ module.exports = function isAuthorized(permissionRequired) {
         include: Permission,
       });
       if (result.Permissions.some((element) =>
-        element.name === permissionRequired)) {
+        element.permissionName === permissionRequired)) {
         return next();
       }
       throw new ApiError('Not Authorized', 403, false);
