@@ -80,6 +80,10 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
+      imagePath: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
