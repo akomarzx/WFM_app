@@ -7,6 +7,11 @@
     <title>WFM</title>
     <script src="/js/jquery.js"></script>
     <link rel="shortcut icon" href="#" />
+    <% if (cssUrls.length > 0) { %>
+        <% for( let index = 0; index < cssUrls.length; index++ ) { %>
+            <link rel="stylesheet" href=<%= cssUrls[index]%>>
+        <% } %>
+    <% } %>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <script src="/js/bootstrap.min.js"></script>
 </head>

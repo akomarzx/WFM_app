@@ -7,6 +7,7 @@ const express = require('express');
 
 // eslint-disable-next-line new-cap
 const router = express.Router();
+router.get('/create-employee', employeeController.getCreateEmployeeForm);
 
 router.route('/')
     .get(

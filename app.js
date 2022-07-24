@@ -74,6 +74,7 @@ app.use((req, res, next) => {
 // locals variable
 app.use((req, res, next) => {
   res.locals.employee = req.user;
+  res.locals.cssUrls = [];
   next();
 });
 

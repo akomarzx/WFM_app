@@ -1,7 +1,4 @@
-const EventEmitter = require('events');
-const employeeEvents = new EventEmitter();
 const moment = require('moment');
-
 const {createPunchInfo, deletePunchInfo} = require('./punchInfoServices');
 const {Employee, Department, Position, PunchInfo,
   sequelize} = require('../models');
@@ -122,5 +119,4 @@ module.exports = {
   createEmployee,
   updateEmployee,
   deleteEmployee,
-  employeeEvents,
 };
