@@ -1,3 +1,5 @@
+// TODO: Add Image into the form
+
 const employeeController = require('../controller/employeeController');
 const {employeeSchema} = require('../utils/schemas');
 const validate = require('../middlewares/validateInput');
