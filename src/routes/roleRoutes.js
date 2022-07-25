@@ -20,7 +20,7 @@ router.post('/',
 // use js to modify the form action
 // use path params
 
-router.put('/',
+router.put('/:id',
     validateInput(roleSchema),
     roleController.updateRole);
 

@@ -1,6 +1,5 @@
 const {RoleServices} = require('../services');
 const asyncWrapper = require('../utils/asyncWrapper');
-
 const getCreateRoleForm = asyncWrapper(async (req, res, next) => {
   res.status(200).render('./roleAndPermissionViews/roleViews/createRoleView');
 });
@@ -32,7 +31,7 @@ const createRole = asyncWrapper(async (req, res, next) => {
 });
 
 const updateRole = asyncWrapper(async (req, res, next) => {
-  await RoleServices.updateRole(req.body.uuid, req.body.roleName);
+  await RoleServices.updateRole(req.params.id, req.body.roleName);
   req.flash('success', 'Updated Succesfully');
   res.redirect('back');
 });
