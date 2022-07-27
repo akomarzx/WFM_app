@@ -1,9 +1,10 @@
 // TODO: Image upload system
 // TODO: routes refactoring
 // TODO: Module loader for each part of the app
+// TODO: Unified Data access layer.
+// TODO: Only pass the object option
 const express = require('express');
 const session = require('express-session');
-const path = require('path');
 const app = express();
 const {sequelize} = require('./src/models/index');
 const flash = require('connect-flash');
@@ -57,7 +58,7 @@ app.use(passport.session());
 
 // Set Up View Engine
 app.engine('ejs', ejsMate);
-app.set('view engine', 'ejs');T /positions/delete-posit
+app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
