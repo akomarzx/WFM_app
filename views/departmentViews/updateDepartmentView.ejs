@@ -2,10 +2,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="border border-secondary col-md-4 ms-2 mt-4 p-2">
-            <h2>Update a Role</h2>
+            <h2>Update a Department</h2>
             <form action="/departments?_method=PUT" method="post">
                 <select class="form-select" aria-label="Current roles" onChange='document.getElementById("deptName").value = getSelectedOption(this)' name="uuid">
-                    <option selected>Select Role to Update</option>
+                    <option selected>Select Department to Update</option>
                     <% departments.forEach(element => { %>
                         <option value="<%= element.uuid %>"><%= element.deptName %></option>
                     <% }) %>
