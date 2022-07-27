@@ -1,4 +1,6 @@
 // TODO: Image upload system
+// TODO: routes refactoring
+// TODO: Module loader for each part of the app
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
