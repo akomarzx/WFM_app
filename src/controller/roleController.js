@@ -23,7 +23,6 @@ const getRoles = asyncWrapper(async (req, res, next) => {
 });
 
 const createRole = asyncWrapper(async (req, res, next) => {
-  // eslint-disable-next-line camelcase
   const {roleName} = req.body;
   await RoleServices.createRole(roleName);
   req.flash('success', 'Role Created Succesfully');

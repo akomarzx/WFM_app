@@ -20,4 +20,9 @@ router.get('/roles-permissions',
     isRoleAllowed('SUPER_ADMIN'),
     dashboardController.getRolesPermissionsDashboard);
 
+router.get('/positions',
+    isLoggedIn,
+    isRoleAllowed('SUPER_ADMIN'),
+    dashboardController.getPositionsDashboard);
+
 module.exports = router;

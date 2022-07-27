@@ -10,6 +10,7 @@ const flash = require('connect-flash');
 const ejsMate = require('ejs-mate');
 const passport = require('passport');
 const methodOverride = require('method-override');
+
 // Morgan and live Reloading
 // Disable http caching to live reload css and js
 if (process.env.NODE_ENV === 'development') {
@@ -56,10 +57,7 @@ app.use(passport.session());
 
 // Set Up View Engine
 app.engine('ejs', ejsMate);
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
-// Body Parsers
+app.set('view engine', 'ejs');T /positions/delete-posit
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
@@ -85,6 +83,7 @@ app.use('/roles', require('./src/routes/roleRoutes'));
 app.use('/permissions', require('./src/routes/permissionRoutes'));
 app.use('/role-permissions', require('./src/routes/rolePermissionRoutes'));
 app.use('/departments', require('./src/routes/departmentRoutes'));
+app.use('/positions', require('./src/routes/positionRoutes'));
 
 // TODO: Example for a Accept header.
 // Will response with json if accept header is

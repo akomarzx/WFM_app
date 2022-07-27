@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       set(value) {
-        this.setDataValue('position_name', value.toUpperCase());
+        this.setDataValue('positionName', value.toUpperCase());
       },
     },
     uuid: {
