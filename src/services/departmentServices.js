@@ -73,6 +73,7 @@ const deleteDepartment = async (uuid) => {
     throw error;
   }
 };
+
 module.exports = {
   getDepartment,
   getDepartments,

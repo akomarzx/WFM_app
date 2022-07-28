@@ -6,10 +6,14 @@ const {logInSchema, registrationSchema} = require('../utils/schemas.js');
 const validateInput = require('../middlewares/validateInput');
 
 module.exports = function(passport) {
-  router.get('/login', authController.getLoginPage);
-  router.get('/signout', authController.signOut);
+  router.get('/login',
+      authController.getLoginPage);
 
-  router.get('/register', authController.getRegistrationPage);
+  router.get('/signout',
+      authController.signOut);
+
+  router.get('/register',
+      authController.getRegistrationPage);
 
   router.post('/login', validateInput(logInSchema),
       passport.authenticate('local', {
@@ -17,7 +21,9 @@ module.exports = function(passport) {
         failureRedirect: 'login/',
         failureFlash: true,
       }));
-  router.post('/register', validateInput(registrationSchema),
+
+  router.post('/register',
+      validateInput(registrationSchema),
       authController.registerUser);
 
   return router;

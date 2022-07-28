@@ -28,13 +28,12 @@ module.exports = async (passport) => {
     } catch (err) {
       return done(err);
     }
-  },
-  ),
-  );
+  }));
+
   passport.serializeUser(function(user, done) {
     done(null, user.empId);
   });
-  // eslint-disable-next-line camelcase
+
   passport.deserializeUser(async (empId, done) => {
     try {
       const employee = await Employee.findByPk(empId, {

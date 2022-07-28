@@ -1,5 +1,6 @@
 const {RoleServices} = require('../services');
 const asyncWrapper = require('../utils/asyncWrapper');
+
 const getCreateRoleForm = asyncWrapper(async (req, res, next) => {
   res.status(200).render('./roleAndPermissionViews/roleViews/createRoleView');
 });
@@ -13,10 +14,12 @@ const getDeleteRoleForm = asyncWrapper(async (req, res, next) => {
   res.locals.roles = await RoleServices.getRoles();
   res.status(200).render('./roleAndPermissionViews/roleViews/deleteRoleView');
 });
+
 const getRole = asyncWrapper(async (req, res, next) => {
   const role = await RoleServices.getRole(req.params.id);
   res.status(200).json(role);
 });
+
 const getRoles = asyncWrapper(async (req, res, next) => {
   const roles = await RoleServices.getRoles();
   res.status(200).json(roles);

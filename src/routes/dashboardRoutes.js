@@ -8,7 +8,8 @@ const isRoleAllowed = require('../middlewares/isRoleAllowed');
 
 router.use(isLoggedIn);
 
-router.get('/', dashboardController.getDashboard);
+router.get('/',
+    dashboardController.getDashboard);
 
 router.get('/departments',
     isLoggedIn,

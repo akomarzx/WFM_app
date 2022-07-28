@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 // TODO: Add Image into the form
 
 const employeeController = require('../controller/employeeController');
@@ -7,8 +8,8 @@ const isLoggedIn = require('../middlewares/isLoggedIn');
 const isAuthorized = require('../middlewares/isAuthorized');
 const express = require('express');
 
-// eslint-disable-next-line new-cap
 const router = express.Router();
+
 router.get('/create-employee',
     isLoggedIn,
     isAuthorized('CREATE_EMPLOYEE'),

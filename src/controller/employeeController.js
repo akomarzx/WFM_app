@@ -11,6 +11,7 @@ const getCreateEmployeeForm = asyncWrapper(async (req, res, next) => {
   res.locals.roles = await RoleServices.getRoles();
   res.status(200).render('./employeeViews/createEmployeeForm');
 });
+
 const getEmployee = asyncWrapper(async (req, res, next) => {
   const employee = await EmployeeServices.getEmployee(req.params.id);
   res.status(200).json(employee);

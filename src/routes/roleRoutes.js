@@ -5,20 +5,25 @@ const validateInput = require('../middlewares/validateInput');
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
-router.get('/create-role', roleController.getCreateRoleForm);
-router.get('/update-role', roleController.getUpdateRoleForm);
-router.get('/delete-role', roleController.getDeleteRoleForm);
+router.get('/create-role',
+    roleController.getCreateRoleForm);
 
-router.get('/', roleController.getRoles);
+router.get('/update-role',
+    roleController.getUpdateRoleForm);
+
+router.get('/delete-role',
+    roleController.getDeleteRoleForm);
+
+router.route('/')
+    .get(roleController.getRoles)
+    .post(validateInput(roleSchema),
+        roleController.createRole);
+
 router.get('/:id', roleController.getRole);
 
 router.post('/',
     validateInput(roleSchema),
     roleController.createRole);
-// TODO: seperate route for put
-// ie roles/:id because req.body is used for different thing
-// use js to modify the form action
-// use path params
 
 router.put('/:id',
     validateInput(roleSchema),

@@ -11,6 +11,7 @@ const getPositions = async () => {
     throw error;
   }
 };
+
 const getPosition = async (positionUuid) => {
   try {
     const result = sequelize.transaction(async (t) => {

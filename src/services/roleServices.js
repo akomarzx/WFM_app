@@ -13,6 +13,7 @@ const getRoles = async () => {
     throw error;
   };
 };
+
 const getRole = async (roleUuid) => {
   try {
     const result = sequelize.transaction(async (t) => {

@@ -20,6 +20,7 @@ const getDepartment = asyncWrapper(async (req, res, next) => {
   const department = await DepartmentServices.getDepartment(req.params.id);
   res.status(200).json(department);
 });
+
 const getDepartments = asyncWrapper(async (req, res, next) => {
   const departments = await DepartmentServices.getDepartments();
   res.status(200).json(departments);
