@@ -14,15 +14,17 @@ router.get('/update-department',
 router.get('/delete-department',
     departmentController.getDeleteDepartmentForm);
 
+router.get('/show-departments',
+    departmentController.getShowDepartmentsPage);
 
 router.route('/')
     .get(departmentController.getDepartments)
-    .post(departmentController.createDepartment)
-    .put(departmentController.updateDepartment)
-    .delete(departmentController.deleteDepartment);
+    .post(departmentController.createDepartment);
 
 router.route('/:id')
-    .get(departmentController.getDepartment);
+    .get(departmentController.getDepartment)
+    .patch(departmentController.updateDepartment)
+    .delete(departmentController.deleteDepartment);
 
 
 module.exports = router;

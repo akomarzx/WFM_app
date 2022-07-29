@@ -18,13 +18,12 @@ router.get('/delete-permission',
 
 router.route('/')
     .post(validateInput(permissionSchema),
-        permissionController.createPermission);
+        permissionController.createPermission)
+    .get(permissionController.getPermissions);
 
-router.put('/',
-    validateInput(permissionSchema),
-    permissionController.updatePermission);
-
-router.delete('/',
-    permissionController.deletePermission);
+router.route('/:id')
+    .get(permissionController.getPermission)
+    .put(permissionController.updatePermission)
+    .delete(permissionController.deletePermission);
 
 module.exports = router;

@@ -14,15 +14,13 @@ router.get('/update-position',
 router.get('/delete-position',
     positionController.getDeletePositionForm);
 
-router.get('/:id', positionController.getPositions);
-
-router.put('/:id',
-    positionController.updatePosition);
-
-router.delete('/', positionController.deletePosition);
-
 router.route('/')
+    .get(positionController.getPositions)
+    .post(positionController.createPosition);
+
+router.route('/:id')
     .post(positionController.createPosition)
-    .get(positionController.getPositions);
+    .get(positionController.getPosition)
+    .delete(positionController.deletePosition);
 
 module.exports = router;

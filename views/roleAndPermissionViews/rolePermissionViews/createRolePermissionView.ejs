@@ -1,32 +1,37 @@
 <% layout('./roleAndPermissionViews/roleAndPermissionLayout') %>
-<div class="container-fluid">
-    <div class="row">
-        <div class="border border-secondary col-md-4 ms-2 mt-4 p-2">
-            <h2>Assign Permission to Role</h2>
-            <form action="/role-permissions" method="post">
-                <div class="form-group mt-3">
-                    <label for="role_name">Role</label>
-                    <select class="form-select" aria-label="Current roles" name="roleUuid" id="role_name">
-                        <option selected>Select Role</option>
-                        <% roles.forEach(element => { %>
-                            <option value="<%= element.uuid %>"><%= element.roleName %></option>
-                        <% }) %>
-                    </select>
-                </div>
-                
-                <div class="form-group mt-3">
-                    <label for="permission_name">Permission</label>
-                    <select class="form-select" aria-label="Current roles" name="permissionUuid" id="permission_name">
-                        <option selected>Select Permission</option>
-                        <% permissions.forEach(element => { %>
-                            <option value="<%= element.uuid %>"><%= element.permissionName %></option>
-                        <% }) %>
-                    </select>
-                </div>
-                <div class="form-group mt-3">
-                    <button class="btn btn-secondary btn-sm" type="submit">Submit</button>
-                </div>
-            </form>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="border border-secondary col-md-4 ms-2 mt-4 p-2">
+                <h2>Assign Permission to Role</h2>
+                <form action="/role-permissions" method="post">
+                    <div class="form-group mt-3">
+                        <label for="role_name">Role</label>
+                        <select class="form-select" aria-label="Current roles" name="roleUuid" id="role_name">
+                            <option selected>Select Role</option>
+                            <% roles.forEach(element=> { %>
+                                <option value="<%= element.uuid %>">
+                                    <%= element.roleName %>
+                                </option>
+                                <% }) %>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="permission_name">Permission</label>
+                        <select class="form-select" aria-label="Current roles" name="permissionUuid"
+                            id="permission_name">
+                            <option selected>Select Permission</option>
+                            <% permissions.forEach(element=> { %>
+                                <option value="<%= element.uuid %>">
+                                    <%= element.permissionName %>
+                                </option>
+                                <% }) %>
+                        </select>
+                    </div>
+                    <div class="form-group mt-3">
+                        <button class="btn btn-secondary btn-sm" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>

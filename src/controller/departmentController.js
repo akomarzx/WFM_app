@@ -16,6 +16,11 @@ const getDeleteDepartmentForm = asyncWrapper(async (req, res, next) => {
   res.status(200).render('./departmentViews/deleteDepartmentView');
 });
 
+const getShowDepartmentsPage = asyncWrapper(async (req, res, next) => {
+  res.locals.departments = await DepartmentServices.getDepartments();
+  res.status(200).render('./departmentViews/showDepartmentsView');
+});
+
 const getDepartment = asyncWrapper(async (req, res, next) => {
   const department = await DepartmentServices.getDepartment(req.params.id);
   res.status(200).json(department);
@@ -49,6 +54,7 @@ module.exports = {
   getCreateDepartmentForm,
   getUpdateDepartmentForm,
   getDeleteDepartmentForm,
+  getShowDepartmentsPage,
   getDepartment,
   getDepartments,
   createDepartment,

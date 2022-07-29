@@ -19,16 +19,9 @@ router.route('/')
     .post(validateInput(roleSchema),
         roleController.createRole);
 
-router.get('/:id', roleController.getRole);
-
-router.post('/',
-    validateInput(roleSchema),
-    roleController.createRole);
-
-router.put('/:id',
-    validateInput(roleSchema),
-    roleController.updateRole);
-
-router.delete('/', roleController.deleteRole);
+router.route('/:id')
+    .get(roleController.getRole)
+    .put(roleController.updateRole)
+    .delete(roleController.deleteRole);
 
 module.exports = router;
