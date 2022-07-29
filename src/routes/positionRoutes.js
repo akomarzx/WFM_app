@@ -14,6 +14,9 @@ router.get('/update-position',
 router.get('/delete-position',
     positionController.getDeletePositionForm);
 
+router.get('/show-positions',
+    positionController.getShowPositionsPage);
+
 router.route('/')
     .get(positionController.getPositions)
     .post(positionController.createPosition);

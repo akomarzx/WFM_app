@@ -1,5 +1,6 @@
 const {PositionServices} = require('../services');
 const asyncWrapper = require('../utils/asyncWrapper');
+
 const getCreatePositionForm = asyncWrapper(async (req, res, next) => {
   res.status(200).render('./positionViews/createPositionView');
 });
@@ -14,10 +15,16 @@ const getDeletePositionForm = asyncWrapper(async (req, res, next) => {
   res.status(200).render('./positionViews/deletePositionView');
 });
 
+const getShowPositionsPage = asyncWrapper(async (req, res, next) => {
+  res.locals.positions = await PositionServices.getPositions();
+  res.status(200).render('./positionViews/showPositionsView');
+});
+
 const getPosition = asyncWrapper(async (req, res, next) => {
   const position = await PositionServices.getPosition(req.params.id);
   res.status(200).json(position);
 });
+
 const getPositions = asyncWrapper(async (req, res, next) => {
   const positions = await PositionServices.getPositions();
   res.status(200).json(positions);
@@ -48,6 +55,7 @@ module.exports = {
   getCreatePositionForm,
   getUpdatePositionForm,
   getDeletePositionForm,
+  getShowPositionsPage,
   getPosition,
   getPositions,
   createPosition,

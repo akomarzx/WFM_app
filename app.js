@@ -104,14 +104,14 @@ app.get('/test', (req, res, next) => {
 // All errors from all layers will bubble up
 // to this error handler
 // TODO: improve the centralized error handler
-app.use((err, req, res, next) => {
-  if (req.flash) {
-    req.flash('error', err.message);
-  }
-  console.log(err.message);
-  const statusCode = err.statusCode || 500;
-  res.status(statusCode).send(err.stack);
-});
+// app.use((err, req, res, next) => {
+//   if (req.flash) {
+//     req.flash('error', err.message);
+//   }
+//   console.log(err.message);
+//   const statusCode = err.statusCode || 500;
+//   res.status(statusCode).send(err.stack);
+// });
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, async () => {
