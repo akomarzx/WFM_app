@@ -31,8 +31,6 @@ const getPositions = asyncWrapper(async (req, res, next) => {
 });
 
 const createPosition = asyncWrapper(async (req, res, next) => {
-// TODO: standardize how we pass the req body
-// whether to pass the whole req.body or deconstruct.
   const {positionName} = req.body;
   await PositionServices.createPosition(positionName);
   req.flash('success', 'Position Created Succesfully');

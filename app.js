@@ -1,8 +1,7 @@
 // TODO: Image upload system
-// TODO: routes refactoring
 // TODO: Module loader for each part of the app
 // TODO: Unified Data access layer.
-// TODO: Only pass the object option
+// Only pass the object option
 const express = require('express');
 const session = require('express-session');
 const app = express();

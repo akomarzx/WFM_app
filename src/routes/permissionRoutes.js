@@ -1,5 +1,3 @@
-// TODO: Add View route in the roles and permission dashboard!
-// For roles and permissions
 const express = require('express');
 const permissionController = require('../controller/permissionController');
 // eslint-disable-next-line new-cap
