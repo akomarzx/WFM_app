@@ -14,6 +14,9 @@ router.get('/update-role',
 router.get('/delete-role',
     roleController.getDeleteRoleForm);
 
+router.get('/show-roles',
+    roleController.getShowRolesPage);
+
 router.route('/')
     .get(roleController.getRoles)
     .post(validateInput(roleSchema),
@@ -21,7 +24,7 @@ router.route('/')
 
 router.route('/:id')
     .get(roleController.getRole)
-    .put(roleController.updateRole)
+    .patch(roleController.updateRole)
     .delete(roleController.deleteRole);
 
 module.exports = router;
