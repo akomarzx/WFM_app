@@ -3,7 +3,7 @@
         <div class="row">
             <div class="border border-secondary col-md-4 ms-2 mt-4 p-2">
                 <h2>Delete a Position</h2>
-                <form action="/positions?_method=DELETE" method="post">
+                <form action="/positions?_method=DELETE" method="post" id="mainForm">
                     <select class="form-select" aria-label="Current permission" name="uuid">
                         <option selected>Select Position to Delete</option>
                         <% positions.forEach(element=> { %>
@@ -19,3 +19,4 @@
             </div>
         </div>
     </div>
+    <script src="/js/script3.js"></script>
