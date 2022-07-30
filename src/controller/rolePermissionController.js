@@ -6,7 +6,7 @@ const asyncWrapper = require('../utils/asyncWrapper');
 
 const getCreateRolePermissionForm = asyncWrapper(async (req, res, next) => {
   res.locals.roles = await RoleServices.getRoles();
-  res.locals.permissions = await PermissionServices.getAllPermission();
+  res.locals.permissions = await PermissionServices.getPermissions();
   const viewPath =
   './roleAndPermissionViews/rolePermissionViews/createRolePermissionView';
   res.status(200).render(viewPath);

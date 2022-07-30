@@ -2,7 +2,7 @@
 const {Permission, sequelize} = require('../models');
 const {Op} = require('sequelize');
 
-const getAllPermission = async () => {
+const getPermissions = async () => {
   try {
     const result = sequelize.transaction(async (t) => {
       const permissions = await Permission.findAll({
@@ -12,6 +12,23 @@ const getAllPermission = async () => {
           },
         },
         // rejectOnEmpty: true,
+        benchmark: true,
+      });
+      return permissions;
+    });
+    return result;
+  } catch (error) {
+    throw error;
+  };
+};
+
+const getPermission = async (uuid) => {
+  try {
+    const result = sequelize.transaction(async (t) => {
+      const permissions = await Permission.findOne({
+        where: {
+          uuid: uuid,
+        },
         benchmark: true,
       });
       return permissions;
@@ -68,7 +85,8 @@ const deletePermission = async (uuid) => {
 
 module.exports = {
   createPermission,
-  getAllPermission,
+  getPermissions,
+  getPermission,
   updatePermission,
   deletePermission,
 };

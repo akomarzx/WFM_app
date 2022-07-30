@@ -81,7 +81,7 @@ app.use('/auth', require('./src/routes/authRoutes')(passport));
 app.use('/employees', require('./src/routes/employeeRoutes'));
 app.use('/dashboard', require('./src/routes/dashboardRoutes'));
 app.use('/roles', require('./src/routes/roleRoutes'));
-// app.use('/permissions', require('./src/routes/permissionRoutes'));
+app.use('/permissions', require('./src/routes/permissionRoutes'));
 app.use('/role-permissions', require('./src/routes/rolePermissionRoutes'));
 app.use('/departments', require('./src/routes/departmentRoutes'));
 app.use('/positions', require('./src/routes/positionRoutes'));

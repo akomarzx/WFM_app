@@ -16,6 +16,9 @@ router.get('/update-permission',
 router.get('/delete-permission',
     permissionController.getDeletePermissionForm);
 
+router.get('/show-permissions',
+    permissionController.getShowPermissionsPage);
+
 router.route('/')
     .post(validateInput(permissionSchema),
         permissionController.createPermission)
@@ -23,7 +26,7 @@ router.route('/')
 
 router.route('/:id')
     .get(permissionController.getPermission)
-    .put(permissionController.updatePermission)
+    .patch(permissionController.updatePermission)
     .delete(permissionController.deletePermission);
 
 module.exports = router;
