@@ -3,7 +3,7 @@
         <div class="row">
             <div class="border border-secondary col-md-4 ms-2 mt-4 p-2">
                 <h2>Update a Position</h2>
-                <form action="/positions?_method=put" method="post" id="mainForm">
+                <form action="/positions?_method=PATCH" method="post" id="mainForm">
                     <select class="form-select" aria-label="current roles"
                         onchange='document.getElementById("positionName").value = getSelectedOption(this)' name="uuid">
                         <option selected>Select Position to Update</option>

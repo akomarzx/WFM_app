@@ -22,7 +22,7 @@ router.route('/')
     .post(positionController.createPosition);
 
 router.route('/:id')
-    .post(positionController.createPosition)
+    .patch(positionController.updatePosition)
     .get(positionController.getPosition)
     .delete(positionController.deletePosition);
 
