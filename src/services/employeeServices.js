@@ -36,7 +36,7 @@ const getEmployee = async (id) => {
   }
 };
 
-const createEmployee = async (employeeData) => {
+const createEmployee = async (employeeData, imageFilePath) => {
   try {
     const result = await sequelize.transaction(async (t) => {
       const newEmployee = await Employee.create({
@@ -48,6 +48,7 @@ const createEmployee = async (employeeData) => {
         lastName: employeeData.lastName,
         birthDate: moment(employeeData.birthDate, ('YYYY-MM-DD'), true),
         sex: employeeData.sex,
+        imagePath: `/img/${imageFilePath}`,
       }, {benchmark: true});
       await createPunchInfo(newEmployee);
       return newEmployee;

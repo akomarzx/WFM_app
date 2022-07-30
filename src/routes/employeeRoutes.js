@@ -7,6 +7,20 @@ const validate = require('../middlewares/validateInput');
 const isLoggedIn = require('../middlewares/isLoggedIn');
 const isAuthorized = require('../middlewares/isAuthorized');
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './public/img');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + '-' +
+    Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({storage: storage});
 
 const router = express.Router();
 
@@ -20,6 +34,7 @@ router.route('/')
         employeeController.getEmployees)
     .post(isLoggedIn,
         isAuthorized('CREATE_EMPLOYEE'),
+        upload.single('empImage'),
         validate(employeeSchema),
         employeeController.createEmployee);
 

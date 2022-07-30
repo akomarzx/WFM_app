@@ -1,4 +1,3 @@
-// TODO: Image upload system
 // TODO: Module loader for each part of the app
 // TODO: Unified Data access layer.
 // Only pass the object option
@@ -58,6 +57,8 @@ app.use(passport.session());
 // Set Up View Engine
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
+
+// body parsers
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
@@ -103,14 +104,15 @@ app.get('/test', (req, res, next) => {
 // All errors from all layers will bubble up
 // to this error handler
 // TODO: improve the centralized error handler
-// app.use((err, req, res, next) => {
-//   if (req.flash) {
-//     req.flash('error', err.message);
-//   }
-//   console.log(err.message);
-//   const statusCode = err.statusCode || 500;
-//   res.status(statusCode).send(err.stack);
-// });
+
+app.use((err, req, res, next) => {
+  if (req.flash) {
+    req.flash('error', err.message);
+  }
+  console.log(err.message);
+  const statusCode = err.statusCode || 500;
+  res.status(statusCode).send(err.stack);
+});
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, async () => {

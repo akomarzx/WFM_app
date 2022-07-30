@@ -2,7 +2,6 @@ const {EmployeeServices,
   DepartmentServices,
   PositionServices,
   RoleServices} = require('../services');
-
 const asyncWrapper = require('../utils/asyncWrapper');
 
 const getCreateEmployeeForm = asyncWrapper(async (req, res, next) => {
@@ -23,7 +22,8 @@ const getEmployees = asyncWrapper(async (req, res, next) => {
 });
 
 const createEmployee = asyncWrapper(async (req, res, next) => {
-  const newEmployee = await EmployeeServices.createEmployee(req.body);
+  const newEmployee =
+  await EmployeeServices.createEmployee(req.body, req.file.filename);
   res.status(201).json({employee: newEmployee});
 });
 
