@@ -20,9 +20,13 @@ module.exports = (sequelize, DataTypes) => {
       });
       this.belongsTo(models.Department, {
         foreignKey: 'deptId',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       });
       this.belongsTo(models.Position, {
         foreignKey: 'positionId',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       });
       this.belongsTo(models.Role, {
         foreignKey: 'roleId',

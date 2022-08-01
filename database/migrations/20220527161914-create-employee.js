@@ -18,7 +18,8 @@ module.exports = {
           model: 'departments',
           key: 'deptId',
         },
-        onDelete: 'CASCADE',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       },
       superId: {
         type: Sequelize.INTEGER,
@@ -36,7 +37,8 @@ module.exports = {
           model: 'positions',
           key: 'positionId',
         },
-        onDelete: 'CASCADE',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       },
       firstName: {
         type: Sequelize.STRING,

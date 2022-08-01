@@ -12,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Employee, {
         // eslint-disable-next-line camelcase
         foreignKey: 'deptId',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       });
     }
     toJSON() {
@@ -46,7 +48,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Department',
     tableName: 'departments',
-    paranoid: true,
   });
   return Department;
 };

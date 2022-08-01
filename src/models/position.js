@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.hasMany(models.Employee, {
         foreignKey: 'positionId',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       });
     }
     toJSON() {
@@ -51,7 +53,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Position',
     tableName: 'positions',
-    paranoid: true,
   });
   return Position;
 };
