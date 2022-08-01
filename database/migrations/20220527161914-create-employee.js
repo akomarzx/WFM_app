@@ -32,7 +32,7 @@ module.exports = {
       },
       positionId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: 'positions',
           key: 'positionId',

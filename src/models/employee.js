@@ -61,7 +61,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         positionId: {
           type: DataTypes.INTEGER,
-          allowNull: false,
+          allowNull: true,
         },
         firstName: {
           type: DataTypes.STRING,
