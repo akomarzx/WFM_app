@@ -26,7 +26,6 @@ const deletePunchInfo = async (empId) => {
         where: {
           empId: empId,
         },
-        rejectOnEmpty: true,
       });
     });
   } catch (error) {

@@ -97,7 +97,7 @@ const deleteEmployee = async (id) => {
       });
       await employeeToBeDeleted.destroy();
       await updateEmployementStatusWhenDeleted(employeeToBeDeleted);
-      await deletePunchInfo(employeeToBeDeleted.emp_id);
+      await deletePunchInfo(employeeToBeDeleted.empId);
     });
   } catch (error) {
     throw error;
