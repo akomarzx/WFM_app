@@ -20,7 +20,17 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({storage: storage});
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb('Please upload only images.', false);
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  fileFilter: multerFilter});
 
 const router = express.Router();
 
