@@ -4,7 +4,8 @@ const {employeeSchema} = require('../utils/schemas');
 const {isAuthorized,
   isLoggedIn,
   validateInput,
-  upload} = require('../middlewares');
+  upload,
+  resize} = require('../middlewares');
 
 const express = require('express');
 
@@ -21,6 +22,7 @@ router.route('/')
     .post(isLoggedIn,
         isAuthorized('CREATE_EMPLOYEE'),
         upload.single('empImage'),
+        resize,
         validateInput(employeeSchema),
         employeeController.createEmployee);
 
