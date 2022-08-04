@@ -22,7 +22,7 @@ router.route('/')
     .post(isLoggedIn,
         isAuthorized('CREATE_EMPLOYEE'),
         upload.single('empImage'),
-        resize,
+        resize(300, 300),
         validateInput(employeeSchema),
         employeeController.createEmployee);
 

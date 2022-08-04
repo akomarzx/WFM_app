@@ -1,4 +1,3 @@
-// TODO: Module loader for each part of the app
 // TODO: Unified Data access layer.
 // Only pass the object option
 const express = require('express');

@@ -13,7 +13,14 @@ const getCreateEmployeeForm = asyncWrapper(async (req, res, next) => {
 
 const getEmployee = asyncWrapper(async (req, res, next) => {
   const employee = await EmployeeServices.getEmployee(req.params.id);
-  res.status(200).json(employee);
+  res.format({
+    'text/html': function() {
+      res.render('employeeViews/showEmployeeView');
+    },
+    'application/json': function() {
+      res.status(200).json(employee);
+    },
+  });
 });
 
 const getEmployees = asyncWrapper(async (req, res, next) => {
