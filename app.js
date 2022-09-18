@@ -8,7 +8,7 @@ const flash = require('connect-flash');
 const ejsMate = require('ejs-mate');
 const passport = require('passport');
 const methodOverride = require('method-override');
-
+const cors = require('cors');
 // Morgan and live Reloading
 // Disable http caching to live reload css and js
 if (process.env.NODE_ENV === 'development') {
@@ -46,6 +46,7 @@ app.use(
 );
 store.sync();
 app.use(flash());
+app.use(cors());
 
 // passport related things
 const initializePassport = require('./config/passport/passport');
