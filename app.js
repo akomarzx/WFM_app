@@ -1,80 +1,24 @@
 // TODO: Unified Data access layer.
 // Only pass the object option
 const express = require('express');
-const session = require('express-session');
 const app = express();
 const {sequelize} = require('./src/models/index');
-const flash = require('connect-flash');
-const ejsMate = require('ejs-mate');
 const passport = require('passport');
-const methodOverride = require('method-override');
 const cors = require('cors');
-// Morgan and live Reloading
-// Disable http caching to live reload css and js
-if (process.env.NODE_ENV === 'development') {
-  const morgan = require('morgan');
-  app.use(morgan('dev'));
-  const livereload = require('livereload');
-  const connectLiveReload = require('connect-livereload');
-  const liveReloadServer = livereload.createServer();
-  liveReloadServer.server.once('connection', () => {
-    setTimeout(() => {
-      liveReloadServer.refresh('/');
-    }, 50);
-  });
-  app.use(connectLiveReload());
-}
-// Method override
-app.use(methodOverride('_method'));
+const morgan = require('morgan');
 
-// Session set-up using sequelize store
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const store = new SequelizeStore({
-  db: sequelize,
-  checkExpirationInterval: 15 * 60 * 1000,
-  expiration: 24 * 60 * 60 * 1000,
-});
-app.set('trust proxy', 1);
-app.use(
-    session({
-      secret: process.env.SESSION_SECRET,
-      resave: false,
-      saveUninitialized: true,
-      cookie: {secure: false},
-      store: store,
-    }),
-);
-store.sync();
-app.use(flash());
+app.use(morgan('dev'));
 app.use(cors());
 
 // passport related things
 const initializePassport = require('./config/passport/passport');
 initializePassport(passport);
 app.use(passport.initialize());
-app.use(passport.session());
-
-// Set Up View Engine
-app.engine('ejs', ejsMate);
-app.set('view engine', 'ejs');
 
 // body parsers
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({extended: false, limit: '50mb'}));
 
-// flash middleware
-app.use((req, res, next) => {
-  res.locals.success = req.flash('success');
-  res.locals.error = req.flash('error');
-  next();
-});
-
-// locals variable
-app.use((req, res, next) => {
-  res.locals.employee = req.user;
-  res.locals.cssUrls = [];
-  next();
-});
 
 app.use('/', require('./src/routes/indexRoutes'));
 app.use('/auth', require('./src/routes/authRoutes')(passport));
@@ -85,20 +29,6 @@ app.use('/permissions', require('./src/routes/permissionRoutes'));
 app.use('/role-permissions', require('./src/routes/rolePermissionRoutes'));
 app.use('/departments', require('./src/routes/departmentRoutes'));
 app.use('/positions', require('./src/routes/positionRoutes'));
-
-// TODO: Example for a Accept header.
-// Will response with json if accept header is
-// set to application/json
-app.get('/test', (req, res, next) => {
-  res.format({
-    'text/html': function() {
-      res.send('<h1>Hello world</h1>');
-    },
-    'application/json': function() {
-      res.json({message: 'Hello Wrold'});
-    },
-  });
-});
 
 // Centralized Error Handling
 // All errors from all layers will bubble up
