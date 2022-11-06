@@ -32,11 +32,13 @@ const getPosition = async (positionUuid) => {
 
 const createPosition = async (newPosition) => {
   try {
-    await sequelize.transaction(async (t) => {
-      await Position.create({
+    const result = await sequelize.transaction(async (t) => {
+      const position = await Position.create({
         positionName: newPosition,
       });
-    });
+      return position
+    }); 
+    return result;
   } catch (error) {
     throw error;
   }

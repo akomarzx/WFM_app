@@ -13,7 +13,7 @@ const getEmployees = asyncWrapper(async (req, res, next) => {
 });
 
 const createEmployee = asyncWrapper(async (req, res, next) => {
-  // TODO : remove after rewritting, Reimplement Image upload after
+  // TODO : Remove Image in the employe model and implement its own module
   const newEmployee =
   await EmployeeServices.createEmployee(req.body);
   res.status(201).json({employee: newEmployee});
