@@ -1,15 +1,6 @@
-const {EmployeeServices,
-  DepartmentServices,
-  PositionServices,
-  RoleServices} = require('../services');
+const {EmployeeServices} = require('../services');
 const asyncWrapper = require('../utils/asyncWrapper');
 
-const getCreateEmployeeForm = asyncWrapper(async (req, res, next) => {
-  res.locals.departments = await DepartmentServices.getDepartments();
-  res.locals.positions = await PositionServices.getPositions();
-  res.locals.roles = await RoleServices.getRoles();
-  res.status(200).render('./employeeViews/createEmployeeForm');
-});
 
 const getEmployee = asyncWrapper(async (req, res, next) => {
   const employee = await EmployeeServices.getEmployee(req.params.id);
@@ -39,7 +30,6 @@ const deleteEmployee = asyncWrapper(async (req, res, next) => {
 });
 
 module.exports = {
-  getCreateEmployeeForm,
   getEmployee,
   getEmployees,
   createEmployee,

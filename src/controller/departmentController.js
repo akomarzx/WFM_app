@@ -19,8 +19,9 @@ const createDepartment = asyncWrapper(async (req, res, next) => {
 });
 
 const updateDepartment = asyncWrapper(async (req, res, next) => {
-  await DepartmentServices.updateDepartment(req.body.uuid, req.body.deptName);
-  res.status(200).json({message: 'Updated Succesfully'});
+  const updated =
+    await DepartmentServices.updateDepartment(req.body.uuid, req.body.deptName);
+  res.status(200).json(updated);
 });
 
 const deleteDepartment = asyncWrapper(async (req, res, next) => {

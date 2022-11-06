@@ -11,11 +11,6 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/create-employee',
-    isLoggedIn,
-    isAuthorized('CREATE_EMPLOYEE'),
-    employeeController.getCreateEmployeeForm);
-
 router.route('/')
     .get(
         employeeController.getEmployees)

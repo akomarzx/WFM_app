@@ -54,6 +54,7 @@ const updateDepartment = async (uuid, updateDepartment) => {
         deptName: updateDepartment,
       });
       await departmentToBeUpdated.save();
+      return departmentToBeUpdated;
     });
   } catch (error) {
     throw error;
