@@ -26,7 +26,7 @@ const updatePosition = asyncWrapper(async (req, res, next) => {
 });
 
 const deletePosition = asyncWrapper(async (req, res, next) => {
-  await PositionServices.deletePosition(req.body.uuid);
+  await PositionServices.deletePosition(req.params.id);
   res.status(200).json({message: 'Succesfully deleted'});
 });
 

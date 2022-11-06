@@ -1,5 +1,6 @@
 const {sequelize, Position} = require('../models');
-
+const ApiError = require('../utils/apiError');
+const {EmptyResultError} = require('sequelize');
 const getPositions = async () => {
   try {
     const result = await sequelize.transaction(async (t) => {
@@ -19,8 +20,6 @@ const getPosition = async (positionUuid) => {
         where: {
           uuid: positionUuid,
         },
-        rejectOnEmpty: true,
-        benchmark: true,
       });
       return positions;
     });
@@ -51,6 +50,7 @@ const updatePosition = async (uuid, updatedPosition) => {
         where: {
           uuid: uuid,
         },
+        rejectOnEmpty: true,
       });
       await positionToBeUpdated.set({
         positionName: updatedPosition,
@@ -60,6 +60,9 @@ const updatePosition = async (uuid, updatedPosition) => {
     });
     return result;
   } catch (error) {
+    if (error instanceof EmptyResultError) {
+      throw new ApiError('Position not found', 400, false);
+    }
     throw error;
   }
 };
@@ -75,6 +78,9 @@ const deletePosition = async (uuid) => {
       });
     });
   } catch (error) {
+    if (error instanceof EmptyResultError) {
+      throw new ApiError('Position not found', 400, false);
+    }
     throw error;
   }
 };
