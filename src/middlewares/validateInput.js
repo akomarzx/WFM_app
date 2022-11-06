@@ -10,7 +10,7 @@ module.exports = function Validate(schema) {
       });
       next();
     } catch (error) {
-      next(new ApiError(error.message, 422, false));
+      next(new ApiError(error.message, 400, false));
     }
   };
 };

@@ -6,7 +6,6 @@ const {sequelize} = require('./src/models/index');
 const passport = require('passport');
 const cors = require('cors');
 const morgan = require('morgan');
-const ApiError = require('./src/utils/apiError');
 
 app.use(cors());
 
@@ -21,7 +20,6 @@ app.use(express.urlencoded({extended: false, limit: '50mb'}));
 
 app.use(morgan('dev'));
 
-app.use('/', require('./src/routes/indexRoutes'));
 app.use('/auth', require('./src/routes/authRoutes')(passport));
 app.use('/employees', require('./src/routes/employeeRoutes'));
 app.use('/roles', require('./src/routes/roleRoutes'));
