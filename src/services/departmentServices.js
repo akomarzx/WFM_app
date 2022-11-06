@@ -7,7 +7,6 @@ const getDepartment = async (deptUuid) => {
         where: {
           uuid: deptUuid,
         },
-        rejectOnEmpty: true,
         benchmark: true,
       });
       return department;
@@ -71,7 +70,6 @@ const deleteDepartment = async (uuid) => {
         where: {
           uuid: uuid,
         },
-        rejectOnEmpty: true,
       });
     });
   } catch (error) {
