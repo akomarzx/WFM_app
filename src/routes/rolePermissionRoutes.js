@@ -6,15 +6,6 @@ const rolePermissionController =
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
-router.get('/create-rolePermission',
-    rolePermissionController.getCreateRolePermissionForm);
-
-router.get('/show-rolePermission',
-    rolePermissionController.getViewRolePermissionForm);
-
-router.get('/delete-rolePermission',
-    rolePermissionController.getDeleteRolePermissionForm);
-
 router.post('/',
     rolePermissionController.createRolePermission);
 
