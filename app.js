@@ -35,7 +35,8 @@ app.use('/positions', require('./src/routes/positionRoutes'));
 
 app.use((err, req, res, next) => {
   console.log(err.message);
-  res.status(err.statusCode).json({error: err.message});
+  console.log(err.stack);
+  res.status(err.statusCode || 500).json({error: err.message});
 });
 
 const PORT = process.env.PORT || 8080;

@@ -14,10 +14,10 @@ const router = express.Router();
 router.route('/')
     .get(
         employeeController.getEmployees)
-    .post(isLoggedIn,
-        isAuthorized('CREATE_EMPLOYEE'),
-        upload.single('empImage'),
-        resize(300, 300),
+    // Add the middleware later
+    .post(
+        // upload.single('empImage'),
+        // resize(300, 300),
         validateInput(employeeSchema),
         employeeController.createEmployee);
 

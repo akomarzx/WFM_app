@@ -16,7 +16,7 @@ const resize = (width, height) => {
       fs.unlinkSync(req.file.path);
       next();
     } catch (error) {
-      next(new ApiError(err.message, 500, false));
+      next(new ApiError(error.message, 500, false));
     }
   };
 };

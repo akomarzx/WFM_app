@@ -13,8 +13,9 @@ const getEmployees = asyncWrapper(async (req, res, next) => {
 });
 
 const createEmployee = asyncWrapper(async (req, res, next) => {
+  // TODO : remove after rewritting, Reimplement Image upload after
   const newEmployee =
-  await EmployeeServices.createEmployee(req.body, req.file.filename);
+  await EmployeeServices.createEmployee(req.body);
   res.status(201).json({employee: newEmployee});
 });
 
