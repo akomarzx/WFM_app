@@ -1,7 +1,8 @@
 
 const {Permission, sequelize} = require('../models');
 const {Op} = require('sequelize');
-
+const {EmptyResultError} = require('sequelize');
+const ApiError = require('../utils/apiError');
 const getPermissions = async () => {
   try {
     const result = sequelize.transaction(async (t) => {
@@ -11,7 +12,6 @@ const getPermissions = async () => {
             [Op.notIn]: ['CREATE_ROLE', 'ASSIGN_ROLE', 'CREATE_PERMISSION'],
           },
         },
-        // rejectOnEmpty: true,
         benchmark: true,
       });
       return permissions;
@@ -29,7 +29,6 @@ const getPermission = async (uuid) => {
         where: {
           uuid: uuid,
         },
-        benchmark: true,
       });
       return permissions;
     });
@@ -42,10 +41,10 @@ const getPermission = async (uuid) => {
 const createPermission = async (newPermission) => {
   try {
     const result = await sequelize.transaction(async (t) => {
-      await Permission.create({
+      const permission = await Permission.create({
         permissionName: newPermission,
       });
-      return result;
+      return permission;
     });
     return result;
   } catch (error) {
@@ -60,6 +59,7 @@ const updatePermission = async (uuid, updatedPermission) => {
         where: {
           uuid: uuid,
         },
+        rejectOnEmpty: true,
       });
       await permissionToBeUpdated.set({
         permissionName: updatedPermission,
@@ -69,6 +69,9 @@ const updatePermission = async (uuid, updatedPermission) => {
     });
     return result;
   } catch (error) {
+    if (error instanceof EmptyResultError) {
+      throw new ApiError('Permission not found', 400, false);
+    }
     throw error;
   }
 };
@@ -84,6 +87,9 @@ const deletePermission = async (uuid) => {
       });
     });
   } catch (error) {
+    if (error instanceof EmptyResultError) {
+      throw new ApiError('Permission not found', 400, false);
+    }
     throw error;
   }
 };
