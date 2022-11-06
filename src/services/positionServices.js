@@ -36,8 +36,8 @@ const createPosition = async (newPosition) => {
       const position = await Position.create({
         positionName: newPosition,
       });
-      return position
-    }); 
+      return position;
+    });
     return result;
   } catch (error) {
     throw error;
@@ -46,7 +46,7 @@ const createPosition = async (newPosition) => {
 
 const updatePosition = async (uuid, updatedPosition) => {
   try {
-    await sequelize.transaction(async (t) => {
+    const result = await sequelize.transaction(async (t) => {
       const positionToBeUpdated = await Position.findOne({
         where: {
           uuid: uuid,
@@ -56,7 +56,9 @@ const updatePosition = async (uuid, updatedPosition) => {
         positionName: updatedPosition,
       });
       await positionToBeUpdated.save();
+      return positionToBeUpdated;
     });
+    return result;
   } catch (error) {
     throw error;
   }
@@ -69,6 +71,7 @@ const deletePosition = async (uuid) => {
         where: {
           uuid: uuid,
         },
+        rejectOnEmpty: true,
       });
     });
   } catch (error) {

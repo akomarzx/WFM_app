@@ -41,11 +41,13 @@ const getPermission = async (uuid) => {
 
 const createPermission = async (newPermission) => {
   try {
-    await sequelize.transaction(async (t) => {
+    const result = await sequelize.transaction(async (t) => {
       await Permission.create({
         permissionName: newPermission,
       });
+      return result;
     });
+    return result;
   } catch (error) {
     throw error;
   }
@@ -53,7 +55,7 @@ const createPermission = async (newPermission) => {
 
 const updatePermission = async (uuid, updatedPermission) => {
   try {
-    await sequelize.transaction(async (t) => {
+    const result = await sequelize.transaction(async (t) => {
       const permissionToBeUpdated = await Permission.findOne({
         where: {
           uuid: uuid,
@@ -65,6 +67,7 @@ const updatePermission = async (uuid, updatedPermission) => {
       await permissionToBeUpdated.save();
       return permissionToBeUpdated;
     });
+    return result;
   } catch (error) {
     throw error;
   }
@@ -77,6 +80,7 @@ const deletePermission = async (uuid) => {
         where: {
           uuid: uuid,
         },
+        rejectOnEmpty: true,
       });
     });
   } catch (error) {

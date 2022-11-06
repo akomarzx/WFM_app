@@ -35,11 +35,13 @@ const getRole = async (roleUuid) => {
 
 const createRole = async (newRole) => {
   try {
-    await sequelize.transaction(async (t) => {
+    const role = await sequelize.transaction(async (t) => {
       await Role.create({
         roleName: newRole,
       });
+      return role;
     });
+    return result;
   } catch (error) {
     throw error;
   }
@@ -47,7 +49,7 @@ const createRole = async (newRole) => {
 
 const updateRole = async (uuid, updatedRole) => {
   try {
-    await sequelize.transaction(async (t) => {
+    const result = await sequelize.transaction(async (t) => {
       const roleToBeUpdated = await Role.findOne({
         where: {
           uuid: uuid,
@@ -57,7 +59,9 @@ const updateRole = async (uuid, updatedRole) => {
         roleName: updatedRole,
       });
       await roleToBeUpdated.save();
+      return roleToBeUpdated;
     });
+    return result;
   } catch (error) {
     throw error;
   }

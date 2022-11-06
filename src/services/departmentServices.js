@@ -32,11 +32,13 @@ const getDepartments = async () => {
 
 const createDepartment = async (departmentName) => {
   try {
-    await sequelize.transaction(async (t) => {
-      await Department.create({
+    const result = await sequelize.transaction(async (t) => {
+      const department = await Department.create({
         deptName: departmentName,
       });
+      return department;
     });
+    return result;
   } catch (error) {
     throw error;
   }
@@ -44,7 +46,7 @@ const createDepartment = async (departmentName) => {
 
 const updateDepartment = async (uuid, updateDepartment) => {
   try {
-    await sequelize.transaction(async (t) => {
+    const result = await sequelize.transaction(async (t) => {
       const departmentToBeUpdated = await Department.findOne({
         where: {
           uuid: uuid,
@@ -56,6 +58,7 @@ const updateDepartment = async (uuid, updateDepartment) => {
       await departmentToBeUpdated.save();
       return departmentToBeUpdated;
     });
+    return result;
   } catch (error) {
     throw error;
   }
@@ -68,6 +71,7 @@ const deleteDepartment = async (uuid) => {
         where: {
           uuid: uuid,
         },
+        rejectOnEmpty: true,
       });
     });
   } catch (error) {
