@@ -1,25 +1,6 @@
 const {RoleServices} = require('../services');
 const asyncWrapper = require('../utils/asyncWrapper');
 
-const getCreateRoleForm = asyncWrapper(async (req, res, next) => {
-  res.status(200).render('./roleAndPermissionViews/roleViews/createRoleView');
-});
-
-const getUpdateRoleForm = asyncWrapper(async (req, res, next) => {
-  res.locals.roles = await RoleServices.getRoles();
-  res.status(200).render('./roleAndPermissionViews/roleViews/updateRoleView');
-});
-
-const getDeleteRoleForm = asyncWrapper(async (req, res, next) => {
-  res.locals.roles = await RoleServices.getRoles();
-  res.status(200).render('./roleAndPermissionViews/roleViews/deleteRoleView');
-});
-
-const getShowRolesPage = asyncWrapper(async (req, res, next) => {
-  res.locals.roles = await RoleServices.getRoles();
-  res.status(200).render('./roleAndPermissionViews/roleViews/showRolesPage');
-});
-
 const getRole = asyncWrapper(async (req, res, next) => {
   const role = await RoleServices.getRole(req.params.id);
   res.status(200).json(role);
@@ -32,28 +13,22 @@ const getRoles = asyncWrapper(async (req, res, next) => {
 
 const createRole = asyncWrapper(async (req, res, next) => {
   const {roleName} = req.body;
-  await RoleServices.createRole(roleName);
-  req.flash('success', 'Role Created Succesfully');
-  res.status(200).redirect('back');
+  const role = await RoleServices.createRole(roleName);
+  res.status(200).json(role);
 });
 
 const updateRole = asyncWrapper(async (req, res, next) => {
+  const updated =
   await RoleServices.updateRole(req.params.id, req.body.roleName);
-  req.flash('success', 'Updated Succesfully');
-  res.redirect('back');
+  res.status(200).json(updated);
 });
 
 const deleteRole = asyncWrapper(async (req, res, next) => {
   await RoleServices.deleteRole(req.params.id);
-  req.flash('success', 'Deleted Succesfully');
-  res.redirect('back');
+  res.status(200).json({message: 'Suceesfully Deleted'});
 });
 
 module.exports = {
-  getCreateRoleForm,
-  getUpdateRoleForm,
-  getDeleteRoleForm,
-  getShowRolesPage,
   getRole,
   getRoles,
   createRole,
