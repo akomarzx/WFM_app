@@ -5,18 +5,6 @@ const router = express.Router();
 const {permissionSchema} = require('../utils/schemas');
 const validateInput = require('../middlewares/validateInput');
 
-router.get('/create-permission',
-    permissionController.getCreatePermissionForm);
-
-router.get('/update-permission',
-    permissionController.getUpdatePermissionForm);
-
-router.get('/delete-permission',
-    permissionController.getDeletePermissionForm);
-
-router.get('/show-permissions',
-    permissionController.getShowPermissionsPage);
-
 router.route('/')
     .post(validateInput(permissionSchema),
         permissionController.createPermission)

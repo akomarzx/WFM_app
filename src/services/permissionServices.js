@@ -63,6 +63,7 @@ const updatePermission = async (uuid, updatedPermission) => {
         permissionName: updatedPermission,
       });
       await permissionToBeUpdated.save();
+      return permissionToBeUpdated;
     });
   } catch (error) {
     throw error;
