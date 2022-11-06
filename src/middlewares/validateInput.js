@@ -1,4 +1,5 @@
 const {ValidationError} = require('joi');
+const ApiError = require('../utils/apiError');
 
 module.exports = function Validate(schema) {
   return async (req, res, next) => {
@@ -9,11 +10,7 @@ module.exports = function Validate(schema) {
       });
       next();
     } catch (error) {
-      if (error instanceof ValidationError) {
-        req.flash('error', error.message);
-        return res.redirect('back');
-      }
-      next(error);
+      next(new ApiError(error.message, 422, false));
     }
   };
 };

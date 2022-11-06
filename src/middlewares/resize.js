@@ -1,6 +1,7 @@
 const sharp = require('sharp');
 const path = require('path');
 const fs = require('fs');
+const ApiError = require('../utils/apiError');
 
 const resize = (width, height) => {
   return async (req, res, next) => {
@@ -15,7 +16,7 @@ const resize = (width, height) => {
       fs.unlinkSync(req.file.path);
       next();
     } catch (error) {
-      next(error);
+      next(new ApiError(err.message, 500, false));
     }
   };
 };

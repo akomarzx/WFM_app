@@ -6,8 +6,8 @@ const {sequelize} = require('./src/models/index');
 const passport = require('passport');
 const cors = require('cors');
 const morgan = require('morgan');
+const ApiError = require('./src/utils/apiError');
 
-app.use(morgan('dev'));
 app.use(cors());
 
 // passport related things
@@ -19,6 +19,7 @@ app.use(passport.initialize());
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({extended: false, limit: '50mb'}));
 
+app.use(morgan('dev'));
 
 app.use('/', require('./src/routes/indexRoutes'));
 app.use('/auth', require('./src/routes/authRoutes')(passport));
@@ -36,12 +37,8 @@ app.use('/positions', require('./src/routes/positionRoutes'));
 // TODO: improve the centralized error handler
 
 app.use((err, req, res, next) => {
-  if (req.flash) {
-    req.flash('error', err.message);
-  }
   console.log(err.message);
-  const statusCode = err.statusCode || 500;
-  res.status(statusCode).send(err.stack);
+  res.status(err.statusCode).json({error: err.message});
 });
 
 const PORT = process.env.PORT || 8080;
