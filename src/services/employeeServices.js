@@ -77,6 +77,7 @@ const updateEmployee = async (id, employeeData) => {
         sex: employeeData.sex,
         employmentStatus: employeeData.employmentStatus,
       }, {benchmark: true});
+      await employeeToBeUpdated.save();
       return employeeToBeUpdated;
     });
     return result;
