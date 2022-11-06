@@ -2,14 +2,14 @@ const moment = require('moment');
 const {createPunchInfo, deletePunchInfo} = require('./punchInfoServices');
 const {Employee, Department, Position, PunchInfo,
   sequelize} = require('../models');
+const {EmptyResultError} = require('sequelize');
+const ApiError = require('../utils/apiError');
 
 const getEmployees = async () => {
   try {
     const result = await sequelize.transaction(async (t) => {
       const employees = await Employee.findAll(
-          {include: [Department, Position, PunchInfo],
-            rejectOnEmpty: true,
-            benchmark: true});
+          {include: [Department, Position, PunchInfo]});
       return employees;
     });
     return result;
@@ -25,7 +25,6 @@ const getEmployee = async (id) => {
         where: {
           uuid: id,
         },
-        rejectOnEmpty: true,
         include: [Department, Position, PunchInfo],
       });
       return employee;
@@ -48,7 +47,7 @@ const createEmployee = async (employeeData, imageFilePath) => {
         lastName: employeeData.lastName,
         birthDate: moment(employeeData.birthDate, ('YYYY-MM-DD'), true),
         sex: employeeData.sex,
-      }, {benchmark: true});
+      });
       await createPunchInfo(newEmployee);
       return newEmployee;
     });
@@ -82,6 +81,9 @@ const updateEmployee = async (id, employeeData) => {
     });
     return result;
   } catch (error) {
+    if (error instanceof EmptyResultError) {
+      throw new ApiError('Employee not found', 400, false);
+    }
     throw error;
   }
 };
@@ -96,10 +98,16 @@ const deleteEmployee = async (id) => {
         rejectOnEmpty: true,
       });
       await employeeToBeDeleted.destroy();
-      await updateEmployementStatusWhenDeleted(employeeToBeDeleted);
-      await deletePunchInfo(employeeToBeDeleted.empId);
+
+      if (employeeToBeDeleted) {
+        await updateEmployementStatusWhenDeleted(employeeToBeDeleted);
+        await deletePunchInfo(employeeToBeDeleted.empId);
+      }
     });
   } catch (error) {
+    if (error instanceof EmptyResultError) {
+      throw new ApiError('Employee not found', 400, false);
+    }
     throw error;
   }
 };
