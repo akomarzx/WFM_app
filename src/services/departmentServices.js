@@ -1,4 +1,6 @@
 const {sequelize, Department} = require('../models');
+const {EmptyResultError} = require('sequelize');
+const ApiError = require('../utils/apiError');
 
 const getDepartment = async (deptUuid) => {
   try {
@@ -7,7 +9,6 @@ const getDepartment = async (deptUuid) => {
         where: {
           uuid: deptUuid,
         },
-        benchmark: true,
       });
       return department;
     });
@@ -50,6 +51,7 @@ const updateDepartment = async (uuid, updateDepartment) => {
         where: {
           uuid: uuid,
         },
+        rejectOnEmpty: true,
       });
       await departmentToBeUpdated.set({
         deptName: updateDepartment,
@@ -59,6 +61,9 @@ const updateDepartment = async (uuid, updateDepartment) => {
     });
     return result;
   } catch (error) {
+    if (error instanceof EmptyResultError) {
+      throw new ApiError('Department not found', 400, false);
+    }
     throw error;
   }
 };
@@ -70,9 +75,13 @@ const deleteDepartment = async (uuid) => {
         where: {
           uuid: uuid,
         },
+        rejectOnEmpty: true,
       });
     });
   } catch (error) {
+    if (error instanceof EmptyResultError) {
+      throw new ApiError('Department not found', 400, false);
+    }
     throw error;
   }
 };
