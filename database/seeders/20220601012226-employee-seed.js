@@ -16,7 +16,6 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         uuid: uuidv4(),
-        imagePath: '/img/jhalpert.jpg',
       },
     ]);
   },

@@ -48,7 +48,6 @@ const createEmployee = async (employeeData, imageFilePath) => {
         lastName: employeeData.lastName,
         birthDate: moment(employeeData.birthDate, ('YYYY-MM-DD'), true),
         sex: employeeData.sex,
-        imagePath: `/img/${imageFilePath}`,
       }, {benchmark: true});
       await createPunchInfo(newEmployee);
       return newEmployee;

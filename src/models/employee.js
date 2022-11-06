@@ -111,10 +111,6 @@ module.exports = (sequelize, DataTypes) => {
           primaryKey: true,
           autoIncrement: true,
         },
-        imagePath: {
-          type: DataTypes.STRING,
-          allowNull: true,
-        },
       },
       {
         sequelize,
