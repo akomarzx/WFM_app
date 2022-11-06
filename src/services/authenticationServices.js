@@ -9,7 +9,7 @@ const registerUser = async (email, password, regCode) => {
     if (punchInfo == null) {
       throw new ApiError(
           'One of the information is invalid or already exist in the system',
-          200, true);
+          400, true);
     }
     const user = await User.findOne({
       where: {
@@ -22,14 +22,15 @@ const registerUser = async (email, password, regCode) => {
     if (punchInfo == null || user != null) {
       throw new ApiError(
           'One of the information is invalid or already exist in the system',
-          200, true);
+          400, true);
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    await User.create({
+    const newUser = await User.create({
       email: email,
       hash: hashedPassword,
       empId: punchInfo.empId,
     });
+    return newUser;
   } catch (error) {
     throw error;
   }
