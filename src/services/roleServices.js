@@ -1,10 +1,11 @@
 const {Role, sequelize, Permission} = require('../models');
+const {EmptyResultError} = require('sequelize');
+const ApiError = require('../utils/apiError');
 
 const getRoles = async () => {
   try {
     const result = sequelize.transaction(async (t) => {
       const roles = await Role.findAll({
-        benchmark: true,
       });
       return roles;
     });
@@ -21,8 +22,6 @@ const getRole = async (roleUuid) => {
         where: {
           uuid: roleUuid,
         },
-        rejectOnEmpty: true,
-        benchmark: true,
         include: Permission,
       });
       return roles;
@@ -35,8 +34,8 @@ const getRole = async (roleUuid) => {
 
 const createRole = async (newRole) => {
   try {
-    const role = await sequelize.transaction(async (t) => {
-      await Role.create({
+    const result = await sequelize.transaction(async (t) => {
+      const role = await Role.create({
         roleName: newRole,
       });
       return role;
@@ -54,6 +53,7 @@ const updateRole = async (uuid, updatedRole) => {
         where: {
           uuid: uuid,
         },
+        rejectOnEmpty: true,
       });
       await roleToBeUpdated.set({
         roleName: updatedRole,
@@ -63,6 +63,9 @@ const updateRole = async (uuid, updatedRole) => {
     });
     return result;
   } catch (error) {
+    if (error instanceof EmptyResultError) {
+      throw new ApiError('Role not found', 400, false);
+    }
     throw error;
   }
 };
@@ -74,9 +77,13 @@ const deleteRole = async (uuid) => {
         where: {
           uuid: uuid,
         },
+        rejectOnEmpty: true,
       });
     });
   } catch (error) {
+    if (error instanceof EmptyResultError) {
+      throw new ApiError('Role not found', 400, false);
+    }
     throw error;
   }
 };
